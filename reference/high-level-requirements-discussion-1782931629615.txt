@@ -1,0 +1,353 @@
+**Kevin:** Okay, we are recording. This is Kevin. Let's see, this is Lee.
+
+**Lee:** I'm Lee.
+
+**Kevin:** Yeah, okay. All right. Good.
+
+**Lee:** Okay. This is our Job Tracker 2.0. Here, let me just move over here. All right, so I will show you our current system and then I will...
+
+**Kevin:** I need screenshots of this thing too, so like if you've got, yeah.
+
+**Lee:** Um, okay, I can take screenshots, or you could take screenshots if you like.
+
+**Kevin:** Sure. 
+
+**Lee:** Okay. Right. Yeah, I have some in... um, so I did attach a couple documents to the meeting invite.
+
+**Kevin:** Oh you did. Sorry. I didn't see those.
+
+**Lee:** That's all right. Okay, but okay, first I'm gonna show you... so our current system is in FileMaker Pro.
+
+**Kevin:** Okay.
+
+**Lee:** Um, and this is the lovely screen you get when you open it up.
+
+**Kevin:** Okay. Do I have screenshots of all this, or can I...
+
+**Lee:** This is, but um, I will take more screenshots. So this, okay so this, let me show you the document I sent you.
+
+**Kevin:** Okay.
+
+**Lee:** Oh shoot, I closed it.
+
+**Kevin:** It's like, yeah, like the more I can have of like images of what is there, is the, you know.
+
+**Lee:** Well, there's a lot in here that I don't need anymore. Like, there's other things that I do. So it's kind of taking this and like morphing it.
+
+**Kevin:** Okay, but let's talk about what's there and then let's talk about what's not there. Or what's there that you want, and then what's not there that you don't, that you do want.
+
+**Lee:** Let's see, what's the easiest way to find this. I could show you the one that I, um, started to build in Airtable.
+
+**Kevin:** Okay.
+
+**Lee:** That kind of works.
+
+**Kevin:** Yeah, kind of works, but no.
+
+**Lee:** Okay. Okay, we can add to this. So okay, so this is the home screen.
+
+**Kevin:** Okay. Okay, you can send me all these right? They're all documents, okay.
+
+**Lee:** Yeah, and we could, so we could maybe just add other screenshots to this document so you have everything in one place.
+
+**Kevin:** Okay, this is probably your sort of best version of what you want? This Job Tracker 2.0 spreadsheet?
+
+**Lee:** Yeah.
+
+**Kevin:** Okay. Okay. So I want a home screen with certain functions here like how, like you know, doing a new job, there's a form, there's a... it's basically a Google form that we can ingest from. And right now it's this weird process. I can go through that, but it should be an easy process to ingest a Google form, but it's not. So ingest a Google form, okay... do you, but this would be a series of forms, right? Like do you want to use existing Google forms or import existing Google forms into this document, or have this or this application or have this replace all those Google forms?
+
+**Lee:** I want this to ingest a... there's a Google form, because there's other groups that use Google forms. So there's an existing Google form that I want to be able to ingest into this, but I want our...
+
+**Kevin:** You want to ingest the data from the Google form.
+
+**Lee:** Yes. Yeah.
+
+**Kevin:** Got it. Okay, got it. You want to keep them entering things in their existing Google forms, but you have some data out there from forms and you want to bring all this together into the thing. Okay. How many Google forms out there, like how many things are collecting data out there that you want to bring in?
+
+**Lee:** Um, we just have, uh... I mean it's basically one Google form with different options. So I can even show it to you. It's called our agency request form.
+
+**Kevin:** Okay.
+
+**Lee:** Um, and it's you know, basic, you know... and based on whether it's a creative or a video or just a digital image, whatever, you get different questions.
+
+**Kevin:** Okay, this is an agency re... uh, can you scroll down? Do I have this in my um...
+
+**Lee:** No, I don't have, so how can I, I mean...
+
+**Kevin:** Can you just print this to a PDF or something?
+
+**Lee:** But it's different based on... you get different questions based on the different options.
+
+**Kevin:** Oh. Okay. Um, so I can go through, I mean I could print them all. Is this a public form, or is this something that you guys only... you have to get to this through authentication?
+
+**Lee:** I think you have to be authenticated to get to it.
+
+**Kevin:** Okay. Okay. Um, maybe not. We could try. Could you try sending me a link like personally? Can you send me a link to it, like to me, Kevin Robert Hoss, and then see if I can get to it? Because then I can just set a co-worker on it to say, go through this form and figure it all out. But this is the primary form that you...
+
+**Lee:** Well, it's what kicks off a job. It's what kicks off a request. It's not all the information I need for the job. It's not all the information that I want to record for a project.
+
+**Kevin:** I understand. I understand. Yeah, yeah, yeah. Okay, getting primary form. But from a process standpoint, somebody out there in marketing, whatever, or another division or whatever says, "I want you guys to do something," and I fill out this form first, and that is the thing that kicks off the process.
+
+**Lee:** Yes. Although there needs to be a way to manually enter a form because, um, because sometimes people don't understand the process.
+
+**Kevin:** Yeah, yeah.
+
+**Lee:** And you want, and the idea being that like people submit all this stuff and you want to kind of like... first, there's status of the jobs, like when they submit it, you need to know what's come in, what's there, what you need to kind of do, summarize that kind of stuff, maybe there's reports and summaries and things like that. So I mean, let me just show you the job tracker. So it comes into job tracker. Um, basically how we use this is, I basically use it for active projects. Um, there's all of these are requests, each one of these lines is a request that has been made.
+
+**Kevin:** So each one of these needs to be kind of a record.
+
+**Lee:** Yeah. Got it. And I need to... so there's all different views in here that I don't use. We basically use this at a glance. So this is kind of our job list. And so we have...
+
+**Kevin:** If this is the one you use, do I have a screenshot of this?
+
+**Lee:** Um, yeah. Or is it with, there's one in the doc or something, yeah. Let's see. So yeah, that's here, that's view by status. And that's view by status at a glance. So we need to have a view by status, and this is all the things. So okay, things come in. These are all of... this is a list of all of the fields that I would need for an individual record.
+
+**Kevin:** That you need... okay, in an individual record. Okay, so in the end, this is everything that needs to be filled out and managed.
+
+**Lee:** Yeah. And some of these, and I have notes over here, what pulls from the... if I say "pull from the intake form," that's that Google form. Um, the job number we want automatically assigned on intake. Like it gets the next job number.
+
+**Kevin:** Okay. Do you care how those job numbers are assigned? They need to be short and pithy, or how do you care? Like you have them right now in 1376, and I would like that we would like to have continuity... if we need to start over, we start over.
+
+**Lee:** Okay, maybe there's some kind of way to define that or whatever that's exposed. Okay, all right. Uh, and then there's certain things that you know, we fill in later, agency, realander.
+
+**Kevin:** Okay. So you just... this is sort of like, again, it's almost like a, you know, the job comes in and then you might look at it and then you're just gonna update one of those statuses or one of those cells in there, fill it in kind of right? And then what happens? Like you update things, is it that people take action based on stuff, or you fill it out and then it's sort of a...
+
+**Lee:** Basically only uh, seven of us in the agency actually use this tool. Which is why we can't get any IT given energy. So, and I'm the only one that really updates it. Um, other people could come in here and fill in the information, but it's primarily me that's coming in here and filling...
+
+**Kevin:** Got it. Okay, so it's basically a repository database. Yeah, yeah. Yeah, yeah, yeah, yeah, yeah.
+
+**Lee:** And I want to be able to pull up, you know, when I'm doing this, I want to be able to pull up an individual record. Right now we have all these different views, so I could pull it up, I don't even know what RFS stands for... request for service. Like this is like, you know, I can see this view, but I mean I kind of want this kind of view showing me all the information that's listed on, you know, this thing.
+
+**Kevin:** On an individual row, and be able to like click on the row and like open it in either a panel or a window and then edit, save, and go back. And maybe there's like charts or what's going on, status and filter and things like that.
+
+**Lee:** And we really don't really, I mean, maybe that's some added feature a bit as far as like, you know, doing something with the data... I don't mean, I do that at the end of the year, I do like an end of year report and I can tell you what data I'm trying to get. But um, but for day-to-day use, we have different views that we need to look at. So I need to be able to view by status. So this is like a drop-down menu, there's all these different statuses. So I would like to have different views where I could just say, "okay, view all of the jobs that are in design."
+
+**Kevin:** Yeah, filter panel, or filter thing along the top that you could be like "status." How many statuses are there? Are there 10, are there 20, are there five?
+
+**Lee:** Um, like we keep adding more.
+
+**Kevin:** Okay, okay. Are those statuses something that you'll want to manage as part of this? Right, like I'll want anything that's kind of a pick list thing, you'll want to be able to add new things in settings.
+
+**Lee:** Yeah, we have our meetings and we go through this list and I update this while we're going through our meeting, you know, where the status is at. Where this is lacking is a little notes column. So I always, I put my notes over here where I'm supposed to be listing the printer. But...
+
+**Kevin:** When you do this, do you want to capture each change? Date changes and then say like, be able to be like, "oh, here's history of changes of the whatever"?
+
+**Lee:** So, let me think about that. So um, okay, so I started to...
+
+**Kevin:** I mean, I think it'd be easy enough to see, yeah, I would guess yes.
+
+**Lee:** I started creating this in um, in what is this, Airtable. And unfortunately it's not robust enough for me to do what I want to do without paying for it, and we can't get IT to pay for anything. So, um, but the way this was working, uh, here's my notes. Oh here. So I did like a creative status here. Um, with all ones that I would want to see. We're going through creative status and I had, oh, something like in the comments here. So like this comments field was really nice because you could just... I mean, I could date things and so it would save, I could you know, say "today is comments" and then do the next day.
+
+**Kevin:** Yeah, it feels like you need to maintain a change history on this. I think it's like every time somebody puts in a new... you know, this gets tricky though too because like every time somebody puts something in, there's a new record and you're gonna maintain that history of all those records, that it could get large in terms of the data that you wind up with because da da da. But it's not, again, we're talking seven people. How many changes you're doing, and I don't know...
+
+**Lee:** There's a question there. Server space is always an issue for us.
+
+**Kevin:** Yeah, yeah, yeah, yeah, no right, disk space. So I mean, maybe this is again one of these things like we create it as an option to turn on history or turn off history like...
+
+**Lee:** Yeah, because I don't think we need history for updating everything. I need to maintain a history of the comments is really, I mean... History of comments, not necessarily history of everything. I don't need to know if somebody changes the name of the internal point. I mean...
+
+**Kevin:** Right. Well, there's just... I mean I sort of, yes, sort of yes, yeah, yeah, yeah. It's a little overkill. Or it's something that would be nice, but we don't want to overcomplicate the experience or overcomplicate the processes in order to do that. This is probably... history is maybe something we could build in. Again, I'm going to give it this and it's going to come up with sort of a like priority list based on what we talk about here. But uh, yeah, that sounds like it's probably a B priority or something like that, or we could fold that in later. We should probably build whatever we need for an infrastructure first though for it, but okay. Okay.
+
+**Lee:** Um, so that, I mean honestly, I mean that is basically it. I need you know, a record field, a record screen where I can input all this different information, some pulling from a form and some inputting, and then uh, views. You know, the status view being the most important. I listed out like it would be nice to be able to view by vendor.
+
+**Kevin:** Of course. Not so much anymore because we don't.
+
+**Lee:** All of these types of things, yeah, yeah. So I mean, yeah, you could just...
+
+**Kevin:** Okay, so panels that you can pick something and like an option.
+
+**Lee:** So right, it's really pretty easy, and like I said, I started what I built here in this in Airtable works pretty well, but um...
+
+**Kevin:** Right, like in the end it's a spreadsheet that you manage that is kind of a common shared sheet that everybody kind of works.
+
+**Lee:** But I would like it to be... I mean this is, this is obviously old. But it is user friendly in some respects in that you pull up different views. It's not just a spreadsheet, like it doesn't, where it doesn't look like...
+
+**Kevin:** Yeah, yeah, yeah, yeah, yeah. Like each of those views are kind of reports or summaries. But when each of those views, do you just filter rows or do you like wind up saying like, "hey, I'm going to put two or three fields on this one and two or three fields on that one," like...
+
+**Lee:** Well, like the way they have it right now, I mean there's the only views we could do is like active projects. Or like all. And it's really hard to figure out how to get where I want, like if I want to do all of...
+
+**Kevin:** Let me just view your screen for a second, I just want to see. Like these are the different views right now. Active, completed, to be invoiced.
+
+**Lee:** And then all these other things here, designer estimates, designer, printer estimates... I don't use any... I've never used any of these. I do want to be able to... these there are fields in here that I um listed. Okay, so here's a whole separate thing. Yeah, yeah, that I don't know if I want integrated or not. But I have this, um, uh... this is our budget tracking worksheet. So I manage the budgets for um, marketing communications, council and communications, and in each one of these they have like, there's individual budgets based on um, their... whoops, I have these opening. Oh okay, it's just going to see. Um, so I mean this is just a budget worksheet right? This is their budget for this line item, blah blah blah. And this pulls in and so I have this is like the budget column and then this is the accrued to date column and it pulls in... I created this whole thing. Yeah, yeah. And I don't really know what I'm doing. I've never taken an accounting course. Dollars plus minus. Um, but I basically, so this is just a long list where every time there's an expense, every time there's a purchase order invoice whatever, um, I record it here and it, I did all the formulas to pull it into here.
+
+**Kevin:** How do those purchase orders get in there? Manually, you enter them, type them in.
+
+**Lee:** I type them in.
+
+**Kevin:** The uh, is there a... how do you get them? Like do you see them somewhere? Do they come to you in a file? Do they, you're on a screen...
+
+**Lee:** Most of them I create. I create a purchase order in a separate system in NetSuite.
+
+**Kevin:** Okay, you create a purchase order in a separate system in NetSuite. Okay. But all I get from that... I don't think there's any way to... I get a PDF of the purchase order. I don't know any other way to get that data from... let's see. It's a PDF. Can you get me one of those sample PDFs of what you get from the system? Yeah. Cause maybe it's possible that you know, we could just parse that out and then import it in. Like have some kind of like import PDF and just point to this PDF and then it imports it into the thing. Right?
+
+**Lee:** So I was, I'm debating... but this is a purchase order... this, there's a couple things. There's job tracker and then there's the purchase order module. Right. And so at one point I had, I was considering um, trying to combine them. And that's why I had included in the job tracker, like in my list of fields, I want to be able to record you know, purchase order number, um, but I don't have all the fields from the purchase order there though. I mean there's some overlap, like there's a vendor. But okay, so here's my question. So if all of the information gets put in here instead of this list on my worksheet, could I then... I think if I could output it from here, from, if I can output it from Job Tracker into something like this, and then... and then I could just use that to populate these worksheets. Cause other people look at these worksheets now.
+
+**Kevin:** So the purchase orders go in and then there's kind of a purchase order list and that is somehow linked to the job? Like by a job ID or something, or you might have to maybe on the...
+
+**Lee:** I mean it's only linked to a job if I put a job number on it.
+
+**Kevin:** If you link it. You link it. Okay so it'd be a manual... so you import a purchase order and then that purchase order, it'd be like, import the purchase order and then it's gonna be like, what jobs do you link this to? Can it be many? Like a purchase order might be split across several jobs, several jobs might share the same purchase order, and or several purchase orders might go into one job. Is it like that kind of thing or is it more like one on one?
+
+**Lee:** It's usually a one on one. But theoretically it could be... say yes, there are times where you need to spread it across.
+
+**Kevin:** Okay, that gets a little trickier from an import and manage standpoint. But okay. So again, this purchase order thing I'm gonna you know, from a sort of module build standpoint I feel like the job tracker comes first. Right?
+
+**Lee:** Yeah. And as long as there's fields in the job tracker to put this stuff in manually, put the PO number, whatever... I mean whatever all the things that I have listed here.
+
+**Kevin:** Okay. Yeah, yeah, yeah. let me look at the endless here. Okay all those fields that are on the sheet one here. Check, I'll call it fields.
+
+**Lee:** Yeah, call it fields, that's good. That's helpful. Yeah.
+
+**Kevin:** Okay. Um okay. So I, I guess I'm thinking of like you know, probably it's an interface with like panels that you like have kind of a menu here and this is a collapsible panel um, with maybe like icons or something and then this is like you know, you have like maybe like jobs or job views and this is like a list of the jobs and then you might you know, click view or edit or something like that and then it goes to an editor that has you know, the job and you might save it and go back, and then there's maybe a purchase order panel here and then there's a whole settings section I imagine here that kind of has a lot of things like that, we might do some other things there.
+
+**Lee:** And I mean like what I have here is fine except that it, it just, I would like it more customizable to make more sense like you know, I don't know, like okay and on this one I don't...
+
+**Kevin:** Like when you say make more sense, like what, like give me an example. More filters, more, like do you want to create views out of this and then be like, "yes, here's my library of views"?
+
+**Lee:** Yeah, like I just click on a... I could just click on a button and it'll take me to this view. Which I, I mean I guess is what I can do here... like here's the full view list, here's my creative status view.
+
+**Kevin:** Would it maybe be like, on your main reporting list, like when you go in, you want to go in and see like sort of jobs... maybe there's a, there's probably a home here too with like recent jobs and a panel on that you could get to things quickly, or new ones that have come in. There's probably a good homepage type thing, you could do that and we could kind of put most stuff, and then there's like, okay, I want to go to the editor, you could go to the list. Maybe there's filters and views there. Maybe you could take that list... I mean when you say like different views it's more just like you're picking certain columns to show and certain rows. Right, certain fields you're kind of like saying like, I only want to get these two things together so you often roll things up, summarize, you like, I now want to take status and then look at the total number of jobs that are whatever, like yeah, that's kind of an interactive thing.
+
+**Lee:** Yeah. Nice to be able to... I mean nice to build, I mean again you know to be able to filter on any of these things right, would be good. But there are... but it would be nice to have buttons for standard views that I use all the time, right?
+
+**Kevin:** Yeah. Building create standard views too. Right. Right, saving to my library. Okay. Okay. Okay. Yeah, this is... okay, yeah, this is a builder. I should... I gotta show you my dashboard editor which I'm kind of like working on, but I might now, it's like okay, I might extend that and make that more functional here, but I'm also kind of like, let's think about like... build... there's a whole thing I want to talk with you about in terms of like building and supporting this and how it would work and how this would actually function.
+
+**Lee:** Yeah, because that's the whole thing, I mean like it's got to be something our IT is going to let us use.
+
+**Kevin:** Yeah well okay, there's a like, there is a like you know, we're gonna use this until you stop us, right I mean there is a like we're gonna roll our own and we're gonna do our own thing until you get me a better option and this is what we're doing and stop me.
+
+**Lee:** Yeah. Well I just have to know how like I mean, how does everybody in my group, I mean you're gonna build something, it's gonna be web based, right?
+
+**Kevin:** Well yeah, let's talk about that. Yeah, let's talk about that cause there's a diff...
+
+**Lee:** That's what this guy was... the guy that did our original job tracker. Yeah. I mean we were gonna pay him $3,000 to... he was gonna build us a web based... yeah, I mean that's why I did that document because he was gonna work from that document and build us a web based system.
+
+**Kevin:** Yeah, yeah cool. 
+
+**Lee:** And that got put on hold because he was... he was saying that he needed server capacity on our server. 
+
+**Kevin:** Okay, this is where... okay, so this is where I start to get to talk to you about like, okay it's like because okay, I mean in the end right, I can make you an application that's like again basic javascript HTML, it will run like it would almost run entirely in your browser right, like it, like there's almost nothing that it would require except, except the shared data. Because the shared data has to be somewhere like a database that this application can talk to and everybody can talk to. Now there's a lot of options on how we get that done, right? Like IT can support it or whatever right? Like you know, and that's of course quite complex right? There are things that can be, you can set this up outside right, like for example my servers, I have some servers set up on Oracle cloud right? And I have data on Oracle cloud. You could put it out in Amazon, you could, there's places you could put it. And you could connect to a database out there over the internet and just talk to it. So let me...
+
+**Lee:** Right, so... like our current job tracker is in FileMaker Pro. So that data, and we share it, so that data must be on our... it's on our servers.
+
+**Kevin:** By FileMaker Pro, I'm guessing is that that is a file, because FileMaker Pro I believe is just kind of a database file thing, there's no server with FileMaker Pro. Right. And that file sits on a, yeah, it sits on a shared file server location I'm guessing. You connect to a drive or something or like a...
+
+**Lee:** Oh yeah, I know, I guess I'm not sure, I'd find out I guess.
+
+**Kevin:** Yeah, you probably connect to a drive and open something that then connects to this FileMaker Pro database file that's sitting out there whatever. Okay. Okay. So that kind of thing could be replicated. So okay. If IT gets on board. But then the other question, so the other way of thinking of this is, is truly as a service where it's like you just log in, you guys don't do any... there's no configuration, this is all just up in the cloud. And you log in...
+
+**Lee:** Is that what... so Airtable here, I put all our data into this Airtable that I created. Where is that living?
+
+**Kevin:** That's out there on the cloud. So it's out there on the cloud already somewhere.
+
+**Lee:** And because I've shared this with other people... how do you get into Airtable? I think I log in.
+
+**Kevin:** Through what?
+
+**Lee:** My, I think I must have set up an account.
+
+**Kevin:** Could you share and or give me that account that you created in Airtable as a reference?
+
+**Lee:** Yeah. Okay, I can figure out how to log in as me again.
+
+**Kevin:** So yes, in the end that's what's going on is that Airtable, you're paying Airtable certain services whatever.
+
+**Lee:** Well we're not paying anything, this is a free version, that's the problem.
+
+**Kevin:** Oh yeah, okay sure sure the free version right okay. Yeah well okay that's right that's right okay. So in the end right, in the end there will be some cost to this if you want a shared environment. Now we might be able to like keep... again, the cost I'm talking about like, we're talking how much you use it, 50 bucks a month maybe, I don't know something like that, it could be really low. Right?
+
+**Lee:** Or I mean, if we could put on our own internal servers?
+
+**Kevin:** Yes, yes that is also an option and that begins to get into a... and this is, this is the long term thing I always describe it like, software is like a puppy right? It's like you get it at first but it's like no, you gotta take care of it and manage it and update it and da da da and who's gonna version it and security and blah blah blah. There's all these like little like real annoying things that are like, I can make the features, but then there'll be a lot of sort of quote deployment concerns because like is it secure is it blah blah blah and how do we get it and put on your network right? So that's a possibility. I'm gonna say like, I guess what we should think of and consider is ease of deployment, simplicity of deployment in environments like this where it's like, look we want as minimal as a footprint as possible on this thing, like I don't want to have to like set up a bunch of servers and... because this is the problem is it like to run it locally there on a lot of stuff in your environment it's gonna be, you're gonna need some kind of server database thing. Now is it possible that we could connect to that existing FileMaker pro database and just use the FileMaker pro back end?
+
+**Lee:** But we want to get rid of FileMaker pro too.
+
+**Kevin:** You do, but what's your option? Yeah I know. Okay the whole, the whole obstacle here is figuring out how to get IT to let us do this. Yes. Yes. Yes. Yes. And part of this too is it's like you know, I started in forgiveness not permission right? You know it's like hey look, I mean I think it, and it's one of these things, it's provocative, like this could be provocative for people it's because like cause I could build something here and it's gonna look pretty fucking good right? Like it's gonna, people are gonna be like "I want that" is maybe what's gonna happen. Okay and then that's gonna put pressure on your IT team to be like da da da. And they will attack me. They will say this is a bunch of AI generated code blah blah there's no support who's gonna whatever who's gonna version da da da. There's about a million things they could take me on right on this. But the other thing that it could be done is it's like, "I hear your concerns, I don't care, we're running this up in the cloud, my business, my, I'm a business unit, I need to get my job done, I'm getting my job done. If and when you guys are willing to support me on this that is great, but until that point in time I'm gonna get my job done and do like what I'm doing here with Airtable and other things," right? Or you know, or this new app running out somewhere, right?
+
+**Lee:** By saying this new app running out somewhere is gonna need a ser... we're gonna have to pay for a server somewhere.
+
+**Kevin:** Okay. Okay. I there are... well and again there's things like there are free options to play too. Like a lot, like I'm talking with this database...
+
+**Lee:** Well that's the problem with Airtable I mean it's free up to a certain number of records.
+
+**Kevin:** Right. Everything's free up to a point. And the but the question is is like how much is it going to be because this honestly I already have servers running out there that I kind of already have on Oracle and I can just spin one up and check down and I was like I was like, this is gonna be like 40 or 50 bucks a month and I was like eh 40 bucks a month when I'm working and I'm doing it I'm like hey that's fine right? So this might not be very expensive. Like I mean you might be talking like $10 10 a month right? Like and this is where I get on certain things I'm like look if this makes your life easier and it costs $10 a month to support and you're happier and more productive.
+
+**Lee:** Right yeah.
+
+**Kevin:** Then fuck everybody else. It's like it's like you know, I am now powerful and productive and I'm gonna pay $10 a month because that frees up my time. Right like that's my vision on cloud is it's like I don't mind paying to now paying out of my personal pocket to liberate myself from a work chore. Okay. Um so I think we should go, I'll go into it with a very like minimal footprint, simplicity of deploy. I think the most prudent approach to start is something that is out on the cloud and secure enough, right again I'm not putting your data in here we're not going to load your data, I'll ask it to like put fake data in and things like that, right?
+
+**Lee:** Yeah.
+
+**Kevin:** Or if you want I could load your data... again we'll put it behind something so it's not like anybody can get in. It'll be HTTPS secure, it'll follow general sort of authentication standards. They'll have some issues with like users and setting it up but I'll create a user thing for it. I'll create users and you can set up users in there and shit like that, we'll have it do that. But I think the prudent thing is to get it up and out in the cloud and get it functional and then you can either use it and stop or we'll figure out what the cost factors are...
+
+**Lee:** Or could the application part run from the cloud but like the data saves to a server like a local server? Yes. Like I think what we do now I mean and we haven't done this yet this year but like every year we basically sink it down or sink it down.
+
+**Kevin:** Sink it down and start over again. And exactly what... that's kind of a pain in the ass cause I like to look up history and then I have to go back into one of these completed files and open it up. Yeah. And like anything it's like you know things like it's like oh well you know hey look we want to keep history, it's like okay well let's not keep history now because that's gonna whatever like more history you keep more data at that size and cost right? But what we're talking, like how many jobs are you talking about here per year you might create or do?
+
+**Lee:** Um like a thousand jobs a year.
+
+**Kevin:** Thousand jobs right with 50 or so attributes, 40 attributes on those jobs? Yeah. This is not very, this is not big data. Yeah. This is a thousand records, like this is something that I think we could probably sneak away with a free plan on something. Okay. Because there are free databases out there that are like again, they have the whole thing it's like we're gonna offer you a free thing to hope that you convert and da da da right um, and as long as we choose something on the back end that is very neutral like Postgres, everybody has Postgres, everything supports Postgres, you know, it's free, no licenses. So put it out there with Postgres backended and then it's like look here it is, and then it's like look you want to move this inside, great, you can have a Postgres database or even something simpler than Postgres, we might do something even easier like SQLite. SQLite is a very good cheap free database that you can just install and like I think it's even can be serverless. So it's like you just install it there and then your application can just talk to it. Um so let me explore kind of some options on that about what that might be from an architecture deploy and keep it super simple. Um and then yeah we can collect all of your documents, everything you can send me.
+
+**Lee:** Yeah let me send, let me I gotta call Nicole and then I'll send you everything and then let me try to find too... I don't think there's a lot of information but I might have the estimate that the outside guy gave. I don't think he gave any information though about how he was going to build it because IT was ready to sign off on that.
+
+**Kevin:** Oh okay okay. Okay yeah actually that would be helpful to understand what he was proposing from a...
+
+**Lee:** Yeah.
+
+**Kevin:** Was he going to update the application and still use the FileMaker Pro?
+
+**Lee:** No he wasn't. He said it was cloud. Yeah it was cloud based and we're gonna get rid of FileMaker Pro. So I'd be interested to see what he proposed and IT approved because then I can just make that. Yeah it was not very, it was not very um detailed.
+
+**Kevin:** That's okay I mean I might be able to infer it but I guess that's my notion here. My notion here is to find something that would be a database, I think SQLite is serverless and then you could just have that as like a file out there and then this thing maybe could talk to SQLite. Let me do a little investigation on how to like make the footprint just about zero.
+
+**Lee:** Um I want to say too that only do this if you're, if it's fun and it's interesting.
+
+**Kevin:** Yeah yeah yeah yeah.
+
+**Lee:** Because I'm all ready for you know, IT to just go "oh no no."
+
+**Kevin:** Oh well I no, I expect that honestly.
+
+**Lee:** Yeah or even the rest of my team going, not being willing to use it if IT doesn't.
+
+**Kevin:** I agree, no no, I complete and by the way I completely get that. That is mostly where things stop is that IT doesn't want to, and it is for good reasons, right, they have their reasons, right um, mostly because it's just overwhelming for them to try to figure out... oh yeah, no IT is because you got to solve everything right and it's in their security, there's people attacking you, there's all these, there's a lot of problems. It's hard to be IT like I, I'm not like, they got their issues and concerns right, so it's not, it's not like they're unfounded in their topics. But I will go on the other side of like, I get all your concerns are valid but you can't stop the business from trying to improve and proceed and you're either going to be a part of this, the business is going to want to move forward and you're either going to be a barrier or you're going to you know... and I personally it's like, I don't let other organizations be a barrier to the things I want to achieve. Again like fire me if you want, and I did, I got fired, but it wasn't because it wasn't because I was pushing people into things that were you know uncomfortable you know so. Uh I yeah, so I may I may uh yeah you know see that's as a consultant I can be I can be the change agent.
+
+**Lee:** Thanks.
+
+**Kevin:** Yeah. You guys, fuck you guys yeah yeah good exactly. No okay so no good thank you. Um okay I have notions yeah, if you can kind of, I'll take a look at those docs, I'll package things up um, do you have a timeline on this?
+
+**Lee:** Next Tuesday, no I mean you know, sooner rather than later is you know always the answer usually right?
+
+**Kevin:** Yes. Okay all right okay uh how do you like to, how would you like to work on this, would you like me to generate things and then like sit down with you and review these applications together and kind of talk about it like yeah we kind of walk through the flow maybe something like that and kind of gen, do a few iterations and...
+
+**Lee:** Yeah I think if we do yeah some yeah check ins and and...
+
+**Kevin:** Anything in terms of graphic style like I would love I could make it look...
+
+**Lee:** I can share you our brand standards.
+
+**Kevin:** Get the brand standards. Bring them over. Give me any, also too, also too any websites that purport to use the brand standards because those are, there's the brand standards what you're officially supposed to do and then there's the execution on the actual website and people, the website is what people believe is the brand standards even if the brand standards say it should be like this right so we have that fight all the time.
+
+**Lee:** If you yeah yeah.
+
+**Kevin:** So if you can share with me also the website as the, or whatever website or sites you think are a you would like this to look like. Okay like colors palettes navigation even things like that. Give, send me that I'll take all that stuff and we'll put it in a, in a robot and the robot will help us spin some things out. Um I'm gonna do all this work on my public or my private GitHub so it'll be private it'll be behind GitHub and it'll be in GitHub um and then we'll just I'll do some iterations um yeah.
+
+**Lee:** I mean I'll send you, I mean I'll send you a link to my Airtable, maybe I already did but um I mean if you want to use that for data I mean I already put it out there so.
+
+**Kevin:** Yeah no yeah no good, I mean I can notionally maybe yeah if you give me the logins and stuff I could bring that data in so it's illustrative.
+
+**Lee:** Illustrative. Yeah.
+
+**Kevin:** Um okay all right well let me um.
+
+**Lee:** We'll plan to you know meet again in a week or so yeah.
+
+**Kevin:** It is a holiday week yeah cause I got I got some time with my family that I want to spend.
+
+**Lee:** Yeah okay so maybe late next week we'll get something on the calendar.
+
+**Kevin:** Yeah yeah. Yeah if you want you want to see some of the stuff that I have already and kind of like mode like in terms of interfaces like what you want to come over and look at like what I'm...
+
+**Lee:** I actually need to call Nicole back real quick.
+
+**Kevin:** That's fine, that's fine. I yeah we can talk about this later but I have I have notions of how that interface might look but I would like your feedback too of how we might want to improve it cause I'll show you what I've been doing on the dashboard um the analytics package. Okay. And hopefully this recorded and uh took enough notes. We'll see. Thank you.
