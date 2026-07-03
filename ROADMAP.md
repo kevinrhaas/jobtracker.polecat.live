@@ -72,10 +72,11 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 - [ ] **Job intake form** — a dedicated, friendly "New job request" form (a
       Microsoft-Forms replacement) with type-driven conditional fields, sharable
       via token so requesters can submit directly.
-- [ ] **Job type templates** — each job type seeds type-specific fields and a
-      default subtask checklist; render an interactive checklist on the job.
-- [ ] **Subtasks & milestones UI** — checkable subtasks with progress rollup;
-      milestone dates on the calendar.
+- [x] **Job type templates** ✅ Shipped — each type's default checklist (set in
+      Settings → Pick lists) auto-seeds a new job's subtasks. **Subtasks &
+      milestones UI** ✅ Shipped — the job editor's new Checklist tab has
+      checkable subtasks with a progress bar + rollup badge in the hero, plus
+      dated milestones that also appear as chips on the Calendar.
 - [ ] **Campaigns / programs** — group jobs into campaigns with rollup status and
       a campaign detail page.
 - [ ] **Status transition rules** — optional allowed-transition map + confirmation
