@@ -95,7 +95,11 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 - [ ] **End-of-year report generator** — the report Lee builds manually: summary
       stats, by-division/type breakdowns, exportable to Excel/PDF-via-print.
 - [ ] **Custom KPI builder** + savable dashboards.
-- [ ] **In-app notifications feed** (overdue, approvals requested, stale jobs).
+- [x] **In-app notifications feed** ✅ Shipped — a bell in the top bar with a live
+      unread count surfaces overdue jobs, jobs due within 2 days, approval
+      requests, jobs gone stale in their stage, and upcoming/overdue milestones.
+      Click through to the job, dismiss individually, or mark the whole feed read;
+      everything is computed live (nothing new to store), so it's always in sync.
 
 ### Backend progression (design only until asked)
 - [ ] **Phase 2 API bridge** — a settings-driven `fetch()` data adapter behind a
