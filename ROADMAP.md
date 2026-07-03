@@ -37,12 +37,14 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 ## 🎯 Next up (feature runs) — prioritized
 
 ### ⭐ Requested by the owner (do these first)
-- [ ] **Simplify & reorganize the job editor.** The Details tab is daunting.
-      Group fields into clear, collapsible sections (e.g. *Overview* → name, type,
-      status, owner, due; *People*; *Schedule*; *Deliverables*; *Finance* collapsed
-      by default). Lead with the few fields people touch most; progressively
-      disclose the rest. Improve visual hierarchy, spacing, and mobile layout.
-      Respect Simple mode. Keep every field reachable.
+- [x] **Simplify & reorganize the job editor.** ✅ Shipped — the Details tab's
+      full mode now leads with an *Overview* grid (name, job #, letter, type,
+      client, status, priority, owner, due date, rush), then clearly labeled
+      collapsible sections: *People* (requester, assignee, designers),
+      *Schedule* (date in, in-hands, completed), *Deliverables* (count,
+      quantity, vendor, campaign, divisions, icon), and *Finance & tracking*
+      (collapsed by default). Each section remembers open/closed per user.
+      Simple mode unchanged.
 - [x] **Media-type filter + tidy the pill filters.** ✅ Shipped — a dedicated
       "Type" chip filters by media type (Podcast, Video, Print, Social, Email,
       Web, …) via a checklist dropdown with icons + live counts. Status, Rush,
