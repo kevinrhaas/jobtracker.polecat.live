@@ -84,6 +84,33 @@ async function checkPage(browser, url, mustFind, label){
     if(garbage.length) throw new Error('views rendered broken content:\n  '+garbage.join('\n  '));
     console.log('✓ all sections navigated + rendered real content');
     await page.close();
+
+    // 4) mobile viewport (390px): marketing nav, app topbar and the job editor
+    //    sheet must all fit — no horizontal page scroll, no cut-off chrome.
+    const mob = await browser.newContext({ viewport:{ width:390, height:844 }, isMobile:true });
+    const mp = await mob.newPage();
+    const mobErrs=[]; mp.on('pageerror',e=>mobErrs.push(String(e)));
+    await mp.goto(`http://localhost:${PORT}/`, { waitUntil:'domcontentloaded' });
+    await mp.waitForSelector('.nav-in'); await mp.waitForTimeout(200);
+    if(await mp.evaluate(()=>document.documentElement.scrollWidth > innerWidth+1))
+      throw new Error('mobile: marketing page overflows horizontally at 390px');
+
+    await mp.goto(`http://localhost:${PORT}/app/?token=${encodeURIComponent(TEAM_TOKEN)}#inventory`, { waitUntil:'domcontentloaded' });
+    await mp.waitForSelector('#rail .rail-item'); await mp.waitForTimeout(300);
+    if(await mp.evaluate(()=>{ const b=[...document.querySelectorAll('.topbar > *')].pop(); return b ? b.getBoundingClientRect().right > innerWidth+1 : false; }))
+      throw new Error('mobile: app topbar buttons overflow the 390px viewport');
+    await mp.waitForSelector('table.tbl tbody tr', { timeout:8000 }).catch(()=>{});
+    await mp.evaluate(()=>{ const r=document.querySelector('table.tbl tbody tr'); if(r) r.click(); });
+    const modal = await mp.waitForSelector('.modal', { timeout:8000 }).catch(()=>null);
+    if(modal && await mp.evaluate(()=>{
+      const m=document.querySelector('.modal').getBoundingClientRect();
+      const body=document.querySelector('.modal-body');
+      return (m.width>innerWidth+1) || (body && body.scrollWidth>body.clientWidth+1);
+    })) throw new Error('mobile: job editor modal is wider than the 390px viewport');
+    if(mobErrs.length) throw new Error('mobile console errors:\n  '+mobErrs.join('\n  '));
+    console.log('✓ mobile (390px): nav, topbar and job sheet all fit');
+    await mp.close();
+
     console.log('\n✅ smoke test passed');
   }catch(e){
     console.error('\n❌ smoke test FAILED:\n'+e.message);

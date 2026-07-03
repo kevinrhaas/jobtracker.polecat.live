@@ -36,6 +36,20 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 
 ## 🎯 Next up (feature runs) — prioritized
 
+- [ ] **Radically improve mobile across the whole app.** Test every screen at
+      360–430px. Immediate fixes shipped (marketing brand wrap, topbar crowding,
+      full-screen job sheet, letter shown with the job #). Do a thorough pass:
+      inventory table → card list on phones (or sticky first column); board columns
+      swipeable with snap; calendar compact/agenda mode; filter bar as a bottom
+      sheet; settings nav as a scrollable segmented control; ≥44px tap targets;
+      safe-area insets. The smoke test now runs a 390px pass — extend per view.
+- [ ] **Marketing site: real media — screenshots, carousel, video.** Replace the
+      single CSS mock with a swipeable screenshot gallery (dashboard, board,
+      calendar, job editor, metrics), an autoplaying muted looping hero demo video
+      (or animated GIF/APNG), per-feature preview images, and a light/dark preview
+      toggle. Self-hosted only. Generate screenshots from the live app (Playwright)
+      so they stay current.
+
 ### ⭐ Requested by the owner (do these first)
 - [x] **Simplify & reorganize the job editor.** ✅ Shipped — the Details tab's
       full mode now leads with an *Overview* grid (name, job #, letter, type,
