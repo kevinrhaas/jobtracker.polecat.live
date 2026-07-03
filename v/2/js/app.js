@@ -25,21 +25,6 @@ const RENDERERS = { home:renderHome, inventory:renderInventory, board:renderBoar
 let rail, view, topTitle;
 let currentSection='home', currentParams={};
 
-// ---- version pinning -----------------------------------------------------
-// If the user pinned an earlier build in Settings → Version, honor it — but
-// only from the canonical /app/ (archived builds live under /v/<n>/ and must
-// not redirect, or we'd loop). Runs at import, before anything renders.
-(function honorPinnedVersion(){
-  try{
-    const onCanonical = /^\/app\/?(index\.html)?$/.test(location.pathname);
-    if(!onCanonical) return;
-    const pin = JSON.parse(localStorage.getItem('jt.workspace')||'{}')?.config?.settings?.pinnedVersion;
-    if(pin && typeof pin==='string' && /^\/v\/\d+\/app\/?$/.test(pin)){
-      location.replace(pin + location.hash);
-    }
-  }catch{}
-})();
-
 async function boot(){
   applyTheme();
   const gate = await Access.init();
@@ -190,10 +175,6 @@ function renderGate(errMsg){
   ta.addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); enter(); } });
   setTimeout(()=>ta.focus(),50);
 }
-
-// Note: the "you're viewing an archived build" banner is injected directly into
-// each /v/<n>/ snapshot's HTML by .github/archive-release.mjs, so it works even
-// for snapshots built from older code that predates the switcher.
 
 document.addEventListener('DOMContentLoaded', boot);
 export { ctx };

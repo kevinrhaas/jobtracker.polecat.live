@@ -42,7 +42,6 @@ let currentSection='home', currentParams={};
 
 async function boot(){
   applyTheme();
-  showArchivedBanner();
   const gate = await Access.init();
   if(!gate.granted){ renderGate(gate.inviteError); return; }
 
@@ -192,22 +191,9 @@ function renderGate(errMsg){
   setTimeout(()=>ta.focus(),50);
 }
 
-// When running an archived snapshot (/v/<n>/app/), show a slim banner so the
-// user always knows they're on an older build and can jump back to the latest.
-function showArchivedBanner(){
-  const m = location.pathname.match(/\/v\/(\d+)\//);
-  if(!m) return;
-  const n = m[1];
-  const bar = el('div',{class:'archived-bar'},[
-    el('span',{html:`${icon('history',15)} You're viewing <b>v${n}</b> (an archived build)`}),
-    el('button',{class:'btn sm', text:'Return to latest', onclick:()=>{
-      try{ Store.setSetting('pinnedVersion','current'); }catch{}
-      location.href='/app/';
-    }}),
-  ]);
-  document.body.append(bar);
-  document.documentElement.style.setProperty('--archived-bar-h','38px');
-}
+// Note: the "you're viewing an archived build" banner is injected directly into
+// each /v/<n>/ snapshot's HTML by .github/archive-release.mjs, so it works even
+// for snapshots built from older code that predates the switcher.
 
 document.addEventListener('DOMContentLoaded', boot);
 export { ctx };

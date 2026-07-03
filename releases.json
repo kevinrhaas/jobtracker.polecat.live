@@ -4,5 +4,17 @@
     "title": "Version switcher — flip between released builds",
     "date": "Jul 3, 2026, 1:30 PM CT",
     "path": "/v/3/app/"
+  },
+  {
+    "v": 2,
+    "title": "Neutral branding + public-site SEO",
+    "date": "Jul 3, 2026, 12:45 PM CT",
+    "path": "/v/2/app/"
+  },
+  {
+    "v": 1,
+    "title": "JobTracker launches",
+    "date": "Jul 3, 2026 CT",
+    "path": "/v/1/app/"
   }
 ]
