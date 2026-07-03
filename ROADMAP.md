@@ -50,12 +50,13 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       Web, …) via a checklist dropdown with icons + live counts. Status, Rush,
       Overdue and My jobs stay as primary inline pills; Division, Priority and
       Client moved into one grouped "Filters" dropdown chip so the bar stays tidy.
-- [ ] **Make Saved Views clearer + fully manageable.** Explain what a view is
-      (a saved combination of columns + filters + sort) with a tiny inline hint /
-      onboarding. Make creating, renaming, duplicating, reordering, setting a
-      default, and deleting views obvious from the inventory. Add a **View Library
-      manager in Settings** (rename, edit filters/columns, reorder, delete, mark
-      default) so views can be curated in one place, not just ad hoc.
+- [x] **Make Saved Views clearer + fully manageable.** ✅ Shipped — a
+      **Settings → Saved views** "View Library" lists every saved view with a
+      plain-language summary of its filters, columns & sort; each row supports
+      inline rename, icon change, duplicate, ↑↓ reorder, star-to-set-default,
+      "Open in Jobs" (loads the view there to tweak filters/columns/sort), and
+      delete. Jobs now opens to the starred default view, and the inventory's
+      views row links straight to the View Library with an explanatory tooltip.
 
 ### Data & attachments
 - [ ] **IndexedDB attachment store** — move real file binaries from in-session
