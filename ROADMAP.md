@@ -135,13 +135,28 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 - [ ] **Conflict UI** — surface last-write-wins conflicts with a diff + resolve.
 
 ### Polish backlog (for polish runs)
-- [ ] Micro-interactions: confetti on job completion, smooth board reflow,
-      celebratory streaks.
-- [ ] Empty-state illustrations per section.
-- [ ] Print stylesheet for jobs and reports.
-- [ ] PWA manifest + offline service worker (installable, mobile-app-ready).
+- [x] **Micro-interactions: confetti on job completion.** ✅ Shipped — moving a
+      job into any terminal, non-Canceled status (via the Details tab's Status
+      field, or dragging a card into a terminal board column) fires a themed
+      confetti burst using the active palette's own colors (`celebrate()` in
+      `ui.js`). Respects the OS *and* in-app "reduce motion" preference —
+      skipped entirely, zero DOM cost either way.
+- [x] Print stylesheet for jobs and reports — already shipped (see the
+      `@media print` block in `css/styles.css`); marking it done here since the
+      backlog hadn't caught up.
+- [x] PWA manifest + offline service worker — already shipped (`manifest.json`
+      + `sw.js`, network-first with cache fallback, scoped to `/app/`); marking
+      done for the same reason.
+- [ ] Smooth board reflow when cards move between columns (currently an
+      instant re-render); a celebratory streak counter ("3 jobs completed this
+      week!") on the dashboard hero, reusing the new `celebrate()` confetti.
+- [ ] Empty-state illustrations per section (small inline SVGs instead of the
+      shared generic icon-in-a-circle empty state).
 - [ ] Performance: virtualize very large lists/boards (>1000 jobs).
-- [ ] Full a11y audit pass (axe) + focus-trap review on modals.
+- [ ] Full a11y audit pass (axe) + focus-trap review on modals — verify Tab
+      stays trapped inside an open modal and focus returns to the trigger
+      element on close (`modal()`/`confirmDialog()`/the new `promptDialog()`
+      in `ui.js` are the first place to check).
 
 ---
 
@@ -151,3 +166,17 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 - Time tracking per job; capacity planning.
 - Slack/email digest export (copy-to-clipboard summaries).
 - Theming: per-workspace accent color picker.
+- **Focus mode** — a distraction-free single-job view (large card, checklist,
+  and comments only) for someone heads-down on one deliverable; deep-linkable.
+- **"On this day" / job anniversary nudges** — surface jobs whose due date or
+  completion date lines up with today from a prior year, useful for recurring
+  annual campaigns (e.g. "Membership Drive" every spring).
+- **Smart duplicate detection on New Job** — as the name is typed, fuzzy-match
+  against existing job names/clients and suggest "Did you mean to duplicate
+  #14522 instead?" to cut down on accidental re-entry.
+- **Keyboard-only board mode** — arrow keys to move focus between cards, a
+  single keypress to cycle a focused card through statuses, so power users
+  never need the mouse for triage.
+- **Workload heatmap** — a calendar-style grid colored by how many jobs are
+  due per person per day, to spot overload before it happens (complements the
+  existing per-person workload bars in Metrics).
