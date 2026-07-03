@@ -756,3 +756,28 @@ input[type=color].color-input{width:34px;height:30px;flex:none;padding:2px;borde
   .print-footer{ display:block!important; margin-top:18px; padding-top:10px; border-top:1px solid #ccc; font-size:11px; color:#555; }
 }
 .print-footer{ display:none; }
+
+/* =========================================================================
+   Mobile refinements (phones), added on top of the base mobile rules:
+   declutter the topbar, full-screen the job editor sheet, stack dense rows.
+   ========================================================================= */
+@media (max-width:560px){
+  .topbar .tb-hide-sm{display:none}          /* undo / redo / what's-new tuck away */
+  .topbar-search{min-width:0;flex:1}
+
+  /* job editor + any wide dialog become a fixed, full-screen sheet so page
+     content can never push it wider than the viewport */
+  .modal-back{padding:0}
+  .modal, .modal.wide, .modal.full{position:fixed;inset:0;width:auto;max-width:none;
+    height:auto;max-height:none;border-radius:0;transform:none;display:flex;flex-direction:column}
+  .modal-body{overflow-x:hidden;flex:1;min-width:0}
+  .modal-head,.modal-foot{flex:none}
+  .modal-foot{position:sticky;bottom:0;background:var(--surface)}
+  .modal *{max-width:100%}
+  .tabs{overflow-x:auto}
+
+  .field-row{flex-direction:column;gap:0}
+  .def-grid{grid-template-columns:1fr}
+  .job-hero{flex-wrap:wrap;gap:12px}
+  .job-hero .jh-actions{width:100%;justify-content:flex-start;flex-wrap:wrap}
+}

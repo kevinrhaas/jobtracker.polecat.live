@@ -20,7 +20,7 @@ import { jobIconFor } from './icons.js';
 import { seedJobs, DEFAULT_META, DEFAULT_VIEWS } from './seed.js';
 
 const LS_KEY  = 'jt.workspace';       // main blob
-const SCHEMA  = 6;                    // bump when the shape changes
+const SCHEMA  = 5;                    // bump when the shape changes
 const HIST_MAX = 200;                 // undo/redo depth
 
 class Emitter{
@@ -55,8 +55,7 @@ export const Store = new (class extends Emitter{
   // Forward migration. Old blobs are upgraded field-by-field; nothing is
   // dropped. Keep each step additive so downgrades degrade gracefully.
   _migrate(d){
-    const from = d.schemaVersion || 1;
-    d.schemaVersion = from;
+    d.schemaVersion = d.schemaVersion || 1;
     if(!d.jobs) d.jobs = {};
     if(!d.meta) d.meta = structuredClone(DEFAULT_META);
     if(!d.views) d.views = structuredClone(DEFAULT_VIEWS);
@@ -83,25 +82,6 @@ export const Store = new (class extends Emitter{
     for(const j of Object.values(d.jobs)){
       if(!j.subtasks) j.subtasks = [];
       if(!j.milestones) j.milestones = [];
-    }
-    // v6: real campaign entities (rollup status, owner, description). One-time
-    // backfill from any free-text campaign names already used on jobs, so
-    // existing data surfaces as real campaigns automatically; gated on `from`
-    // so a campaign someone deletes later doesn't quietly come back.
-    if(from < 6){
-      const known = new Set(d.campaigns.map(c=>c.name));
-      for(const j of Object.values(d.jobs)){
-        if(j.campaign && !known.has(j.campaign)){
-          known.add(j.campaign);
-          d.campaigns.push({ id:uuid(), name:j.campaign, status:'Active', description:'', owner:'', createdAt:Date.now() });
-        }
-      }
-    }
-    for(const c of d.campaigns){
-      if(!c.status) c.status = 'Active';
-      if(c.description==null) c.description = '';
-      if(c.owner==null) c.owner = '';
-      if(!c.createdAt) c.createdAt = Date.now();
     }
     d.schemaVersion = SCHEMA;
     return d;
@@ -476,36 +456,10 @@ export const Store = new (class extends Emitter{
   }
   setDefaultView(id){ this.data.defaultViewId = id; this._persist(); this.emit('views'); }
 
-  // ---- campaigns ---------------------------------------------------------
-  // Campaigns are a light entity layer over jobs: a job links to one by
-  // storing its *name* in job.campaign (kept free-text so the job editor's
-  // datalist field needs no changes). Renaming or deleting a campaign here
-  // cascades to every linked job so nothing goes stale.
+  // ---- campaigns -------------------------------------------------------
   campaigns(){ return this.data.campaigns; }
-  campaign(id){ return this.data.campaigns.find(c=>c.id===id) || null; }
-  campaignJobs(name){ return name ? this.jobs().filter(j=>j.campaign===name) : []; }
-  addCampaign(c){
-    const camp={ id:uuid(), status:'Active', description:'', owner:'', createdAt:Date.now(), ...c };
-    this.data.campaigns.push(camp); this._persist(); this.emit('change');
-    return camp;
-  }
-  updateCampaign(id, patch){
-    const c = this.data.campaigns.find(x=>x.id===id); if(!c) return;
-    const oldName = c.name;
-    Object.assign(c, patch);
-    if(patch.name && patch.name!==oldName){
-      this.jobs().forEach(j=>{ if(j.campaign===oldName){ j.campaign=patch.name; j.updatedAt=Date.now(); } });
-    }
-    this._persist(); this.emit('change'); this.emit('jobs');
-  }
-  // Unlinking jobs is opt-out, not opt-in: a deleted campaign shouldn't leave
-  // jobs pointing at a name nothing manages any more.
-  removeCampaign(id, { clearJobs=true }={}){
-    const c = this.data.campaigns.find(x=>x.id===id); if(!c) return;
-    if(clearJobs) this.jobs().forEach(j=>{ if(j.campaign===c.name){ j.campaign=''; j.updatedAt=Date.now(); } });
-    this.data.campaigns = this.data.campaigns.filter(x=>x.id!==id);
-    this._persist(); this.emit('change'); this.emit('jobs');
-  }
+  addCampaign(c){ const camp={ id:uuid(), ...c }; this.data.campaigns.push(camp); this._persist(); this.emit('change'); return camp; }
+  removeCampaign(id){ this.data.campaigns=this.data.campaigns.filter(c=>c.id!==id); this._persist(); this.emit('change'); }
 
   // ---- import / export -------------------------------------------------
   exportAll(){

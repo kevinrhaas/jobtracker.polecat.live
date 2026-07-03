@@ -88,22 +88,6 @@ function topics(){ return [
     toolbar. The JSON export from Settings is a full workspace backup you can re-import later
     (see <a data-jump="importing">Importing data</a>).</p>` },
 
-  { id:'campaigns', group:'user', title:'Campaigns', icon:'flag', html:`
-    <h2>Campaigns</h2>
-    <p>A campaign groups related jobs — a product launch, an annual event, a rebrand — so you can
-    see rollup status in one place instead of hunting across the Jobs list.</p>
-    <h3>Creating &amp; managing</h3>
-    <p>Open <a data-go="campaigns">Campaigns</a> and click <b>New campaign</b> to give it a name,
-    status (Active, Planned, On hold, Complete), owner and description. Every campaign card shows
-    its % complete, job count, overdue count and latest due date at a glance.</p>
-    <h3>Linking jobs</h3>
-    <p>Open a campaign for a detail view with rollup KPIs, a status-mix chart, and the full list of
-    linked jobs. Use <b>Add jobs</b> to search and attach existing jobs, or remove one with the
-    <b>×</b> next to it. You can also set a job's <b>Campaign</b> field directly from its own
-    editor (Deliverables section) — either way stays in sync.</p>
-    <p>Renaming or deleting a campaign automatically updates every job linked to it, so nothing is
-    ever left pointing at a campaign that no longer exists.</p>` },
-
   { id:'importing', group:'user', title:'Importing data', icon:'upload', html:`
     <h2>Importing data</h2>
     <p>The <a data-go="import">Import wizard</a> walks you through bringing outside data in,

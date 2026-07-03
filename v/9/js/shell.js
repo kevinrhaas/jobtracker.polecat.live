@@ -13,7 +13,6 @@ export const SECTIONS = [
   { key:'inventory', label:'Jobs',      icon:'list' },
   { key:'board',     label:'Board',     icon:'board' },
   { key:'calendar',  label:'Calendar',  icon:'calendar' },
-  { key:'campaigns', label:'Campaigns', icon:'flag' },
   { key:'metrics',   label:'Metrics',   icon:'chart' },
   { group:'Manage' },
   { key:'import',    label:'Import',    icon:'upload' },

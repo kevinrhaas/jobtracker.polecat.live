@@ -17,15 +17,16 @@ import { icon } from './icons.js';
 export const CHANGELOG = [
   {
     v: 9,
-    title: 'Campaigns — group jobs and see rollup status',
-    kind: 'feature',
-    ts: '2026-07-03T22:20:28.725Z',
-    date: 'Jul 3, 2026, 5:20 PM CT',
+    title: 'Mobile polish — nav, topbar & full-screen job sheet',
+    kind: 'fix',
+    ts: '2026-07-03T22:11:52.710Z',
+    date: 'Jul 3, 2026, 5:11 PM CT',
     items: [
-      'New Campaigns section: every campaign is a card showing status, owner, % complete, overdue count and its latest due date.',
-      'Open a campaign for the full picture — rollup KPIs, a status-mix chart, and the list of linked jobs. Add jobs from a searchable picker, remove them individually, or jump straight into one.',
-      'Create, edit and delete campaigns right there; renaming or deleting one automatically updates every job linked to it.',
-      'Any campaign names already used on your jobs are adopted automatically — nothing to redo after upgrading.',
+      'Marketing header no longer wraps the "Agency Job Tracker" wordmark or overlaps the Launch button on phones.',
+      'The app top bar no longer crowds off-screen on mobile — Undo/Redo/What\u2019s-new tuck away so New and search stay reachable.',
+      'The job editor now opens as a proper full-screen sheet on phones instead of overflowing the viewport.',
+      'The job header shows the letter with the number (e.g. #14800-C) instead of a separate "Letter C".',
+      'Added a 390px mobile pass to the automated smoke test so these can\u2019t regress.',
     ],
   },
   {

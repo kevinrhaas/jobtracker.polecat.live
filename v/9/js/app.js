@@ -9,7 +9,6 @@ import { renderHome } from './views/home.js';
 import { renderInventory } from './views/inventory.js';
 import { renderBoard } from './views/board.js';
 import { renderCalendar } from './views/calendar.js';
-import { renderCampaigns } from './views/campaigns.js';
 import { renderMetrics } from './views/metrics.js';
 import { renderImport } from './views/import.js';
 import { renderDocs } from './views/docs.js';
@@ -21,8 +20,8 @@ import { maybeStartTour, startTour } from './tour.js';
 import { openSearch } from './views/search.js';
 import { buildNotifBell } from './notifications.js';
 
-const TITLES = { home:'Dashboard', inventory:'Jobs', board:'Board', calendar:'Calendar', campaigns:'Campaigns', metrics:'Metrics', import:'Import', docs:'Documentation', admin:'Admin', settings:'Settings' };
-const RENDERERS = { home:renderHome, inventory:renderInventory, board:renderBoard, calendar:renderCalendar, campaigns:renderCampaigns, metrics:renderMetrics, import:renderImport, docs:renderDocs, admin:renderAdmin, settings:renderSettings };
+const TITLES = { home:'Dashboard', inventory:'Jobs', board:'Board', calendar:'Calendar', metrics:'Metrics', import:'Import', docs:'Documentation', admin:'Admin', settings:'Settings' };
+const RENDERERS = { home:renderHome, inventory:renderInventory, board:renderBoard, calendar:renderCalendar, metrics:renderMetrics, import:renderImport, docs:renderDocs, admin:renderAdmin, settings:renderSettings };
 
 let rail, view, topTitle;
 let currentSection='home', currentParams={};
@@ -77,12 +76,12 @@ function buildTopbar(){
 
   const searchBtn=el('button',{class:'topbar-search', title:'Search jobs (press /)',
     html:`${icon('search',18)}<span>Search jobs…</span><kbd>/</kbd>`, onclick:()=>openSearch(ctx)});
-  const undoBtn=el('button',{class:'btn icon ghost', title:'Undo', 'aria-label':'Undo',
+  const undoBtn=el('button',{class:'btn icon ghost tb-hide-sm', title:'Undo', 'aria-label':'Undo',
     html:icon('undo'), onclick:()=>doUndo()});
-  const redoBtn=el('button',{class:'btn icon ghost', title:'Redo', 'aria-label':'Redo',
+  const redoBtn=el('button',{class:'btn icon ghost tb-hide-sm', title:'Redo', 'aria-label':'Redo',
     html:icon('redo'), onclick:()=>doRedo()});
   const notifBtn=buildNotifBell(ctx);
-  const wnBtn=el('button',{class:'btn icon ghost wn-btn', title:"What's new",
+  const wnBtn=el('button',{class:'btn icon ghost wn-btn tb-hide-sm', title:"What's new",
     html:icon('sparkle'), onclick:()=>{ openWhatsNew(); wnBtn.classList.remove('has-unread'); }});
   if(hasUnread()) wnBtn.classList.add('has-unread');
   const themeBtn=el('button',{class:'btn icon ghost', title:'Toggle light / dark',
@@ -146,7 +145,7 @@ function handleJobHash(){
 
 function wireEvents(){
   Store.on('change', ()=>{ window.__topbar?.refresh(); window.__notifBell?.refresh(); });
-  Store.on('jobs', ()=>{ window.__notifBell?.refresh(); if(['home','inventory','board','calendar','campaigns','metrics'].includes(currentSection)) render(); });
+  Store.on('jobs', ()=>{ window.__notifBell?.refresh(); if(['home','inventory','board','calendar','metrics'].includes(currentSection)) render(); });
   // Due dates & staleness are time-relative, not just data-relative — recheck
   // periodically so a job that crosses into "overdue" gets noticed even if
   // nothing else changes while the tab stays open.

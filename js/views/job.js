@@ -160,7 +160,7 @@ export function openJob(id, ctx={}){
   function refreshHero(){
     job = Store.job(id) || job;
     heroIc.innerHTML = icon(job.icon || jobIconFor(job.type), 28);
-    heroNum.textContent = '#'+job.jobNumber + (job.letter ? ` · Letter ${job.letter}` : '');
+    heroNum.textContent = '#'+job.jobNumber + (job.letter ? `-${job.letter}` : '');
     if(document.activeElement !== heroName) heroName.value = job.name || '';
     heroBadges.innerHTML = '';
     heroBadges.append(statusPill(job.status));

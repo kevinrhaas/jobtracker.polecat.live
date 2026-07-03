@@ -77,12 +77,12 @@ function buildTopbar(){
 
   const searchBtn=el('button',{class:'topbar-search', title:'Search jobs (press /)',
     html:`${icon('search',18)}<span>Search jobs…</span><kbd>/</kbd>`, onclick:()=>openSearch(ctx)});
-  const undoBtn=el('button',{class:'btn icon ghost', title:'Undo', 'aria-label':'Undo',
+  const undoBtn=el('button',{class:'btn icon ghost tb-hide-sm', title:'Undo', 'aria-label':'Undo',
     html:icon('undo'), onclick:()=>doUndo()});
-  const redoBtn=el('button',{class:'btn icon ghost', title:'Redo', 'aria-label':'Redo',
+  const redoBtn=el('button',{class:'btn icon ghost tb-hide-sm', title:'Redo', 'aria-label':'Redo',
     html:icon('redo'), onclick:()=>doRedo()});
   const notifBtn=buildNotifBell(ctx);
-  const wnBtn=el('button',{class:'btn icon ghost wn-btn', title:"What's new",
+  const wnBtn=el('button',{class:'btn icon ghost wn-btn tb-hide-sm', title:"What's new",
     html:icon('sparkle'), onclick:()=>{ openWhatsNew(); wnBtn.classList.remove('has-unread'); }});
   if(hasUnread()) wnBtn.classList.add('has-unread');
   const themeBtn=el('button',{class:'btn icon ghost', title:'Toggle light / dark',
