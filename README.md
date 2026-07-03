@@ -43,6 +43,8 @@ python3 -m http.server 8080
 - **Jobs inventory** — pill filters, saved views, sortable columns, bulk edit,
   pagination, one-click CSV / Excel / JSON export.
 - **Board** — drag-and-drop Kanban by status. **Calendar** — by due date.
+- **Campaigns** — group jobs into a campaign/program; rollup status, % complete,
+  overdue count, and a detail view to add/remove linked jobs.
 - **Metrics** — status/type/division bars, monthly throughput, per-person workload,
   aging alerts.
 - **Job editor** — full details, comments/activity feed, attachments, approvals
@@ -74,8 +76,8 @@ js/
   ui.js  icons.js     DOM toolkit, icon set (+ job/marketing icons)
   seed.js             Default metadata, saved views, synthetic demo jobs
   changelog.js  tour.js
-  views/              home, inventory, board, calendar, metrics, job, search,
-                      import, docs, settings, admin, shared (filters/export)
+  views/              home, inventory, board, calendar, campaigns, metrics, job,
+                      search, import, docs, settings, admin, shared (filters/export)
 reference/            Source material + the real sample export (importable)
 .github/              deploy + hourly self-improve workflows, smoke test
 ```

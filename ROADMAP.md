@@ -77,8 +77,15 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       milestones UI** ✅ Shipped — the job editor's new Checklist tab has
       checkable subtasks with a progress bar + rollup badge in the hero, plus
       dated milestones that also appear as chips on the Calendar.
-- [ ] **Campaigns / programs** — group jobs into campaigns with rollup status and
-      a campaign detail page.
+- [x] **Campaigns / programs** ✅ Shipped — a new **Campaigns** nav section lists
+      every campaign as a card (status, description, owner, % complete, overdue
+      count, latest due date). Open one for a detail view: rollup KPIs, a status
+      mix chart, and the full list of linked jobs — add jobs from a searchable
+      picker, remove them individually, or jump straight into one. Create, edit
+      and delete campaigns inline; renaming or deleting cascades to every linked
+      job automatically (jobs still link via the existing free-text Campaign
+      field, so the job editor needed no changes). Campaign names already in use
+      on jobs are auto-adopted as real campaigns on upgrade — nothing to redo.
 - [ ] **Status transition rules** — optional allowed-transition map + confirmation
       on illegal moves; aging indicators surfaced on board/list.
 
