@@ -3,7 +3,7 @@
 //
 // A four-step stepper that ingests data from several shapes and lands it in
 // the store as fresh jobs (or, for our own workspace export, merges it whole):
-//   1. Source   — upload a file, paste text, or load the shipped sample.
+//   1. Source   — upload a file, paste text, or load generated sample data.
 //   2. Map      — auto-guess source→JobTracker column mapping (editable).
 //   3. Preview  — validate every row, flag duplicates/errors, pick a policy.
 //   4. Done     — commit via Store.bulkInsert, summarize, offer an error report.
@@ -17,6 +17,7 @@
 import { Store } from '../store.js';
 import { el, field, toast, download, escapeHtml } from '../ui.js';
 import { icon } from '../icons.js';
+import { generateSampleJobs } from '../seed.js';
 
 // Target JobTracker fields offered in the mapping dropdown. `*` = required.
 const TARGET_FIELDS = [
@@ -233,17 +234,17 @@ export function renderImport(view, ctx, params){
     box.append(el('div',{class:'or-rule', text:'or paste'}), field('', ta,
       'We sniff the format automatically — JSON vs CSV/TSV. Excel & Microsoft Forms exports are CSV/TSV.'));
 
-    // (c) sample
-    const sampleBtn = el('button',{class:'btn', html:`${icon('sparkle',15)}<span>Load the sample export</span>`,
+    // (c) generated sample data (fully fictional — no real client data)
+    const sampleBtn = el('button',{class:'btn', html:`${icon('sparkle',15)}<span>Load sample data</span>`,
       onclick:loadSample});
     box.append(el('div',{class:'sample-row'}, [
       sampleBtn,
-      el('span',{class:'tiny muted', text:'The real 471-row Airtable export shipped in this repo.'}),
+      el('span',{class:'tiny muted', text:'Adds ~40 realistic, made-up jobs so you can explore. No real data — bring yours in above.'}),
     ]));
 
     box.append(el('div',{class:'tiny muted', style:'margin-top:14px'},
       [el('span',{html:`${icon('info',13)} `}),
-       el('span',{text:'The preferred format is the JSON that Settings → Export produces — importing it restores an entire workspace.'})]));
+       el('span',{text:'To load your real data, upload or paste your export above. The preferred format is the JSON that Settings → Export produces — importing it restores an entire workspace.'})]));
 
     box.append(nav({ next:()=>parseSource(S.raw, S.sourceLabel || 'Pasted data') }));
 
@@ -255,28 +256,13 @@ export function renderImport(view, ctx, params){
       r.onerror = ()=> toast('Could not read that file', { kind:'err' });
       r.readAsText(file);
     }
-    async function loadSample(){
-      sampleBtn.disabled = true;
-      sampleBtn.innerHTML = `${icon('clock',15)}<span>Loading sample…</span>`;
-      const candidates = [
-        '/reference/jobtracker-airtable/jobtracker_data.json',
-        '../reference/jobtracker-airtable/jobtracker_data.json',
-        'reference/jobtracker-airtable/jobtracker_data.json',
-      ];
-      for(const url of candidates){
-        try{
-          const res = await fetch(url);
-          if(!res.ok) continue;
-          S.raw = await res.text();
-          parseSource(S.raw, 'sample export');
-          return;
-        }catch{ /* try next candidate */ }
-      }
-      sampleBtn.disabled = false;
-      sampleBtn.innerHTML = `${icon('sparkle',15)}<span>Load the sample export</span>`;
-      toast('Could not load the sample', {
-        body:'The bundled sample file was not reachable. You can still upload or paste your own data.',
-        kind:'err', ms:5000 });
+    function loadSample(){
+      // Fully generated fictional jobs — inserted straight in (no mapping needed
+      // since they're already in our shape), then jump to the inventory.
+      const jobs = generateSampleJobs(40);
+      const n = Store.bulkInsert(jobs, actor);
+      toast(`Added ${n} sample jobs`, { body:'All made-up data. Delete or reset anytime from Settings → Data & Privacy.', kind:'ok', ms:3200 });
+      ctx.go('inventory');
     }
     return box;
   }

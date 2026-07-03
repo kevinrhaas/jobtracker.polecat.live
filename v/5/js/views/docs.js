@@ -88,7 +88,7 @@ function topics(){ return [
       <li><b>CSV / TSV</b> — the classic spreadsheet export.</li>
       <li><b>Excel</b> — save your sheet as CSV, or copy-paste the cells straight into the wizard.</li>
       <li><b>Microsoft Forms</b> — export responses to Excel/CSV, then import that file the same way.</li>
-      <li><b>Airtable JSON</b> — the shipped sample is one click away to try it out.</li>
+      <li><b>Load sample data</b> — one click adds ~40 realistic, fully made-up jobs so you can explore. Import your own real export when ready.</li>
     </ul>
     <h3>Column mapping</h3>
     <p>For spreadsheet-style data the wizard shows a mapping table and pre-guesses which
@@ -219,7 +219,7 @@ function topics(){ return [
     that Excel opens natively — no binary xlsx library required. The import wizard reads CSV/TSV
     with a quote-aware parser (handles embedded commas, newlines and doubled quotes).</p>
     <h3>Airtable mapping</h3>
-    <p>The shipped sample is Airtable's <span class="mono">records[].fields</span> JSON. The wizard
+    <p>The wizard also reads Airtable's <span class="mono">records[].fields</span> JSON. It
     maps its headers to job fields — e.g. <span class="mono">Project ID → jobNumber</span>,
     <span class="mono">Division Code → divisions</span> (array), <span class="mono">Designer Name →
     designers</span> (array), <span class="mono">Comments → notes</span>.</p>` },
