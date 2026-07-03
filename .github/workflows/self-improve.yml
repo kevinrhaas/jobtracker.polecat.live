@@ -78,8 +78,21 @@ jobs:
         env:
           MODE: ${{ steps.mode.outputs.mode }}
 
+      - name: Stamp changelog timestamps
+        run: |
+          if git diff --name-only | grep -q '^js/changelog.js$'; then
+            node .github/stamp-changelog.mjs
+          else
+            echo "changelog.js unchanged; nothing to stamp."
+          fi
+
       - name: Smoke test (marketing + app must load with no errors)
         run: node .github/smoke-test.mjs
+
+      # Freeze this build as an immutable /v/<n>/ snapshot AFTER it passes the
+      # smoke test, so the Settings → Version switcher can roll back to it later.
+      - name: Archive this release
+        run: node .github/archive-release.mjs
 
       - name: Commit + push to main
         id: commit

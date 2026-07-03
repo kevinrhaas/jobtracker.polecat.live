@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" data-palette="ada" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <meta name="description" content="Agency Job Tracker — the agency creative job console. Track, manage, and deliver marketing jobs end to end."/>
+  <meta name="theme-color" content="#0a0f1a"/>
+  <title>Agency Job Tracker</title>
+  <link rel="icon" type="image/svg+xml" href="/v/3/favicon.svg"/>
+  <link rel="stylesheet" href="/v/3/css/styles.css"/>
+  <!-- Apply saved theme + reduced-motion before first paint to avoid a flash. -->
+  <script>
+    (function(){try{
+      var raw=localStorage.getItem('jt.theme.v1')||'ada:dark';
+      var parts=raw.split(':'), palette=parts[0]||'ada', mode=parts[1]||'dark';
+      if(mode==='system') mode=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
+      var r=document.documentElement;
+      r.setAttribute('data-palette',palette); r.setAttribute('data-theme',mode);
+      var cfg=JSON.parse(localStorage.getItem('jt.workspace')||'{}');
+      if(cfg&&cfg.config&&cfg.config.settings&&cfg.config.settings.reduceMotion) r.setAttribute('data-reduce-motion','1');
+    }catch(e){}})();
+  </script>
+</head>
+<body>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div id="app"></div>
+  <div id="toasts"></div>
+  <script type="module" src="/v/3/js/app.js"></script>
+</body>
+</html>
