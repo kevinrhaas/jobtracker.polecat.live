@@ -108,9 +108,14 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 - [ ] **Column drag-to-reorder & resize** in the inventory table; sticky first column.
 - [ ] **Inline cell editing** in the inventory list (edit without opening a job).
 - [ ] **Saved view sharing** via token links; per-view default sort/columns polish.
-- [ ] **Command palette actions** — not just jobs: run commands (new job, switch
-      theme, go to section, export) from the `/` palette.
-- [ ] **Keyboard shortcut cheat-sheet** overlay (press `?`).
+- [x] **Command palette actions** ✅ Shipped — the `/` palette now has a
+      **Jobs / Commands** toggle (press `Tab`, or type `>` to jump straight
+      in). Commands cover new job, jump to any section, toggle light/dark,
+      undo/redo, export all jobs (CSV/Excel/JSON), restart the tour, and
+      What's new — `Ctrl`/`Cmd`+`K` opens straight into Commands.
+- [x] **Keyboard shortcut cheat-sheet** ✅ Shipped — press `?` anywhere for a
+      full overlay of every shortcut, grouped by Navigate/Edit/Help; also
+      reachable from the palette's command list and hint bar.
 
 ### Reporting
 - [ ] **End-of-year report generator** — the report Lee builds manually: summary
