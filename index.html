@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <title>JobTracker — the ADA Agency creative job console · polecat.live</title>
+  <meta name="description" content="JobTracker is a delightful, local-first console for the ADA Agency creative team to track, manage, and deliver marketing jobs end to end — dashboards, a Kanban board, a calendar, saved views, approvals, and one-click exports. Invite-only, runs entirely in your browser."/>
+  <meta name="theme-color" content="#0b0a16"/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="stylesheet" href="/css/landing.css"/>
+  <meta property="og:title" content="JobTracker — track every creative job, end to end"/>
+  <meta property="og:description" content="A joyful, local-first job console for the ADA Agency marketing team. Dashboards, board, calendar, approvals, imports and exports — invite-only, no backend."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://jobtracker.polecat.live"/>
+</head>
+<body>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <!-- reusable icon symbols -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <g id="i-arrow" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></g>
+    <g id="i-check" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></g>
+    <g id="i-board" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="11" rx="1.5"/><rect x="17" y="4" width="4" height="14" rx="1.5"/></g>
+    <g id="i-cal" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></g>
+    <g id="i-chart" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16M8 16v-5M12 16V8M16 16v-8"/></g>
+    <g id="i-flow" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></g>
+    <g id="i-key" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="4"/><path d="m11 11 8 8M16 16l2-2M13 13l2-2"/></g>
+    <g id="i-import" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0-4 4m4-4 4 4"/><path d="M4 17v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-2"/></g>
+    <g id="i-rocket" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15c-2 1-2 5-2 5s4 0 5-2m3-1c5-1 8-5 9-13-8 1-12 4-13 9z"/><circle cx="14.5" cy="9.5" r="1.6"/></g>
+    <g id="i-copy" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></g>
+  </defs></svg>
+
+  <header class="nav" id="nav">
+    <div class="wrap nav-in">
+      <a class="brand" href="/"><span class="logo"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-rocket"/></svg></span> JobTracker <small>ADA Agency</small></a>
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#access">Get access</a>
+        <a class="btn primary" href="/app/">Launch app <svg width="16" height="16" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- hero -->
+    <section class="hero">
+      <div class="wrap">
+        <span class="eyebrow"><span class="dot"></span> Local-first · Invite-only · Built for the ADA Agency</span>
+        <h1>Track every creative job, <span class="g">end to end</span>.</h1>
+        <p class="lead">JobTracker is the console the agency's creative team runs on — every request, status,
+          due date, approval and deliverable in one delightful place. Requests come in, work moves across
+          the board, and nothing falls through the cracks. Runs entirely in your browser.</p>
+        <div class="hero-cta">
+          <a class="btn primary lg" href="/app/">Launch JobTracker <svg width="18" height="18" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></a>
+          <a class="btn lg ghost" href="#access">Get an access token</a>
+        </div>
+        <div class="trust">
+          <span class="chip"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg> No backend to run</span>
+          <span class="chip"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg> Your data stays local</span>
+          <span class="chip"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg> Import your spreadsheet</span>
+          <span class="chip"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg> Works on mobile</span>
+        </div>
+      </div>
+
+      <!-- pure-CSS app preview -->
+      <div class="shot reveal">
+        <div class="bar"><i></i><i></i><i></i><span class="url">jobtracker.polecat.live/app</span></div>
+        <div class="mock">
+          <div class="mock-rail">
+            <div class="mi on"><span class="b"></span> Dashboard</div>
+            <div class="mi"><span class="b"></span> Jobs</div>
+            <div class="mi"><span class="b"></span> Board</div>
+            <div class="mi"><span class="b"></span> Calendar</div>
+            <div class="mi"><span class="b"></span> Metrics</div>
+          </div>
+          <div class="mock-main">
+            <div class="mock-kpis">
+              <div class="mock-kpi"><b>34</b><span>ACTIVE JOBS</span></div>
+              <div class="mock-kpi"><b>7</b><span>DUE THIS WEEK</span></div>
+              <div class="mock-kpi"><b>2</b><span>OVERDUE</span></div>
+              <div class="mock-kpi"><b>92%</b><span>ON-TIME</span></div>
+            </div>
+            <div class="mock-tiles">
+              <div class="mock-tile"><div class="ti"><span class="ic"></span><div style="flex:1"><div class="ln"></div></div></div><div class="ln s"></div><span class="pill">In Review</span></div>
+              <div class="mock-tile"><div class="ti"><span class="ic"></span><div style="flex:1"><div class="ln"></div></div></div><div class="ln s"></div><span class="pill">In Progress</span></div>
+              <div class="mock-tile"><div class="ti"><span class="ic"></span><div style="flex:1"><div class="ln"></div></div></div><div class="ln s"></div><span class="pill">Approved</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- features -->
+    <section id="features">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="kick">Why JobTracker</div>
+          <h2>Everything the FileMaker &amp; spreadsheet era was missing.</h2>
+          <p>Built from the real agency workflow — requested → in progress → review → approved → delivered —
+            with the polish of a modern app and the speed of running right in your browser.</p>
+        </div>
+        <div class="grid f3">
+          <div class="card reveal"><div class="ic" style="background:linear-gradient(135deg,#7c5cff,#5b34d0)"><svg viewBox="0 0 24 24"><use href="#i-flow"/></svg></div>
+            <h3>A real job workflow</h3><p>Managed statuses with sensible transitions, aging indicators for stuck jobs, rush &amp; priority flags, revision rounds and a lightweight approval flow.</p></div>
+          <div class="card reveal"><div class="ic" style="background:linear-gradient(135deg,#ec4d9a,#b02669)"><svg viewBox="0 0 24 24"><use href="#i-board"/></svg></div>
+            <h3>See it your way</h3><p>A delightful list with pill filters and saved views, a drag-and-drop Kanban board by status, and a calendar by due date. One click switches the lens.</p></div>
+          <div class="card reveal"><div class="ic" style="background:linear-gradient(135deg,#16c0d6,#0c7f90)"><svg viewBox="0 0 24 24"><use href="#i-chart"/></svg></div>
+            <h3>Know your numbers</h3><p>Live KPIs — active by status, due this week, overdue, average cycle time, throughput per month and on-time delivery — plus simple workload visibility per person.</p></div>
+          <div class="card reveal"><div class="ic" style="background:linear-gradient(135deg,#34d399,#0f7d5b)"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg></div>
+            <h3>Bring your data</h3><p>A guided import wizard for your Excel/CSV, JSON, or Microsoft Forms export — with column mapping, validation preview, duplicate detection and an error report.</p></div>
+          <div class="card reveal"><div class="ic" style="background:linear-gradient(135deg,#fbbf24,#b8860b)"><svg viewBox="0 0 24 24"><use href="#i-cal"/></svg></div>
+            <h3>Never miss a date</h3><p>Due dates, in-hands dates and milestones with overdue flagging. Auto-generated, never-duplicate job numbers you can search anywhere.</p></div>
+          <div class="card reveal"><div class="ic" style="background:linear-gradient(135deg,#a78bfa,#6d3ff0)"><svg viewBox="0 0 24 24"><use href="#i-key"/></svg></div>
+            <h3>Yours &amp; private</h3><p>Invite-only, admin-token access. Data lives in your browser with full export. Six themes (ADA &amp; Polecat, dark/light/system), history, undo, and a joyful, accessible design.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- how it works -->
+    <section id="how">
+      <div class="wrap">
+        <div class="sec-head"><div class="kick">How it works</div><h2>From request to delivered in one place.</h2></div>
+        <div class="steps">
+          <div class="step reveal"><div class="n"></div><div>
+            <h3>Intake a request</h3>
+            <p>Log a new job by hand or import a batch from your spreadsheet or a Microsoft Form. It gets an auto-generated job number and a type-based icon instantly.</p></div></div>
+          <div class="step reveal"><div class="n"></div><div>
+            <h3>Move it through the work</h3>
+            <p>Drag it across the board as it progresses, edit rich details, drop comments, attach files, and request approval — with a full history and one-click undo behind you.</p></div></div>
+          <div class="step reveal"><div class="n"></div><div>
+            <h3>Report &amp; deliver</h3>
+            <p>Watch live KPIs, save the views you check every day, export to CSV/Excel/JSON for the end-of-year report, and share a direct link to any job.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- access / token band -->
+    <section id="access">
+      <div class="wrap">
+        <div class="band reveal">
+          <div class="kick">Get access</div>
+          <h2>Invite-only — <span class="g">grab your token</span>.</h2>
+          <p>JobTracker is gated. Launch the app and paste a token below, or use a one-click launch link.
+            Admins can mint share links for teammates from inside the app.</p>
+
+          <div class="token-box">
+            <div class="tl"><svg width="16" height="16" viewBox="0 0 24 24"><use href="#i-key"/></svg> Admin token — full access, can mint invites</div>
+            <div class="token-code" id="adminTok">MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg+orikJmoc4OnjJVP5QPND61Rs5PdmDsvIMr/cfDzBCuhRANCAAQakbpjPLx1GUlD0vDBbrI6vcBjPsRR6/b5dNUJZlRZUg/F//VApVmJrQSTUE0Hdz8baJgcW+FvK172W0rrzkWZ</div>
+            <div class="token-row">
+              <button class="btn primary" data-copy="adminTok">Copy admin token</button>
+              <a class="btn" id="launchAdmin" href="/app/">Launch as admin <svg width="16" height="16" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></a>
+              <span class="copied hide" id="copiedAdmin">Copied ✓</span>
+            </div>
+          </div>
+
+          <div class="token-box">
+            <div class="tl"><svg width="16" height="16" viewBox="0 0 24 24"><use href="#i-check"/></svg> Team access token — view &amp; edit jobs</div>
+            <div class="token-code" id="userTok">eyJ2IjoxLCJsYWJlbCI6IkFEQSBBZ2VuY3kgVXNlciIsImlhdCI6MTc1MTUwMDAwMDAwMCwiZXhwIjowLCJqdGkiOiJhZGF1c2VyMSJ9.J89Wfrwr0uhaKWrWogf8uu1qCCqJwRN6Y9x0lceaukR4o2CgZNyaKK3cxZVIrzkMDjaHIC-JPo2sQKQyhpp_Aw</div>
+            <div class="token-row">
+              <button class="btn" data-copy="userTok">Copy team token</button>
+              <a class="btn" id="launchUser" href="/app/">Launch as team <svg width="16" height="16" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></a>
+              <span class="copied hide" id="copiedUser">Copied ✓</span>
+            </div>
+          </div>
+          <p class="note">Heads up: anyone with a token can open the app, and a shared job link exposes that job to anyone holding a token — don't circulate confidential client data. This is a preview-grade gate, not hard security.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- roadmap -->
+    <section id="architecture">
+      <div class="wrap">
+        <div class="sec-head"><div class="kick">Built to grow</div><h2>Local-first today, backend-ready tomorrow.</h2>
+          <p>JobTracker starts as a pure browser app so it's fast and private — and it's designed to progressively connect to real infrastructure as the team needs it.</p></div>
+        <div class="phases">
+          <div class="phase now"><div class="pn">PHASE 1 · NOW</div><h4>Local-first</h4><p>Everything in your browser. IndexedDB for attachments, full export/import, six themes, undo &amp; history.</p></div>
+          <div class="phase"><div class="pn">PHASE 2</div><h4>API bridge</h4><p>Opt-in connection to a lightweight REST server bridging to SQLite or PostgreSQL.</p></div>
+          <div class="phase"><div class="pn">PHASE 3</div><h4>Backend-as-a-service</h4><p>Supabase / PocketBase for auth, role-based access, and managed file storage.</p></div>
+          <div class="phase"><div class="pn">PHASE 4</div><h4>Edge sync</h4><p>WebAssembly databases in the browser that sync automatically when online.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- final CTA -->
+    <section class="final">
+      <div class="wrap">
+        <h2>Log a job. Watch it move. Ship it.</h2>
+        <p>It runs the moment it loads — no install, no sign-up.</p>
+        <a class="btn primary lg" href="/app/">Launch JobTracker <svg width="18" height="18" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot-in">
+      <a class="brand" href="/"><span class="logo"><svg width="16" height="16" viewBox="0 0 24 24"><use href="#i-rocket"/></svg></span> JobTracker</a>
+      <span>For the ADA Agency creative team · part of the <a href="https://polecat.live" style="color:var(--brand-2)">polecat.live</a> family · © 2026</span>
+      <div class="foot-links">
+        <a href="/app/">App</a>
+        <a href="/app/#docs">Docs</a>
+        <a href="https://polecat.live" target="_blank" rel="noopener">polecat.live</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // sticky nav shadow
+    const nav=document.getElementById('nav');
+    addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>8),{passive:true});
+
+    // reveal on scroll
+    const reveals=document.querySelectorAll('.reveal');
+    if('IntersectionObserver' in window){
+      const io=new IntersectionObserver((es)=>{for(const e of es){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+      reveals.forEach(el=>io.observe(el));
+    } else reveals.forEach(el=>el.classList.add('in'));
+
+    // token copy + one-click launch links
+    const adminTok=document.getElementById('adminTok').textContent.trim();
+    const userTok=document.getElementById('userTok').textContent.trim();
+    document.getElementById('launchAdmin').href='/app/?token='+encodeURIComponent(adminTok);
+    document.getElementById('launchUser').href='/app/?token='+encodeURIComponent(userTok);
+    async function copy(text){ try{ await navigator.clipboard.writeText(text); return true; }catch{ return false; } }
+    document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{
+      const id=b.getAttribute('data-copy');
+      const ok=await copy(document.getElementById(id).textContent.trim());
+      const badge=document.getElementById(id==='adminTok'?'copiedAdmin':'copiedUser');
+      if(ok && badge){ badge.classList.remove('hide'); setTimeout(()=>badge.classList.add('hide'),1800); }
+    }));
+  </script>
+</body>
+</html>

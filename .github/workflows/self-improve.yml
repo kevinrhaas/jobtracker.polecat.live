@@ -1,0 +1,118 @@
+name: Hourly self-improvement
+
+# Runs Claude Code on a schedule to build the next ROADMAP item (or, every 5th
+# feature run, do a polish/reflection sweep), gate it behind the smoke test,
+# then commit to main and deploy to production automatically.
+#
+# Pause any time by disabling this workflow or removing CLAUDE_CODE_OAUTH_TOKEN.
+#
+# Note: a push to main by the built-in GITHUB_TOKEN does NOT trigger deploy.yml
+# (GitHub blocks that to avoid loops), so this job deploys Pages itself.
+on:
+  schedule:
+    # Off-peak minutes: GitHub heavily delays/drops scheduled jobs at :00.
+    # Two attempts/hour improve the odds of a roughly-hourly cadence; the
+    # concurrency lock keeps them from overlapping.
+    - cron: '19,49 * * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: jobtracker-deploy
+  cancel-in-progress: false
+
+jobs:
+  improve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Claude Code + test browser
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          npm install -D playwright
+          npx playwright install --with-deps chromium
+
+      # Every 5th run is a polish/reflection sweep; the rest build features.
+      - name: Pick mode
+        id: mode
+        run: |
+          if [ $(( ${{ github.run_number }} % 5 )) -eq 0 ]; then
+            echo "mode=polish"  >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=feature" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run Claude Code
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          MODE: ${{ steps.mode.outputs.mode }}
+        run: |
+          PROMPT="$(cat .github/self-improve-prompt.md)
+          ---
+          This run's mode is: ${MODE}"
+          claude -p "$PROMPT" \
+            --dangerously-skip-permissions \
+            --max-turns 120 \
+            --allowedTools "Bash,Edit,Write,Read,Glob,Grep" || echo "claude exited non-zero (continuing to smoke test)"
+
+      - name: Record run cadence
+        run: |
+          mkdir -p .github
+          echo "$(date -u +%FT%TZ) run=${{ github.run_number }} mode=${MODE}" >> .github/cadence.log
+        env:
+          MODE: ${{ steps.mode.outputs.mode }}
+
+      - name: Smoke test (marketing + app must load with no errors)
+        run: node .github/smoke-test.mjs
+
+      - name: Commit + push to main
+        id: commit
+        env:
+          MODE: ${{ steps.mode.outputs.mode }}
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No changes produced this run."; echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          git config user.name  "jobtracker-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add -A
+          git commit -m "auto: self-improvement (${MODE})" \
+            -m "Automated hourly improvement; passed smoke test and auto-deployed."
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      # Deploy Pages ourselves (the bot's push to main won't trigger deploy.yml).
+      - name: Prepare artifact
+        if: steps.commit.outputs.changed == 'true'
+        run: rm -rf node_modules package.json package-lock.json
+
+      - name: Configure Pages
+        if: steps.commit.outputs.changed == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        if: steps.commit.outputs.changed == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        if: steps.commit.outputs.changed == 'true'
+        id: deploy
+        uses: actions/deploy-pages@v4
