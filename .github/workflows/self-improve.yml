@@ -94,7 +94,18 @@ jobs:
           git add -A
           git commit -m "auto: self-improvement (${MODE})" \
             -m "Automated hourly improvement; passed smoke test and auto-deployed."
-          git push origin HEAD:main
+          # Integrate any commits that landed on main during this run (the owner
+          # pushes to main too), then push. Retry with rebase so a concurrent
+          # push never causes a non-fast-forward failure or lost work.
+          pushed=false
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            # On the rare true conflict, prefer main (the owner's pushes win).
+            if git rebase origin/main; then :; else git rebase --abort; git merge -X theirs origin/main -m "merge main"; fi
+            if git push origin HEAD:main; then pushed=true; break; fi
+            sleep $((3*i))
+          done
+          if [ "$pushed" != true ]; then echo "Could not push to main after retries"; exit 1; fi
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
       # Deploy Pages ourselves (the bot's push to main won't trigger deploy.yml).
