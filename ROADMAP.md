@@ -43,12 +43,11 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       by default). Lead with the few fields people touch most; progressively
       disclose the rest. Improve visual hierarchy, spacing, and mobile layout.
       Respect Simple mode. Keep every field reachable.
-- [ ] **Media-type filter + tidy the pill filters.** Add an easy filter by media
-      type (Podcast, Video, Print, Social, Email, Web, …) driven by job `type`.
-      There are getting to be a lot of pills — group/organize them: keep a small
-      set of primary quick-filters (Status, Rush, Overdue, Mine) inline, and move
-      the rest (Type/Media, Division, Priority, Client) into clearly-labeled,
-      grouped dropdown/popover chips so the bar never feels cluttered or confusing.
+- [x] **Media-type filter + tidy the pill filters.** ✅ Shipped — a dedicated
+      "Type" chip filters by media type (Podcast, Video, Print, Social, Email,
+      Web, …) via a checklist dropdown with icons + live counts. Status, Rush,
+      Overdue and My jobs stay as primary inline pills; Division, Priority and
+      Client moved into one grouped "Filters" dropdown chip so the bar stays tidy.
 - [ ] **Make Saved Views clearer + fully manageable.** Explain what a view is
       (a saved combination of columns + filters + sort) with a tiny inline hint /
       onboarding. Make creating, renaming, duplicating, reordering, setting a
