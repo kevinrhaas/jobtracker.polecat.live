@@ -16,17 +16,29 @@ import { icon } from './icons.js';
 
 export const CHANGELOG = [
   {
+    v: 2,
+    title: 'Neutral branding + public-site SEO',
+    kind: 'polish',
+    ts: '2026-07-03T17:45:00.000Z',
+    date: 'Jul 3, 2026, 12:45 PM CT',
+    items: [
+      'Rebranded to "Agency Job Tracker" — dropped the ADA name and logo throughout the app and marketing site. The "ADA" theme is now "Agency", retuned to an ADA-inspired green + blue palette.',
+      'Added SEO to the public site: canonical URL, richer Open Graph & Twitter cards, keywords, JSON-LD structured data, a social share image, robots.txt and sitemap.xml.',
+      'No access tokens are shown on the public site — request one from the polecat admin.',
+    ],
+  },
+  {
     v: 1,
     title: 'JobTracker launches',
     kind: 'feature',
     ts: '2026-07-03T00:00:00.000Z',
     date: 'Jul 3, 2026 CT',
     items: [
-      'Invite-only, admin-token gated console for the ADA Agency creative team, with a public marketing site.',
+      'Invite-only, admin-token gated console for the agency creative team, with a public marketing site.',
       'Dashboard with live KPIs, a full Jobs inventory (list · board · calendar), and a rich job editor with comments, attachments, approvals, and history.',
       'Managed pick lists, saved views, campaigns, undo/redo, global search, and one-click CSV / Excel / JSON export.',
       'A guided import wizard for JSON / CSV / Excel / Microsoft Forms with column mapping, validation, duplicate detection, and an error report.',
-      'Six themes — ADA & Polecat, each Dark / Light / System (default ADA Dark) — with a restartable welcome tour and full in-app documentation.',
+      'Six themes — Agency & Polecat, each Dark / Light / System (default Agency Dark) — with a restartable welcome tour and full in-app documentation.',
     ],
   },
 ];

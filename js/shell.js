@@ -28,8 +28,8 @@ export function buildRail(rail, { onNav, isAdmin=false }){
   rail.classList.toggle('open', open0);
 
   rail.innerHTML='';
-  const brand=el('button',{class:'rail-brand', title:'JobTracker — dashboard',
-    html:`<span class="rail-logo">${icon('rocket',22)}</span><span class="bt"><b>JobTracker</b><small>ADA Agency</small></span>`,
+  const brand=el('button',{class:'rail-brand', title:'Agency Job Tracker — dashboard',
+    html:`<span class="rail-logo">${icon('rocket',22)}</span><span class="bt"><b>Job Tracker</b><small>Agency</small></span>`,
     onclick:()=>onNav('home')});
   rail.append(brand);
 

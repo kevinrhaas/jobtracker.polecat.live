@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------
 // seed.js — default metadata, saved views, and synthetic demo jobs.
 //
-// The pick lists (statuses, types, divisions) mirror the real ADA Agency
+// The pick lists (statuses, types, divisions) mirror the real agency
 // Airtable base so imports of the real export map cleanly. The DEMO JOBS are
 // entirely SYNTHETIC — no confidential client data — so a fresh install feels
 // alive without exposing anything. The real 471-record export ships under

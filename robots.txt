@@ -1,0 +1,8 @@
+# Agency Job Tracker — https://jobtracker.polecat.live
+User-agent: *
+Allow: /$
+Allow: /index.html
+Disallow: /app/
+Disallow: /reference/
+
+Sitemap: https://jobtracker.polecat.live/sitemap.xml

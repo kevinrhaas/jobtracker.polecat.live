@@ -3,7 +3,7 @@
 //
 // A four-step stepper that ingests data from several shapes and lands it in
 // the store as fresh jobs (or, for our own workspace export, merges it whole):
-//   1. Source   — upload a file, paste text, or load the shipped ADA sample.
+//   1. Source   — upload a file, paste text, or load the shipped sample.
 //   2. Map      — auto-guess source→JobTracker column mapping (editable).
 //   3. Preview  — validate every row, flag duplicates/errors, pick a policy.
 //   4. Done     — commit via Store.bulkInsert, summarize, offer an error report.
@@ -234,7 +234,7 @@ export function renderImport(view, ctx, params){
       'We sniff the format automatically — JSON vs CSV/TSV. Excel & Microsoft Forms exports are CSV/TSV.'));
 
     // (c) sample
-    const sampleBtn = el('button',{class:'btn', html:`${icon('sparkle',15)}<span>Load the sample ADA export</span>`,
+    const sampleBtn = el('button',{class:'btn', html:`${icon('sparkle',15)}<span>Load the sample export</span>`,
       onclick:loadSample});
     box.append(el('div',{class:'sample-row'}, [
       sampleBtn,
@@ -268,12 +268,12 @@ export function renderImport(view, ctx, params){
           const res = await fetch(url);
           if(!res.ok) continue;
           S.raw = await res.text();
-          parseSource(S.raw, 'ADA sample export');
+          parseSource(S.raw, 'sample export');
           return;
         }catch{ /* try next candidate */ }
       }
       sampleBtn.disabled = false;
-      sampleBtn.innerHTML = `${icon('sparkle',15)}<span>Load the sample ADA export</span>`;
+      sampleBtn.innerHTML = `${icon('sparkle',15)}<span>Load the sample export</span>`;
       toast('Could not load the sample', {
         body:'The bundled sample file was not reachable. You can still upload or paste your own data.',
         kind:'err', ms:5000 });

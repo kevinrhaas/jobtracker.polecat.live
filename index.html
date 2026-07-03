@@ -3,15 +3,65 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-  <title>JobTracker — the ADA Agency creative job console · polecat.live</title>
-  <meta name="description" content="JobTracker is a delightful, local-first console for the ADA Agency creative team to track, manage, and deliver marketing jobs end to end — dashboards, a Kanban board, a calendar, saved views, approvals, and one-click exports. Invite-only, runs entirely in your browser."/>
+  <title>Agency Job Tracker — creative job console for marketing teams · polecat.live</title>
+  <meta name="description" content="Agency Job Tracker is a delightful, local-first console for a marketing/creative team to track, manage, and deliver marketing jobs end to end — dashboards, a Kanban board, a calendar, saved views, approvals, and one-click exports. Invite-only, runs entirely in your browser."/>
   <meta name="theme-color" content="#0b0a16"/>
+  <meta name="keywords" content="job tracker, creative project management, marketing job console, agency workflow, kanban board, project tracking, creative operations, job management software"/>
+  <meta name="author" content="polecat.live"/>
+  <meta name="robots" content="index, follow, max-image-preview:large"/>
+  <link rel="canonical" href="https://jobtracker.polecat.live/"/>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/favicon.svg"/>
   <link rel="stylesheet" href="/css/landing.css"/>
-  <meta property="og:title" content="JobTracker — track every creative job, end to end"/>
-  <meta property="og:description" content="A joyful, local-first job console for the ADA Agency marketing team. Dashboards, board, calendar, approvals, imports and exports — invite-only, no backend."/>
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="Agency Job Tracker"/>
+  <meta property="og:title" content="Agency Job Tracker — track every creative job, end to end"/>
+  <meta property="og:description" content="A joyful, local-first job console for a marketing/creative team. Dashboards, board, calendar, approvals, imports and exports — invite-only, no backend."/>
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://jobtracker.polecat.live"/>
+  <meta property="og:url" content="https://jobtracker.polecat.live/"/>
+  <meta property="og:image" content="https://jobtracker.polecat.live/assets/og-image.svg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:locale" content="en_US"/>
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Agency Job Tracker — track every creative job, end to end"/>
+  <meta name="twitter:description" content="A joyful, local-first job console for marketing/creative teams. Dashboards, board, calendar, approvals, imports & exports — invite-only, no backend."/>
+  <meta name="twitter:image" content="https://jobtracker.polecat.live/assets/og-image.svg"/>
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://jobtracker.polecat.live/#website",
+        "url": "https://jobtracker.polecat.live/",
+        "name": "Agency Job Tracker",
+        "description": "A local-first console for marketing/creative teams to track, manage, and deliver jobs end to end.",
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Agency Job Tracker",
+        "operatingSystem": "Any (web browser)",
+        "applicationCategory": "BusinessApplication",
+        "url": "https://jobtracker.polecat.live/",
+        "description": "Track, manage, and deliver marketing jobs end to end — dashboards, a Kanban board, a calendar, saved views, approvals, import wizard, and one-click CSV/Excel/JSON exports. Runs entirely in the browser.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "featureList": [
+          "Dashboard with live KPIs",
+          "Jobs inventory with saved views and filters",
+          "Kanban board and calendar",
+          "Job editor with comments, attachments, approvals and history",
+          "Import wizard for CSV, Excel, JSON and Microsoft Forms",
+          "CSV / Excel / JSON export"
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -32,7 +82,7 @@
 
   <header class="nav" id="nav">
     <div class="wrap nav-in">
-      <a class="brand" href="/"><span class="logo"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-rocket"/></svg></span> JobTracker <small>ADA Agency</small></a>
+      <a class="brand" href="/"><span class="logo"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-rocket"/></svg></span> Agency Job Tracker <small>polecat.live</small></a>
       <nav class="nav-links">
         <a href="#features">Features</a>
         <a href="#how">How it works</a>
@@ -45,7 +95,7 @@
     <!-- hero -->
     <section class="hero">
       <div class="wrap">
-        <span class="eyebrow"><span class="dot"></span> Local-first · Invite-only · Built for the ADA Agency</span>
+        <span class="eyebrow"><span class="dot"></span> Local-first · Invite-only · Built for creative teams</span>
         <h1>Track every creative job, <span class="g">end to end</span>.</h1>
         <p class="lead">JobTracker is the console the agency's creative team runs on — every request, status,
           due date, approval and deliverable in one delightful place. Requests come in, work moves across
@@ -111,7 +161,7 @@
           <div class="card reveal"><div class="ic" style="background:linear-gradient(135deg,#fbbf24,#b8860b)"><svg viewBox="0 0 24 24"><use href="#i-cal"/></svg></div>
             <h3>Never miss a date</h3><p>Due dates, in-hands dates and milestones with overdue flagging. Auto-generated, never-duplicate job numbers you can search anywhere.</p></div>
           <div class="card reveal"><div class="ic" style="background:linear-gradient(135deg,#a78bfa,#6d3ff0)"><svg viewBox="0 0 24 24"><use href="#i-key"/></svg></div>
-            <h3>Yours &amp; private</h3><p>Invite-only, admin-token access. Data lives in your browser with full export. Six themes (ADA &amp; Polecat, dark/light/system), history, undo, and a joyful, accessible design.</p></div>
+            <h3>Yours &amp; private</h3><p>Invite-only, admin-token access. Data lives in your browser with full export. Six themes (dark, light &amp; system), history, undo, and a joyful, accessible design.</p></div>
         </div>
       </div>
     </section>
@@ -161,7 +211,7 @@
   <footer>
     <div class="wrap foot-in">
       <a class="brand" href="/"><span class="logo"><svg width="16" height="16" viewBox="0 0 24 24"><use href="#i-rocket"/></svg></span> JobTracker</a>
-      <span>For the ADA Agency creative team · part of the <a href="https://polecat.live" style="color:var(--brand-2)">polecat.live</a> family · © 2026</span>
+      <span>Part of the <a href="https://polecat.live" style="color:var(--brand-2)">polecat.live</a> family · © 2026</span>
       <div class="foot-links">
         <a href="/app/">App</a>
         <a href="/app/#docs">Docs</a>

@@ -88,7 +88,7 @@ function topics(){ return [
       <li><b>CSV / TSV</b> — the classic spreadsheet export.</li>
       <li><b>Excel</b> — save your sheet as CSV, or copy-paste the cells straight into the wizard.</li>
       <li><b>Microsoft Forms</b> — export responses to Excel/CSV, then import that file the same way.</li>
-      <li><b>Airtable JSON</b> — the shipped ADA sample is one click away to try it out.</li>
+      <li><b>Airtable JSON</b> — the shipped sample is one click away to try it out.</li>
     </ul>
     <h3>Column mapping</h3>
     <p>For spreadsheet-style data the wizard shows a mapping table and pre-guesses which
@@ -128,9 +128,9 @@ function topics(){ return [
   { id:'themes-a11y', group:'user', title:'Themes & accessibility', icon:'palette', html:`
     <h2>Themes &amp; accessibility</h2>
     <h3>Six themes</h3>
-    <p>Two palettes — <b>ADA</b> (brand violet/magenta/teal) and <b>Polecat</b> (warm brown/amber)
+    <p>Two palettes — <b>Agency</b> (ADA-inspired green & blue) and <b>Polecat</b> (warm brown/amber)
     — each in <b>Dark</b>, <b>Light</b>, or <b>System</b>. That's six combinations; the default is
-    ADA Dark. Flip light/dark instantly with the sun/moon button in the top bar, or pick a
+    Agency Dark. Flip light/dark instantly with the sun/moon button in the top bar, or pick a
     full theme in Settings.</p>
     <h3>Built to be usable by everyone</h3>
     <ul>

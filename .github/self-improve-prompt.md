@@ -1,6 +1,6 @@
 # JobTracker — self-improvement run
 
-You are Claude Code improving **JobTracker**, the ADA Agency creative job
+You are Claude Code improving **JobTracker**, the agency creative job
 console. It is a local-first, vanilla HTML/JS/CSS single-page app (no framework,
 no build step, ES modules) deployed to GitHub Pages at
 `jobtracker.polecat.live`. The marketing site is at the repo root (`index.html`)
@@ -17,7 +17,7 @@ understand where things stand, then do **one substantial iteration**.
   existing local data** on upgrade. Bump `SCHEMA` and extend `_migrate()` when
   the shape changes; keep changes additive and forward/reverse-compatible where
   practical.
-- Preserve the **six themes** (ADA/Polecat × dark/light/system), accessibility
+- Preserve the **six themes** (Agency/Polecat × dark/light/system), accessibility
   (keyboard nav, visible focus, ARIA, contrast, reduced-motion), and
   mobile/tablet/desktop responsiveness.
 - All timestamps display in **Central Time** (use the helpers in `js/ui.js`).

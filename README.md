@@ -1,7 +1,7 @@
-# JobTracker — ADA Agency creative job console
+# Agency Job Tracker — creative job console
 
-A delightful, **local-first** console for the American Dental Association agency
-creative team to track, manage, and deliver marketing jobs end to end — from
+A delightful, **local-first** console for a marketing & creative agency
+team to track, manage, and deliver marketing jobs end to end — from
 intake request through review, approval, and delivery.
 
 Live: **https://jobtracker.polecat.live** — marketing site at the root, the app
@@ -15,8 +15,9 @@ today and is designed to progressively connect to a real backend later.
 
 ## Quick start
 
-Open `https://jobtracker.polecat.live/app/` and paste an access token, or use a
-one-click launch link from the marketing site's **Get access** section.
+Open `https://jobtracker.polecat.live/app/` and paste an access token on the
+unlock screen. Tokens aren't published on the public site — request one from the
+polecat admin (or open an invite link they share).
 
 - **Admin token** — full access; can mint share links for teammates.
 - **Team token** — view & edit jobs.
@@ -48,7 +49,7 @@ python3 -m http.server 8080
   and revision rounds, per-job history, shareable deep links.
 - **Import wizard** — JSON / CSV / Excel / Microsoft Forms with column mapping,
   validation preview, duplicate detection, error report, and rollback.
-- **Settings** — six themes (ADA / Polecat × dark / light / system), managed pick
+- **Settings** — six themes (Agency / Polecat × dark / light / system), managed pick
   lists, team members, credentials & DB profiles, data/privacy, version switcher.
 - **Admin** — mint and revoke token share links.
 - **Docs & tour** — in-app user + developer documentation and a restartable
@@ -75,7 +76,7 @@ js/
   changelog.js  tour.js
   views/              home, inventory, board, calendar, metrics, job, search,
                       import, docs, settings, admin, shared (filters/export)
-reference/            Source material + the real ADA export (importable)
+reference/            Source material + the real sample export (importable)
 .github/              deploy + hourly self-improve workflows, smoke test
 ```
 

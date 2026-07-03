@@ -43,7 +43,7 @@ State lives in `localStorage` under the key **`jt.workspace`**. Top-level shape:
 }
 ```
 
-A **Job** carries the canonical fields from the ADA Agency spreadsheet
+A **Job** carries the canonical fields from the source agency spreadsheet
 (`jobNumber`, `letter`, `name`, `type`, `client`, `divisions[]`, `designers[]`,
 `status`, `requester/owner/assignee`, `priority`, `rush`, `dateIn`, `dueDate`,
 `inHandsDate`, `dateCompleted`, `deliverables`, `vendor`, finance/PO/invoice
@@ -80,9 +80,9 @@ fields…) plus app fields (`comments[]`, `attachments[]`, `milestones[]`,
   Excel-compatible data, and Microsoft Forms CSV exports, with fuzzy column
   mapping to job fields, a validation preview, duplicate-job-number detection,
   all-or-nothing vs valid-rows-only handling, an error report, and rollback.
-- The real 471-row ADA export ships at
+- The real 471-row sample export ships at
   `reference/jobtracker-airtable/jobtracker_data.json` and is loadable from the
-  wizard's "Load the sample ADA export" action.
+  wizard's "Load the sample export" action.
 
 ## Security & limitations
 

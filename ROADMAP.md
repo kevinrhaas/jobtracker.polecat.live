@@ -14,7 +14,7 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 - [x] Invite-only, admin-token access gate (ECDSA-signed tokens) + gate screen.
 - [x] Marketing website with token access section + one-click launch links.
 - [x] App shell: collapsible rail nav, topbar, global search (`/`), undo/redo.
-- [x] Six themes (ADA / Polecat × dark / light / system), default ADA Dark.
+- [x] Six themes (Agency / Polecat × dark / light / system), default Agency Dark.
 - [x] Data model with versioned schema + forward migration, history/audit, undo/redo.
 - [x] Dashboard with live KPIs, recent + favorites, status-at-a-glance.
 - [x] Jobs inventory: pill filters, saved views, sortable columns, bulk edit,
@@ -29,12 +29,32 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       data/privacy, onboarding, version switcher.
 - [x] Admin console: mint/revoke share links.
 - [x] In-app user + developer documentation; restartable welcome tour.
-- [x] Seed demo data + real ADA export importable from `/reference`.
+- [x] Seed demo data + real sample export importable from `/reference`.
 - [x] Deploy + hourly self-improve GitHub Actions, smoke-test gate.
 
 ---
 
-## 🎯 Next up (feature runs)
+## 🎯 Next up (feature runs) — prioritized
+
+### ⭐ Requested by the owner (do these first)
+- [ ] **Simplify & reorganize the job editor.** The Details tab is daunting.
+      Group fields into clear, collapsible sections (e.g. *Overview* → name, type,
+      status, owner, due; *People*; *Schedule*; *Deliverables*; *Finance* collapsed
+      by default). Lead with the few fields people touch most; progressively
+      disclose the rest. Improve visual hierarchy, spacing, and mobile layout.
+      Respect Simple mode. Keep every field reachable.
+- [ ] **Media-type filter + tidy the pill filters.** Add an easy filter by media
+      type (Podcast, Video, Print, Social, Email, Web, …) driven by job `type`.
+      There are getting to be a lot of pills — group/organize them: keep a small
+      set of primary quick-filters (Status, Rush, Overdue, Mine) inline, and move
+      the rest (Type/Media, Division, Priority, Client) into clearly-labeled,
+      grouped dropdown/popover chips so the bar never feels cluttered or confusing.
+- [ ] **Make Saved Views clearer + fully manageable.** Explain what a view is
+      (a saved combination of columns + filters + sort) with a tiny inline hint /
+      onboarding. Make creating, renaming, duplicating, reordering, setting a
+      default, and deleting views obvious from the inventory. Add a **View Library
+      manager in Settings** (rename, edit filters/columns, reorder, delete, mark
+      default) so views can be curated in one place, not just ad hoc.
 
 ### Data & attachments
 - [ ] **IndexedDB attachment store** — move real file binaries from in-session

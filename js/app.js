@@ -155,8 +155,8 @@ function renderGate(errMsg){
   const card=el('div',{class:'gate-card'});
   card.innerHTML=`
     <div class="gate-logo">${icon('rocket',40)}</div>
-    <h1>JobTracker</h1>
-    <p class="muted">Invite-only preview for the ADA Agency creative team. Paste your access token or admin token to continue — or open the link someone shared with you.</p>`;
+    <h1>Agency Job Tracker</h1>
+    <p class="muted">Invite-only preview for the agency creative team. Paste your access token or admin token to continue — or open the link someone shared with you.</p>`;
   const ta=el('textarea',{class:'input', rows:'3', placeholder:'Paste access or admin token…', spellcheck:'false'});
   const err=el('div',{class:'gate-err'+(errMsg?'':' hide'), text:errMsg?`That token is ${errMsg}.`:''});
   const btn=el('button',{class:'btn primary', style:'width:100%', html:`${icon('shield')} Unlock`, onclick:enter});

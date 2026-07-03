@@ -69,7 +69,7 @@ export function renderAdmin(view, ctx){
     const head = el('div',{class:'section-head'});
     head.append(
       el('h2',{text:'Admin console'}),
-      el('span',{class:'sub', text:'Mint and manage invite links for the ADA Agency creative team.'}),
+      el('span',{class:'sub', text:'Mint and manage invite links for the agency creative team.'}),
       el('span',{class:'sp'}),
       el('span',{class:'chip', style:'gap:6px'},[ el('span',{html:icon('shield',14)}), el('span',{text:'Admin mode'}) ]),
     );

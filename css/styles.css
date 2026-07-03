@@ -7,23 +7,23 @@
    Tokens are keyed on [data-palette] (ada|polecat) × [data-theme] (dark|light).
    ========================================================================= */
 
-/* ---- ADA DARK (default) ------------------------------------------------ */
+/* ---- AGENCY DARK (default) — ADA-inspired green + blue ------------------ */
 :root,
 :root[data-palette="ada"][data-theme="dark"]{
-  --bg:#0b0a16; --surface:#131126; --surface-2:#1b1836; --surface-3:#252048;
-  --border:#2e2a52; --text:#ecebfb; --text-2:#9a95c8; --text-3:#5b567e;
-  --brand:#7c5cff; --brand-2:#a78bfa; --accent:#ec4d9a; --accent-2:#16c0d6;
+  --bg:#0a0f1a; --surface:#111a2b; --surface-2:#18243a; --surface-3:#223150;
+  --border:#26344f; --text:#e9eff8; --text-2:#93a6c2; --text-3:#586b88;
+  --brand:#1a8fd6; --brand-2:#5bb3ea; --accent:#12a24f; --accent-2:#17b9a6;
   --success:#34d399; --danger:#f87171; --warning:#fbbf24; --info:#60a5fa;
-  --rail-bg:#0d0b1c; --rail-bg2:#171334; --rail-line:#2e2a5240;
+  --rail-bg:#0a1120; --rail-bg2:#111d31; --rail-line:#26344f40;
   --shadow:0 24px 64px rgba(0,0,0,.55); --shadow-sm:0 6px 20px rgba(0,0,0,.4);
   --aurora-a:var(--brand); --aurora-b:var(--accent); --aurora-c:var(--accent-2);
 }
 :root[data-palette="ada"][data-theme="light"]{
-  --bg:#f4f1fd; --surface:#ffffff; --surface-2:#f0ecfb; --surface-3:#e6def8;
-  --border:#dcd3f2; --text:#1a1440; --text-2:#5b5586; --text-3:#9990bd;
-  --brand:#6d3ff0; --brand-2:#8b5cf6; --accent:#e5327f; --accent-2:#0ea5be;
-  --rail-bg:#ffffff; --rail-bg2:#f2edfc; --rail-line:#dcd3f280;
-  --shadow:0 24px 64px rgba(60,40,120,.16); --shadow-sm:0 6px 20px rgba(60,40,120,.10);
+  --bg:#eef3f9; --surface:#ffffff; --surface-2:#e9f0f8; --surface-3:#dce7f3;
+  --border:#ccdcec; --text:#0c1c2e; --text-2:#48596f; --text-3:#8496ac;
+  --brand:#0071bc; --brand-2:#2a90d8; --accent:#00964a; --accent-2:#0e9aa0;
+  --rail-bg:#ffffff; --rail-bg2:#eef4fa; --rail-line:#ccdcec80;
+  --shadow:0 24px 64px rgba(20,60,110,.14); --shadow-sm:0 6px 20px rgba(20,60,110,.10);
 }
 :root[data-palette="polecat"][data-theme="dark"]{
   --bg:#0a0a0f; --surface:#111118; --surface-2:#18181f; --surface-3:#222230;

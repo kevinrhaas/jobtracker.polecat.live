@@ -1,11 +1,11 @@
 // -----------------------------------------------------------------------
 // theme.js — palette + light/dark, six modes total.
 //
-//   palette:  'ada'  (ADA brand violet/magenta/teal)  or 'polecat' (brown/amber)
+//   palette:  'ada'  (Agency violet/magenta/teal)  or 'polecat' (brown/amber)
 //   mode:     'dark' | 'light' | 'system'
 //
-// The six selectable modes are the cross product: ADA Dark / Light / System
-// and Polecat Dark / Light / System. Default is ADA Dark per requirements.
+// The six selectable modes are the cross product: Agency Dark / Light / System
+// and Polecat Dark / Light / System. Default is Agency Dark.
 // We stamp two attributes on <html>: data-palette and data-theme, which the
 // stylesheet keys off. The pre-paint inline script in the HTML applies the
 // saved choice before first paint to avoid a flash.
@@ -15,7 +15,7 @@ const KEY = 'jt.theme.v1';           // stores e.g. "ada:dark"
 const mq = window.matchMedia('(prefers-color-scheme: light)');
 
 export const PALETTES = [
-  { key:'ada',     label:'ADA',     hint:'American Dental Association brand' },
+  { key:'ada',     label:'Agency',  hint:'Agency violet / magenta / teal' },
   { key:'polecat', label:'Polecat', hint:'Warm polecat.live house style' },
 ];
 export const MODES = [
@@ -50,7 +50,7 @@ export function applyTheme(){
   const meta = document.querySelector('meta[name="theme-color"]');
   if(meta){
     const dark = resolvedMode(mode)==='dark';
-    meta.setAttribute('content', dark ? (palette==='ada'?'#0b0a16':'#0a0a0f') : (palette==='ada'?'#f6f4fc':'#f4f4fb'));
+    meta.setAttribute('content', dark ? (palette==='ada'?'#0a0f1a':'#0a0a0f') : (palette==='ada'?'#eef3f9':'#f4f4fb'));
   }
 }
 

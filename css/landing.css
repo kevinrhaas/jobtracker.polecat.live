@@ -1,21 +1,21 @@
 /* =========================================================================
    JobTracker — public marketing site styles.
    Same polecat/relay landing DNA (aurora, reveal-on-scroll, glass nav) with
-   the ADA-brand violet/magenta/teal palette. Self-contained, no external
+   an ADA-inspired green + blue palette. Self-contained, no external
    assets, dark + light aware.
    ========================================================================= */
 :root{
-  --bg:#0b0a16; --surface:#131126; --surface-2:#1b1836; --border:#2e2a52;
-  --text:#ecebfb; --text-2:#a49ed0; --text-3:#6b6698;
-  --brand:#7c5cff; --brand-2:#a78bfa; --accent:#ec4d9a; --accent-2:#16c0d6;
+  --bg:#0a0f1a; --surface:#111a2b; --surface-2:#18243a; --border:#26344f;
+  --text:#e9eff8; --text-2:#93a6c2; --text-3:#586b88;
+  --brand:#1a8fd6; --brand-2:#5bb3ea; --accent:#12a24f; --accent-2:#17b9a6;
   --radius:16px; --radius-lg:24px; --maxw:1120px;
   --font:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
   --mono:'SF Mono',ui-monospace,'JetBrains Mono',monospace;
   --shadow:0 30px 80px rgba(0,0,0,.5);
 }
 @media (prefers-color-scheme: light){
-  :root{ --bg:#f4f1fd; --surface:#ffffff; --surface-2:#f0ecfb; --border:#dcd3f2;
-    --text:#1a1440; --text-2:#5b5586; --text-3:#9990bd; --brand:#6d3ff0; --accent:#e5327f;
+  :root{ --bg:#eef3f9; --surface:#ffffff; --surface-2:#e9f0f8; --border:#ccdcec;
+    --text:#0c1c2e; --text-2:#48596f; --text-3:#8496ac; --brand:#0071bc; --accent:#00964a;
     --shadow:0 30px 80px rgba(70,40,130,.16); }
 }
 *{box-sizing:border-box}
