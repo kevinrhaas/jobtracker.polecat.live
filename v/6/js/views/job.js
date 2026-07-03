@@ -136,6 +136,8 @@ export function openJob(id, ctx={}){
   linkBtn.onclick = ()=> copy(`${location.origin}/app/#job/${job.id}`, 'Link copied');
   const cloneBtn = el('button',{class:'btn icon ghost', 'aria-label':'Duplicate job', title:'Duplicate', html:icon('clone',18) });
   cloneBtn.onclick = ()=>{ const c=Store.cloneJob(id, actor); if(c){ m.hide(); (ctx.openJob||openJob)(c.id, ctx); toastFn('Duplicated',{kind:'ok', body:`New job #${c.jobNumber}`}); } };
+  const printBtn = el('button',{class:'btn icon ghost', 'aria-label':'Print this job', title:'Print', html:icon('print',18) });
+  printBtn.onclick = ()=> window.print();
   const delBtn = el('button',{class:'btn danger icon', 'aria-label':'Delete job', title:'Delete', html:icon('trash',18) });
   delBtn.onclick = async ()=>{
     const ok = await confirmDialog({ title:'Delete job?', danger:true, okText:'Delete',
@@ -146,7 +148,7 @@ export function openJob(id, ctx={}){
   const hero = el('div',{class:'job-hero'},[
     heroIc,
     el('div',{class:'jh-main'},[ heroNum, heroName, heroBadges ]),
-    el('div',{class:'jh-actions'},[ savedFlash, favBtn, linkBtn, cloneBtn, delBtn ]),
+    el('div',{class:'jh-actions no-print'},[ savedFlash, favBtn, linkBtn, printBtn, cloneBtn, delBtn ]),
   ]);
 
   let flashTimer;
@@ -563,7 +565,8 @@ export function openJob(id, ctx={}){
   }
 
   // ---- mount -----------------------------------------------------------
-  const m = modal({ title:`Job #${job.jobNumber}`, icon:icon('folder',20), wide:true, body:[hero, tabsBar, bodyWrap] });
+  const printFooter = el('div',{class:'print-footer', text:`Agency Job Tracker — printed ${fmtDateTime(new Date())}`});
+  const m = modal({ title:`Job #${job.jobNumber}`, icon:icon('folder',20), wide:true, body:[hero, tabsBar, bodyWrap, printFooter] });
   m.root.classList.add('full');
   refreshHero();
   renderBody();

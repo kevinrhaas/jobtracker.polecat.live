@@ -7,7 +7,7 @@
 // the picture is always current. No external charting library — just divs.
 // -----------------------------------------------------------------------
 import { Store } from '../store.js';
-import { el, escapeHtml, relTime } from '../ui.js';
+import { el, escapeHtml, relTime, fmtDateTime } from '../ui.js';
 import { icon, jobIconFor } from '../icons.js';
 import { isOverdue, dueSoon, ageState } from './shared.js';
 
@@ -153,7 +153,9 @@ export function renderMetrics(view, ctx, params){
   const monthCounts = months.map(mo => completed.filter(j=>ctMonthKey(completedAt(j))===mo.key).length);
   const throughput = monthCounts.reduce((a,b)=>a+b,0) / months.length;
 
-  view.append(sectionHead('Metrics', 'Live status reporting — everything is computed from your current jobs.'));
+  const head = sectionHead('Metrics', 'Live status reporting — everything is computed from your current jobs.');
+  head.append(el('span',{class:'sp'}), el('button',{class:'btn ghost no-print', html:`${icon('print',16)}<span>Print report</span>`, onclick:()=>window.print()}));
+  view.append(head);
 
   // ---- KPI row ---------------------------------------------------------
   const kpis = el('div',{class:'kpis'});
@@ -260,4 +262,6 @@ export function renderMetrics(view, ctx, params){
       text:`+ ${aging.length-12} more aging job${aging.length-12===1?'':'s'}.`}));
   }
   view.append(card('Aging alerts', 'Jobs sitting longer than their stage should', agingBody));
+
+  view.append(el('div',{class:'print-footer', text:`Agency Job Tracker — printed ${fmtDateTime(new Date())} · ${jobs.length} job${jobs.length===1?'':'s'} total`}));
 }

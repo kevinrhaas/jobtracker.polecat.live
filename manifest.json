@@ -1,0 +1,14 @@
+{
+  "name": "Agency Job Tracker",
+  "short_name": "Job Tracker",
+  "description": "Track, manage, and deliver marketing jobs end to end — the agency creative job console.",
+  "start_url": "/app/",
+  "scope": "/app/",
+  "display": "standalone",
+  "background_color": "#0a0f1a",
+  "theme_color": "#0a0f1a",
+  "orientation": "any",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
