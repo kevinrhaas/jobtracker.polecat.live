@@ -278,6 +278,7 @@ export function renderImport(view, ctx, params){
         body:'The bundled sample file was not reachable. You can still upload or paste your own data.',
         kind:'err', ms:5000 });
     }
+    return box;
   }
 
   // Parse raw text → decide mode, extract rows/columns, then advance.

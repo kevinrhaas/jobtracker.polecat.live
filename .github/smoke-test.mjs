@@ -62,12 +62,27 @@ async function checkPage(browser, url, mustFind, label){
     const page = await browser.newPage();
     const errs=[]; page.on('pageerror',e=>errs.push(String(e)));
     await page.goto(`http://localhost:${PORT}/app/?token=${encodeURIComponent(TEAM_TOKEN)}`, { waitUntil:'networkidle' });
+    const garbage = [];
     for(const sec of ['inventory','board','calendar','metrics','import','docs','settings']){
       await page.click(`.rail-item[data-sec="${sec}"]`).catch(()=>{});
       await page.waitForTimeout(350);
+      // A view that renders a bare "undefined" / "null" / "[object Object]" text
+      // node (e.g. a step function that forgot to return its element) doesn't
+      // throw — catch it here so it can never ship silently.
+      const bad = await page.evaluate(()=>{
+        const view = document.querySelector('#view'); if(!view) return 'no #view';
+        if(view.childElementCount === 0) return 'empty #view';
+        const walker = document.createTreeWalker(view, NodeFilter.SHOW_TEXT);
+        for(let n=walker.nextNode(); n; n=walker.nextNode()){
+          if(/^(undefined|null|\[object Object\])$/.test(n.textContent.trim())) return `stray "${n.textContent.trim()}"`;
+        }
+        return null;
+      });
+      if(bad) garbage.push(`${sec}: ${bad}`);
     }
     if(errs.length) throw new Error('navigation errors:\n  '+errs.join('\n  '));
-    console.log('✓ all sections navigated without throwing');
+    if(garbage.length) throw new Error('views rendered broken content:\n  '+garbage.join('\n  '));
+    console.log('✓ all sections navigated + rendered real content');
     await page.close();
     console.log('\n✅ smoke test passed');
   }catch(e){
