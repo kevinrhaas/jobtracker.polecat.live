@@ -141,18 +141,10 @@
         <div class="band reveal">
           <div class="kick">Get access</div>
           <h2>Invite-only — <span class="g">grab your token</span>.</h2>
-          <p>JobTracker is gated. Launch the app and paste a token below, or use a one-click launch link.
-            Admins can mint share links for teammates from inside the app.</p>
-
-          <div class="token-box">
-            <div class="tl"><svg width="16" height="16" viewBox="0 0 24 24"><use href="#i-key"/></svg> Admin token — full access, can mint invites</div>
-            <div class="token-code" id="adminTok">MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg+orikJmoc4OnjJVP5QPND61Rs5PdmDsvIMr/cfDzBCuhRANCAAQakbpjPLx1GUlD0vDBbrI6vcBjPsRR6/b5dNUJZlRZUg/F//VApVmJrQSTUE0Hdz8baJgcW+FvK172W0rrzkWZ</div>
-            <div class="token-row">
-              <button class="btn primary" data-copy="adminTok">Copy admin token</button>
-              <a class="btn" id="launchAdmin" href="/app/">Launch as admin <svg width="16" height="16" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></a>
-              <span class="copied hide" id="copiedAdmin">Copied ✓</span>
-            </div>
-          </div>
+          <p>JobTracker is gated. Team members can launch with the access token below or a one-click
+            link. Admins sign in with their own private admin token — paste it on the app's unlock
+            screen to manage settings and mint share links. (Ask the workspace owner for it; it's
+            never shown here.)</p>
 
           <div class="token-box">
             <div class="tl"><svg width="16" height="16" viewBox="0 0 24 24"><use href="#i-check"/></svg> Team access token — view &amp; edit jobs</div>
@@ -216,16 +208,14 @@
       reveals.forEach(el=>io.observe(el));
     } else reveals.forEach(el=>el.classList.add('in'));
 
-    // token copy + one-click launch links
-    const adminTok=document.getElementById('adminTok').textContent.trim();
+    // team token copy + one-click launch link (admin token is never exposed here)
     const userTok=document.getElementById('userTok').textContent.trim();
-    document.getElementById('launchAdmin').href='/app/?token='+encodeURIComponent(adminTok);
     document.getElementById('launchUser').href='/app/?token='+encodeURIComponent(userTok);
     async function copy(text){ try{ await navigator.clipboard.writeText(text); return true; }catch{ return false; } }
     document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{
       const id=b.getAttribute('data-copy');
       const ok=await copy(document.getElementById(id).textContent.trim());
-      const badge=document.getElementById(id==='adminTok'?'copiedAdmin':'copiedUser');
+      const badge=document.getElementById('copiedUser');
       if(ok && badge){ badge.classList.remove('hide'); setTimeout(()=>badge.classList.add('hide'),1800); }
     }));
   </script>
