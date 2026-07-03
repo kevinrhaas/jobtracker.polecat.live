@@ -82,7 +82,7 @@ export function renderAdmin(view, ctx){
     view.append(callout('You are in admin mode. Only this device — which holds the signed admin token — can mint invite links.', 'info', 'shield'));
 
     // ---- mint a link ----
-    const labelI = el('input',{class:'input', placeholder:'e.g. Kristin (designer)'});
+    const labelI = el('input',{class:'input', placeholder:'e.g. Maya (designer)'});
     const daysI = el('input',{type:'number', class:'input', min:'0', max:'3650', value:'0', style:'width:120px'});
     const jobSel = el('select',{class:'input'});
     jobSel.append(el('option',{value:'', text:'— Whole app (no specific job) —'}));

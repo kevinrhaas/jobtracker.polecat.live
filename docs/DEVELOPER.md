@@ -80,9 +80,9 @@ fields…) plus app fields (`comments[]`, `attachments[]`, `milestones[]`,
   Excel-compatible data, and Microsoft Forms CSV exports, with fuzzy column
   mapping to job fields, a validation preview, duplicate-job-number detection,
   all-or-nothing vs valid-rows-only handling, an error report, and rollback.
-- The real 471-row sample export ships at
-  `reference/jobtracker-airtable/jobtracker_data.json` and is loadable from the
-  wizard's "Load the sample export" action.
+- The app ships with **generated, fictional** demo data only (see `js/seed.js`).
+  The Import wizard's "Load sample data" adds ~40 more made-up jobs. Real data is
+  never bundled — you import your own export (upload/paste) when you're ready.
 
 ## Security & limitations
 

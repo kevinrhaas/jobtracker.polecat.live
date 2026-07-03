@@ -29,7 +29,7 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       data/privacy, onboarding, version switcher.
 - [x] Admin console: mint/revoke share links.
 - [x] In-app user + developer documentation; restartable welcome tour.
-- [x] Seed demo data + real sample export importable from `/reference`.
+- [x] Generated (fictional) demo data; import your own real data when needed.
 - [x] Deploy + hourly self-improve GitHub Actions, smoke-test gate.
 
 ---
