@@ -1,5 +1,11 @@
 [
   {
+    "v": 24,
+    "title": "Board: WIP limits to flag overloaded stages",
+    "date": "Jul 4, 2026, 6:20 AM CT",
+    "path": "/v/24/app/"
+  },
+  {
     "v": 23,
     "title": "Metrics: a workload heatmap to spot overload before it happens",
     "date": "Jul 4, 2026, 5:35 AM CT",

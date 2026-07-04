@@ -277,10 +277,16 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
   jobs that moved status, new comments, approvals resolved. Everything needed
   (job history + `updatedAt`) already exists; purely a derived read like the
   notifications feed.
-- **Board WIP limits** — an optional soft cap per board column (set in
-  Settings → Pick lists → Statuses, alongside the existing "can move to"
-  workflow map) that visually flags a column as over-capacity, nudging
-  triage before work piles up in one stage.
+- [x] **Board WIP limits** ✅ Shipped — each status in **Settings → Pick
+  lists → Statuses** now has an optional numeric "WIP #" field (blank =
+  unlimited) next to the existing "Can move to" workflow button. Leaving it
+  blank keeps a column unrestricted — the default for every upgraded
+  workspace and most demo statuses; "In Progress" ships with a limit of 8 to
+  show the feature off. On the **Board**, a column over its limit gets a
+  red-tinted header, a warning icon, and its count badge switches to
+  "N/limit" so the overage is obvious at a glance — purely visual, moving a
+  card into a full column still works, it just nudges triage before work
+  piles up in one stage.
 - **Undo toast for destructive bulk actions** — bulk delete / bulk status
   change already goes through the existing undo/redo stack, but a job editor
   or inventory action taken *outside* that flow (e.g. Documents' bulk
