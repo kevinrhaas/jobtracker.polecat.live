@@ -153,7 +153,18 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       step with Prev / Today / Next; search, Rush-only, Show-done and a status
       filter narrow what's plotted. Jobs with only one date, or no due date
       yet (drawn open-ended with a trailing arrow), still show up.
-- [ ] **Column drag-to-reorder & resize** in the inventory table; sticky first column.
+- [x] **Column drag-to-reorder & resize** in the inventory table; sticky first
+      column. ✅ Shipped — on desktop/tablet, drag any Jobs table header left
+      or right to reorder it (a live drop indicator shows before/after; a
+      plain click still sorts, since HTML5 drag only engages once the mouse
+      actually moves). Drag the thin handle on a header's right edge to
+      resize that column; double-click the handle to reset it to auto width.
+      Whichever column ends up first (after the row-select checkbox) stays
+      pinned while scrolling right — so dragging Name or Job # to the front
+      keeps it visible next to the row-select checkbox no matter how many
+      columns are shown. Order and widths save into the saved view along with
+      filters/sort, same "Save view" / "Edit view" flow as before. The mobile
+      card list is unchanged (no wide table to scroll there).
 - [x] **Inline cell editing** ✅ Shipped — in the desktop/tablet Jobs table, click
       (or focus + Enter) a Name, Type, Client, Status, Priority, Owner, Assignee,
       Due date or Rush cell to edit it right there — a live input/select/date

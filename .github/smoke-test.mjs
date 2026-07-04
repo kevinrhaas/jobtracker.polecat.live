@@ -67,7 +67,14 @@ async function checkPage(browser, url, mustFind, label){
     await page.goto(`http://localhost:${PORT}/app/?token=${encodeURIComponent(TEAM_TOKEN)}`, { waitUntil:'networkidle' });
     const garbage = [];
     for(const sec of ['inventory','board','calendar','timeline','metrics','reports','documents','import','docs','settings']){
-      await page.click(`.rail-item[data-sec="${sec}"]`).catch(()=>{});
+      // A real page.click() waits for the element to be unobscured — the
+      // welcome tour's full-screen backdrop (auto-opens ~700ms after boot on
+      // a fresh workspace, same as any first-time visitor) can sit on top of
+      // the rail and make Playwright retry for its full default timeout on
+      // every remaining section. Dispatch the click straight on the element
+      // instead: it still exercises the real rail-item onclick handler, just
+      // without the actionability/occlusion wait.
+      await page.evaluate(s=>document.querySelector(`.rail-item[data-sec="${s}"]`)?.click(), sec);
       await page.waitForTimeout(350);
       // A view that renders a bare "undefined" / "null" / "[object Object]" text
       // node (e.g. a step function that forgot to return its element) doesn't
