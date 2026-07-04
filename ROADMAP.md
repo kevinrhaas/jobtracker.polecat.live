@@ -264,9 +264,14 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 - **Keyboard-only board mode** — arrow keys to move focus between cards, a
   single keypress to cycle a focused card through statuses, so power users
   never need the mouse for triage.
-- **Workload heatmap** — a calendar-style grid colored by how many jobs are
-  due per person per day, to spot overload before it happens (complements the
-  existing per-person workload bars in Metrics).
+- [x] **Workload heatmap** ✅ Shipped — Metrics' "Workload heatmap" card grids
+  the top 8 people by active workload against a 21-day window, one cell per
+  person per day, colored by how many active jobs they have due that day
+  (darker = more). Prev/Next steps a week at a time, "This week" resets;
+  today's column is outlined and weekends are dimmed. Click any colored cell
+  to see (and jump straight into) the jobs due, without leaving Metrics.
+  Complements the existing per-person workload bars — nothing new to store,
+  purely derived from `Store.jobs()`.
 - **"Since you've been away" digest** — a one-time card on the dashboard after
   a gap in usage (say, >3 days since last open) summarizing what changed:
   jobs that moved status, new comments, approvals resolved. Everything needed
