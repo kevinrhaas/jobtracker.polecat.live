@@ -46,7 +46,11 @@ jobs:
         run: |
           npm install -g @anthropic-ai/claude-code
           npm install -D playwright
-          npx playwright install --with-deps chromium
+          # Chromium AND WebKit: WebKit is iOS Safari/Chrome's engine and catches
+          # iOS-only failures (e.g. Intl.format throwing on an invalid Date) that
+          # Chromium silently tolerates. The mobile blank-screen class of bug is
+          # only reproducible on WebKit, so the smoke test runs on both.
+          npx playwright install --with-deps chromium webkit
 
       # Every 5th run is a polish/reflection sweep; the rest build features.
       - name: Pick mode

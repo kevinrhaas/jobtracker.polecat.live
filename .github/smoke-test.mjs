@@ -7,11 +7,14 @@
 //
 //   node .github/smoke-test.mjs
 //
-// Requires: playwright (chromium). Installed by the workflow.
+// Requires: playwright (chromium + webkit). Installed by the workflow.
+// WebKit is iOS Safari/Chrome's engine and reproduces iOS-only failures that
+// Chromium silently tolerates — most importantly Intl.DateTimeFormat.format()
+// throwing a RangeError on an invalid Date, which once blanked the dashboard.
 import http from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
-import { chromium } from 'playwright';
+import { chromium, webkit } from 'playwright';
 
 const ROOT = process.cwd();
 const PORT = 4178;
@@ -142,6 +145,43 @@ async function checkPage(browser, url, mustFind, label){
     if(mobErrs.length) throw new Error('mobile console errors:\n  '+mobErrs.join('\n  '));
     console.log('✓ mobile (390px): nav/topbar/sheet fit + every view renders visible content & scrolls to bottom');
     await mp.close();
+
+    // 5) WebKit pass — iOS Safari/Chrome's engine. This is the check that would
+    //    have caught the blank dashboard: Intl.DateTimeFormat.format(new Date(NaN))
+    //    throws a RangeError on WebKit (not V8), and a view that throws during
+    //    render leaves #view empty (or, with the app's error boundary, shows a
+    //    "hit a snag" card). We fail on either signal, on desktop AND mobile.
+    const SECTIONS = ['home','inventory','board','calendar','timeline','metrics','reports','documents','import','docs','settings'];
+    const wk = await webkit.launch();
+    try{
+      for(const vp of [ null, { viewport:{ width:390, height:844 }, isMobile:true } ]){
+        const lbl = vp ? 'mobile' : 'desktop';
+        const wctx = vp ? await wk.newContext(vp) : await wk.newContext();
+        const wp = await wctx.newPage();
+        const wErrs = [];
+        wp.on('pageerror', e=>wErrs.push('pageerror: '+e));
+        wp.on('console', m=>{ if(m.type()==='error') wErrs.push('console: '+m.text()); });
+        await wp.goto(`http://localhost:${PORT}/app/?token=${encodeURIComponent(TEAM_TOKEN)}`, { waitUntil:'networkidle', timeout:20000 });
+        await wp.waitForSelector('#rail .rail-item', { timeout:12000 });
+        const bad = [];
+        for(const sec of SECTIONS){
+          await wp.evaluate(s=>location.hash=s, sec); await wp.waitForTimeout(320);
+          const state = await wp.evaluate(()=>{
+            const v=document.querySelector('#view'); if(!v) return 'no #view';
+            if(v.childElementCount===0) return 'empty #view';
+            // the app's render() error boundary renders this card on a throw
+            if(/hit a snag/i.test(v.textContent||'')) return 'error boundary tripped (view threw)';
+            return null;
+          });
+          if(state) bad.push(`${sec}: ${state}`);
+        }
+        const real = wErrs.filter(e=>!/favicon|net::ERR|Failed to load resource/i.test(e));
+        await wp.close(); await wctx.close();
+        if(real.length) throw new Error(`WebKit ${lbl} errors:\n  `+real.join('\n  '));
+        if(bad.length)  throw new Error(`WebKit ${lbl}: views failed to render:\n  `+bad.join('\n  '));
+      }
+      console.log('✓ WebKit (iOS engine): every section renders on desktop + mobile with no errors');
+    }finally{ await wk.close(); }
 
     console.log('\n✅ smoke test passed');
   }catch(e){
