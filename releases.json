@@ -1,5 +1,11 @@
 [
   {
+    "v": 28,
+    "title": "Attachment version history",
+    "date": "Jul 4, 2026, 8:21 AM CT",
+    "path": "/v/28/app/"
+  },
+  {
     "v": 27,
     "title": "Polish: illustrated empty states across the app",
     "date": "Jul 4, 2026, 7:59 AM CT",
@@ -136,11 +142,5 @@
     "title": "Reorganized job editor — collapsible sections",
     "date": "Jul 3, 2026, 2:20 PM CT",
     "path": "/v/5/app/"
-  },
-  {
-    "v": 4,
-    "title": "Media-type filter + a tidier filter bar",
-    "date": "Jul 3, 2026, 1:48 PM CT",
-    "path": "/v/4/app/"
   }
 ]

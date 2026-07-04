@@ -92,8 +92,17 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       and keeps metadata only. **Reset all local data** now clears IndexedDB
       too, and workspace export/import stays text-only (bytes never leave
       the browser, by design).
-- [ ] **Attachment versioning** — keep prior versions of a file with a version
-      history and restore.
+- [x] **Attachment versioning** ✅ Shipped — an upload icon on each attachment
+      row (job editor's Attachments tab, and the Document Library) lets you
+      push a replacement file without losing the original: the outgoing file
+      is archived into that attachment's version history (own metadata + its
+      own IndexedDB blob key), the visible `vN` badge increments, and a clock
+      icon opens a **Version history** dialog listing every version with
+      download and restore. Restoring always adds a *new* version rather than
+      rewinding the counter, so the timeline only ever grows — nothing to
+      reconcile. Works the same whether Mock Uploads is on or off (mock
+      versions just carry no bytes, same as any mock attachment). Existing
+      attachments upgrade with an empty history, nothing to backfill.
 - [x] **Global Document Library view** ✅ Shipped — a new **Documents** nav
       section flattens every attachment across every job into one searchable
       list: search by file/job name/#, filter by type (Images/Video/Docs) or
