@@ -103,9 +103,22 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       preview/download.
 
 ### Workflow depth
-- [ ] **Job intake form** — a dedicated, friendly "New job request" form (a
-      Microsoft-Forms replacement) with type-driven conditional fields, sharable
-      via token so requesters can submit directly.
+- [x] **Job intake form** ✅ Shipped — Admin can mint a **Kiosk / intake-only
+      link** (a toggle next to the usual invite fields) that, when opened,
+      skips the whole app shell and boots straight into a friendly, full-screen
+      **"Submit a job request"** form (`js/views/intake.js`) — no dashboard,
+      no nav, no other jobs visible. Fields are type-driven: picking a print/
+      event/banner-style type reveals Quantity + Vendor; everything else
+      (project name, requester, client, due date, priority, Rush, campaign,
+      details) stays visible. Submitting creates a real job straight away, in
+      the workflow's first ("Requested") status, tagged with a small **Intake**
+      badge in the job editor hero — no import/export round-trip needed. Since
+      this stays local-first (no backend), the request lands in whichever
+      workspace opened the link, so kiosk links are meant for a shared device
+      (e.g. a front-desk tablet) rather than broad distribution; a "Done — lock
+      this device" button on the confirmation screen revokes access again when
+      someone's finished. After submitting, "Submit another request" resets
+      the form for the next person in line.
 - [x] **Job type templates** ✅ Shipped — each type's default checklist (set in
       Settings → Pick lists) auto-seeds a new job's subtasks. **Subtasks &
       milestones UI** ✅ Shipped — the job editor's new Checklist tab has
