@@ -146,6 +146,16 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       and inventory list (age dot + overdue highlight in the Due column).
 
 ### Views & UX
+- [x] **Focus mode** ✅ Shipped — a target icon in the job editor's hero (and a
+      "Focus mode" action in the Jobs list's mobile card menu) opens a calm,
+      full-screen, deep-linkable (`#focus/<id>`) view of just one job: its name,
+      status, due date and rush flag up top, a live progress bar, then only the
+      **Checklist** (subtasks + milestones, still checkable/addable) and the
+      **Conversation** (comment thread) — no other tabs, no rail, no topbar.
+      "Copy focus link" shares the exact state; "Open full editor" escalates to
+      the regular job editor when you need everything else; `Esc` or "Exit
+      focus" returns to wherever you were, hash restored via `replaceState` so
+      it never pollutes browser history.
 - [x] **Timeline / Gantt view** ✅ Shipped — a new **Timeline** nav section plots
       every dated job as a bar from Date In to Due Date, grouped by status
       (colored like the board), with milestone diamonds overlaid on each job's
@@ -253,8 +263,6 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 - Time tracking per job; capacity planning.
 - Slack/email digest export (copy-to-clipboard summaries).
 - Theming: per-workspace accent color picker.
-- **Focus mode** — a distraction-free single-job view (large card, checklist,
-  and comments only) for someone heads-down on one deliverable; deep-linkable.
 - **"On this day" / job anniversary nudges** — surface jobs whose due date or
   completion date lines up with today from a prior year, useful for recurring
   annual campaigns (e.g. "Membership Drive" every spring).

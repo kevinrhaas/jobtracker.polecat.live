@@ -1,5 +1,11 @@
 [
   {
+    "v": 25,
+    "title": "Focus mode: a calm, deep-linkable single-job view",
+    "date": "Jul 4, 2026, 6:57 AM CT",
+    "path": "/v/25/app/"
+  },
+  {
     "v": 24,
     "title": "Board: WIP limits to flag overloaded stages",
     "date": "Jul 4, 2026, 6:20 AM CT",
@@ -136,11 +142,5 @@
     "title": "Neutral branding + public-site SEO",
     "date": "Jul 3, 2026, 12:45 PM CT",
     "path": "/v/2/app/"
-  },
-  {
-    "v": 1,
-    "title": "JobTracker launches",
-    "date": "Jul 3, 2026 CT",
-    "path": "/v/1/app/"
   }
 ]
