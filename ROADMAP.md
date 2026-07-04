@@ -434,11 +434,21 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
   or the nearest rush due today) right under the KPIs — a lighter-weight,
   always-on companion to the existing "since you've been away" digest, for
   days when nothing eventful happened but something is still due today.
-- **Cross-job dependency links** — an optional "blocked by / blocks" link
-  between two jobs (a searchable picker on the Details tab), surfaced as a
-  small chip on the card/row and a warning if you try to move a blocked job
-  into an in-progress/done status — useful for agencies where one deliverable
-  (e.g. photography) gates another (e.g. the print ad using it).
+- [x] **Cross-job dependency links** ✅ Shipped — the job editor's Details tab
+  gained a **Dependencies** section: **Add blocker** opens a searchable
+  picker of other jobs (cyclic candidates are grayed out and disabled, so a
+  circular dependency can't be created), and each linked blocker shows as a
+  removable chip colored by its own status. A job with any open
+  (non-terminal) blocker gets a **Blocked** chip in its hero badges, on its
+  Board card, and next to its name in the Jobs table/card list — all purely
+  derived from `job.blockedBy`, nothing new to poll. Moving a blocked job's
+  status (via the Details tab, dragging/keyboard on the Board, or the Jobs
+  table's inline/bulk edit) now asks for one shared confirmation that covers
+  both "blocked" and the existing "unusual transition" case instead of two
+  separate prompts. The reverse **Blocks** list (read-only — every job
+  waiting on this one) is computed the same way campaign membership is,
+  so there's nothing to keep in sync. Existing jobs upgrade with an empty
+  `blockedBy` list — nothing starts out blocked that wasn't already.
 - **Theming: per-workspace accent color picker** (already parked above) could
   extend to a small built-in palette gallery (5–6 curated accent pairs beyond
   the two brand palettes) so a workspace can feel distinct without anyone
