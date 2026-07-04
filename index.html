@@ -85,6 +85,7 @@
       <a class="brand" href="/"><span class="logo"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-rocket"/></svg></span> Agency Job Tracker <small>polecat.live</small></a>
       <nav class="nav-links">
         <a href="#features">Features</a>
+        <a href="#showcase">Screenshots</a>
         <a href="#how">How it works</a>
         <a class="btn primary" href="/app/">Launch app <svg width="16" height="16" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></a>
       </nav>
@@ -112,31 +113,11 @@
         </div>
       </div>
 
-      <!-- pure-CSS app preview -->
+      <!-- real app screenshot in a browser frame -->
       <div class="shot reveal">
         <div class="bar"><i></i><i></i><i></i><span class="url">jobtracker.polecat.live/app</span></div>
-        <div class="mock">
-          <div class="mock-rail">
-            <div class="mi on"><span class="b"></span> Dashboard</div>
-            <div class="mi"><span class="b"></span> Jobs</div>
-            <div class="mi"><span class="b"></span> Board</div>
-            <div class="mi"><span class="b"></span> Calendar</div>
-            <div class="mi"><span class="b"></span> Metrics</div>
-          </div>
-          <div class="mock-main">
-            <div class="mock-kpis">
-              <div class="mock-kpi"><b>34</b><span>ACTIVE JOBS</span></div>
-              <div class="mock-kpi"><b>7</b><span>DUE THIS WEEK</span></div>
-              <div class="mock-kpi"><b>2</b><span>OVERDUE</span></div>
-              <div class="mock-kpi"><b>92%</b><span>ON-TIME</span></div>
-            </div>
-            <div class="mock-tiles">
-              <div class="mock-tile"><div class="ti"><span class="ic"></span><div style="flex:1"><div class="ln"></div></div></div><div class="ln s"></div><span class="pill">In Review</span></div>
-              <div class="mock-tile"><div class="ti"><span class="ic"></span><div style="flex:1"><div class="ln"></div></div></div><div class="ln s"></div><span class="pill">In Progress</span></div>
-              <div class="mock-tile"><div class="ti"><span class="ic"></span><div style="flex:1"><div class="ln"></div></div></div><div class="ln s"></div><span class="pill">Approved</span></div>
-            </div>
-          </div>
-        </div>
+        <img class="shot-img" src="/assets/shots/dashboard.png" width="1950" height="1260"
+             alt="The JobTracker dashboard — live KPIs, status at a glance, and recent jobs">
       </div>
     </section>
 
@@ -163,6 +144,61 @@
             <h3>Never miss a date</h3><p>Due dates, in-hands dates and milestones with overdue flagging. Auto-generated, never-duplicate job numbers you can search anywhere.</p></div>
           <div class="card reveal"><div class="ic" style="background:linear-gradient(135deg,#a78bfa,#6d3ff0)"><svg viewBox="0 0 24 24"><use href="#i-key"/></svg></div>
             <h3>Yours &amp; private</h3><p>Invite-only, admin-token access. Data lives in your browser with full export. Six themes (dark, light &amp; system), history, undo, and a joyful, accessible design.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- showcase: interactive screenshot gallery -->
+    <section id="showcase">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="kick">See it in action</div>
+          <h2>Eight views of the same work, one click apart.</h2>
+          <p>These are real screenshots — no marketing mock-ups. Tap a view to explore the actual app.</p>
+        </div>
+        <div class="showcase reveal">
+          <div class="sc-tabs" role="tablist" aria-label="App views">
+            <button class="sc-tab on" role="tab" aria-selected="true" data-i="0">Dashboard</button>
+            <button class="sc-tab" role="tab" data-i="1">Jobs</button>
+            <button class="sc-tab" role="tab" data-i="2">Board</button>
+            <button class="sc-tab" role="tab" data-i="3">Calendar</button>
+            <button class="sc-tab" role="tab" data-i="4">Timeline</button>
+            <button class="sc-tab" role="tab" data-i="5">Metrics</button>
+            <button class="sc-tab" role="tab" data-i="6">Reports</button>
+            <button class="sc-tab" role="tab" data-i="7">Editor</button>
+          </div>
+          <div class="sc-stage">
+            <div class="shot">
+              <div class="bar"><i></i><i></i><i></i><span class="url">jobtracker.polecat.live/app</span></div>
+              <div class="sc-frames">
+                <img class="sc-img on" data-i="0" src="/assets/shots/dashboard.png"  width="1950" height="1260" alt="Dashboard">
+                <img class="sc-img"    data-i="1" src="/assets/shots/jobs.png"       width="1950" height="1260" loading="lazy" alt="Jobs list">
+                <img class="sc-img"    data-i="2" src="/assets/shots/board.png"      width="1950" height="1260" loading="lazy" alt="Kanban board">
+                <img class="sc-img"    data-i="3" src="/assets/shots/calendar.png"   width="1950" height="1260" loading="lazy" alt="Calendar">
+                <img class="sc-img"    data-i="4" src="/assets/shots/timeline.png"   width="1950" height="1260" loading="lazy" alt="Timeline">
+                <img class="sc-img"    data-i="5" src="/assets/shots/metrics.png"    width="1950" height="1260" loading="lazy" alt="Metrics">
+                <img class="sc-img"    data-i="6" src="/assets/shots/reports.png"    width="1950" height="1260" loading="lazy" alt="Reports">
+                <img class="sc-img"    data-i="7" src="/assets/shots/job-editor.png" width="1950" height="1260" loading="lazy" alt="Job editor">
+              </div>
+            </div>
+            <p class="sc-cap" id="scCap"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- mobile showcase -->
+    <section id="mobile">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="kick">On every device</div>
+          <h2>Your whole pipeline, in your pocket.</h2>
+          <p>Fully responsive — the board, the list and the dashboard all reflow for a phone. Open a link and you're in, no app to install.</p>
+        </div>
+        <div class="phones">
+          <div class="phone reveal"><div class="dev"><img src="/assets/shots/m-dashboard.png" width="780" height="1688" loading="lazy" alt="Dashboard on mobile"></div><span>Dashboard</span></div>
+          <div class="phone reveal"><div class="dev"><img src="/assets/shots/m-jobs.png" width="780" height="1688" loading="lazy" alt="Jobs on mobile"></div><span>Jobs — card list</span></div>
+          <div class="phone reveal"><div class="dev"><img src="/assets/shots/m-board.png" width="780" height="1688" loading="lazy" alt="Board on mobile"></div><span>Board</span></div>
         </div>
       </div>
     </section>
@@ -234,6 +270,45 @@
     } else reveals.forEach(el=>el.classList.add('in'));
 
     // No access tokens are published on this site — the app gate handles access.
+
+    // Interactive screenshot showcase: tabs swap the framed image + caption,
+    // with a gentle autoplay that pauses on interaction / hover / reduced motion.
+    (function(){
+      const tabs=[...document.querySelectorAll('.sc-tab')];
+      const imgs=[...document.querySelectorAll('.sc-img')];
+      const cap=document.getElementById('scCap');
+      if(!tabs.length||!imgs.length) return;
+      const CAPS=[
+        '<b>Dashboard.</b> A time-aware greeting, live KPIs, status-at-a-glance and your recent jobs — the whole shop in one screen.',
+        '<b>Jobs.</b> Every job in a sortable, filterable list with saved views and one-click export to CSV, Excel or JSON.',
+        '<b>Board.</b> A drag-and-drop Kanban by status — move a card and the job updates, with rush flags and due-date aging.',
+        '<b>Calendar.</b> Everything by due date, so a deadline never sneaks up on you.',
+        '<b>Timeline.</b> A Gantt-style view of the whole pipeline, with milestones and a live “today” line.',
+        '<b>Metrics.</b> Cycle time, throughput per month, on-time delivery and workload per person — computed live.',
+        '<b>Reports.</b> The end-of-year report, generated: KPIs with trends and breakdowns by client and owner, ready to export or print.',
+        '<b>Job editor.</b> Rich details, comments, a checklist, milestones, attachments and a lightweight approval flow — all in one sheet.',
+      ];
+      let cur=0, timer=null;
+      const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function show(i){
+        cur=i;
+        tabs.forEach(t=>{const on=+t.dataset.i===i;t.classList.toggle('on',on);t.setAttribute('aria-selected',on);});
+        imgs.forEach(m=>m.classList.toggle('on',+m.dataset.i===i));
+        cap.innerHTML=CAPS[i]||'';
+      }
+      function stop(){ if(timer){clearInterval(timer);timer=null;} }
+      function play(){ if(reduce||timer) return; timer=setInterval(()=>show((cur+1)%tabs.length),4500); }
+      tabs.forEach(t=>t.addEventListener('click',()=>{ stop(); show(+t.dataset.i); }));
+      const sc=document.getElementById('showcase');
+      sc.addEventListener('mouseenter',stop); sc.addEventListener('mouseleave',play);
+      sc.addEventListener('focusin',stop);
+      show(0);
+      // start autoplay only once the showcase scrolls into view
+      if('IntersectionObserver' in window){
+        const o=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){play();} else {stop();} }),{threshold:.3});
+        o.observe(sc);
+      } else play();
+    })();
   </script>
 </body>
 </html>
