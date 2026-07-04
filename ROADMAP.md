@@ -52,12 +52,13 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       segmented control (already mostly there via horizontal-scroll tabs);
       remaining ≥44px tap target audit; safe-area insets. The smoke test now
       runs a 390px pass — extend per view.
-- [ ] **Marketing site: real media — screenshots, carousel, video.** Replace the
-      single CSS mock with a swipeable screenshot gallery (dashboard, board,
-      calendar, job editor, metrics), an autoplaying muted looping hero demo video
-      (or animated GIF/APNG), per-feature preview images, and a light/dark preview
-      toggle. Self-hosted only. Generate screenshots from the live app (Playwright)
-      so they stay current.
+- [x] **Marketing site: real media — screenshots, carousel, video.** ✅ Shipped —
+      the hero now frames a real dashboard capture; a "See it in action" section
+      tabs through eight real views (Dashboard, Jobs, Board, Calendar, Timeline,
+      Metrics, Reports, Job editor) with autoplay that pauses on hover and
+      respects reduced-motion; an "On every device" section shows the
+      responsive dashboard/jobs/board in phone frames. Self-hosted PNGs under
+      `assets/shots`, lazy-loaded.
 
 ### ⭐ Requested by the owner (do these first)
 - [x] **Simplify & reorganize the job editor.** ✅ Shipped — the Details tab's
@@ -140,7 +141,14 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       filter narrow what's plotted. Jobs with only one date, or no due date
       yet (drawn open-ended with a trailing arrow), still show up.
 - [ ] **Column drag-to-reorder & resize** in the inventory table; sticky first column.
-- [ ] **Inline cell editing** in the inventory list (edit without opening a job).
+- [x] **Inline cell editing** ✅ Shipped — in the desktop/tablet Jobs table, click
+      (or focus + Enter) a Name, Type, Client, Status, Priority, Owner, Assignee,
+      Due date or Rush cell to edit it right there — a live input/select/date
+      picker swaps in, commits on blur/Enter, cancels on Escape. Status still
+      honors the workflow's "can move to" rules with a confirmation for unusual
+      transitions, and still fires the completion confetti. The mobile card
+      list is unchanged (tap still opens the job) since a full-width control
+      doesn't suit a card.
 - [ ] **Saved view sharing** via token links; per-view default sort/columns polish.
 - [x] **Command palette actions** ✅ Shipped — the `/` palette now has a
       **Jobs / Commands** toggle (press `Tab`, or type `>` to jump straight

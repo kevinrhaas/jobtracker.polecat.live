@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" data-palette="ada" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <meta name="description" content="Agency Job Tracker — the agency creative job console. Track, manage, and deliver marketing jobs end to end."/>
+  <meta name="theme-color" content="#0a0f1a"/>
+  <title>Agency Job Tracker</title>
+  <link rel="icon" type="image/svg+xml" href="/v/19/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/v/19/favicon.svg"/>
+  <link rel="manifest" href="/manifest.json"/>
+  <link rel="stylesheet" href="/v/19/css/styles.css"/>
+  <!-- Apply saved theme + reduced-motion before first paint to avoid a flash. -->
+  <script>
+    (function(){try{
+      var raw=localStorage.getItem('jt.theme.v1')||'ada:dark';
+      var parts=raw.split(':'), palette=parts[0]||'ada', mode=parts[1]||'dark';
+      if(mode==='system') mode=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
+      var r=document.documentElement;
+      r.setAttribute('data-palette',palette); r.setAttribute('data-theme',mode);
+      var cfg=JSON.parse(localStorage.getItem('jt.workspace')||'{}');
+      if(cfg&&cfg.config&&cfg.config.settings&&cfg.config.settings.reduceMotion) r.setAttribute('data-reduce-motion','1');
+    }catch(e){}})();
+  </script>
+</head>
+<body>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div id="app"></div>
+  <div id="toasts"></div>
+  <script type="module" src="/v/19/js/app.js"></script>
+  <script>
+    // Offline app shell — scoped to /app/ only so it never shadows the
+    // marketing site or archived /v/<n>/ build snapshots.
+    if('serviceWorker' in navigator){
+      window.addEventListener('load', ()=>{
+        navigator.serviceWorker.register('/sw.js', { scope:'/app/' }).catch(()=>{});
+      });
+    }
+  </script>
+<div id="__archived" role="status" style="position:fixed;left:0;right:0;bottom:0;z-index:2147483000;display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;padding:8px 16px;font:600 13px -apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;color:#fff;background:linear-gradient(135deg,#fbbf24,#d97706);box-shadow:0 -6px 20px rgba(0,0,0,.25)">
+  <span>You're viewing <b>v19</b> — an archived build</span>
+  <label style="display:flex;align-items:center;gap:6px;font:inherit">Switch to
+    <select id="__vsel" style="font:600 13px -apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;color:#2a1c00;background:#fff;border:1px solid rgba(0,0,0,.15);border-radius:8px;padding:4px 8px;cursor:pointer"><option>Latest</option></select>
+  </label>
+  <button id="__vlatest" style="cursor:pointer;border:1px solid rgba(255,255,255,.55);background:rgba(255,255,255,.22);color:#fff;border-radius:8px;padding:5px 12px;font:600 13px -apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif">Return to latest</button>
+</div>
+<script>(function(){var CUR=19;
+function pin(p){try{var k='jt.workspace',d=JSON.parse(localStorage.getItem(k)||'{}');if(d&&d.config&&d.config.settings){d.config.settings.pinnedVersion=p;localStorage.setItem(k,JSON.stringify(d));}}catch(e){}}
+document.getElementById('__vlatest').onclick=function(){pin('current');location.href='/app/';};
+var sel=document.getElementById('__vsel');
+fetch('/releases.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(list){
+  if(!Array.isArray(list)||!list.length)return; list.sort(function(a,b){return b.v-a.v;});
+  var top=list[0]; sel.innerHTML='';
+  var o=document.createElement('option'); o.value='/app/'; o.textContent='Latest (v'+top.v+')'; sel.appendChild(o);
+  list.forEach(function(r){var op=document.createElement('option'); op.value=r.path; op.textContent='v'+r.v+(r.v===CUR?' — current':''); sel.appendChild(op);});
+  sel.value='/v/'+CUR+'/app/';
+  sel.onchange=function(){var p=sel.value; pin(p==='/app/'?'current':p); location.href=p;};
+}).catch(function(){});
+})();</script>
+</body>
+</html>

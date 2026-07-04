@@ -1,5 +1,11 @@
 [
   {
+    "v": 19,
+    "title": "Inline cell editing in the Jobs table",
+    "date": "Jul 4, 2026, 1:37 AM CT",
+    "path": "/v/19/app/"
+  },
+  {
     "v": 18,
     "title": "Fixed the blank dashboard on iPhone / iOS",
     "date": "Jul 4, 2026, 12:43 AM CT",
