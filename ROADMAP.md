@@ -280,11 +280,14 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
   to see (and jump straight into) the jobs due, without leaving Metrics.
   Complements the existing per-person workload bars — nothing new to store,
   purely derived from `Store.jobs()`.
-- **"Since you've been away" digest** — a one-time card on the dashboard after
-  a gap in usage (say, >3 days since last open) summarizing what changed:
-  jobs that moved status, new comments, approvals resolved. Everything needed
-  (job history + `updatedAt`) already exists; purely a derived read like the
-  notifications feed.
+- [x] **"Since you've been away" digest** ✅ Shipped — after a gap of 3+ days
+  since the dashboard was last open, a dismissible card summarizes what
+  changed while away: status moves, new comments, approvals resolved, and new
+  jobs created, each row jumping straight to the job. Computed live from the
+  existing audit trail (`Store.audit()`); the only new state is a UI-only
+  "last seen" timestamp in its own localStorage key (`jt.lastSeen`), same
+  pattern as the streak-celebration flag — nothing added to the workspace
+  schema.
 - [x] **Board WIP limits** ✅ Shipped — each status in **Settings → Pick
   lists → Statuses** now has an optional numeric "WIP #" field (blank =
   unlimited) next to the existing "Can move to" workflow button. Leaving it

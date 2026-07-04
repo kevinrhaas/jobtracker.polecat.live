@@ -1,5 +1,11 @@
 [
   {
+    "v": 26,
+    "title": "Focus mode: a calm, deep-linkable single-job view",
+    "date": "Jul 4, 2026, 7:22 AM CT",
+    "path": "/v/26/app/"
+  },
+  {
     "v": 25,
     "title": "Focus mode: a calm, deep-linkable single-job view",
     "date": "Jul 4, 2026, 6:57 AM CT",
@@ -136,11 +142,5 @@
     "title": "Version switcher — flip between released builds",
     "date": "Jul 3, 2026, 1:30 PM CT",
     "path": "/v/3/app/"
-  },
-  {
-    "v": 2,
-    "title": "Neutral branding + public-site SEO",
-    "date": "Jul 3, 2026, 12:45 PM CT",
-    "path": "/v/2/app/"
   }
 ]
