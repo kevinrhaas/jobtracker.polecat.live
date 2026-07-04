@@ -152,8 +152,16 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       reachable from the palette's command list and hint bar.
 
 ### Reporting
-- [ ] **End-of-year report generator** — the report Lee builds manually: summary
-      stats, by-division/type breakdowns, exportable to Excel/PDF-via-print.
+- [x] **End-of-year report generator** ✅ Shipped — a new **Reports** nav
+      section: pick a period (This/Last year, This/Last quarter, This month,
+      Last 12 months, All time, or a Custom month range) and get a summary of
+      what shipped — KPIs (completed, created, on-time %, avg cycle time, rush
+      share) each with a trend arrow vs. the equivalent prior period, bar-chart
+      breakdowns by type/division/client/owner (click a bar to open that slice
+      in Jobs), and a monthly completed-jobs chart. Export via **Copy summary**
+      (plain text), **Export Excel** (.xls, KPIs + every breakdown table), or
+      **Print report** (clean print stylesheet, Save-as-PDF from the browser).
+      Everything is computed live from Store.jobs() — nothing new to store.
 - [ ] **Custom KPI builder** + savable dashboards.
 - [x] **In-app notifications feed** ✅ Shipped — a bell in the top bar with a live
       unread count surfaces overdue jobs, jobs due within 2 days, approval
