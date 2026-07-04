@@ -1,5 +1,11 @@
 [
   {
+    "v": 35,
+    "title": "Quick add: create a job from plain text",
+    "date": "Jul 4, 2026, 12:21 PM CT",
+    "path": "/v/35/app/"
+  },
+  {
     "v": 34,
     "title": "Smart duplicate detection when naming a job",
     "date": "Jul 4, 2026, 11:45 AM CT",
@@ -136,11 +142,5 @@
     "title": "Timeline — a Gantt view of your jobs",
     "date": "Jul 3, 2026, 6:47 PM CT",
     "path": "/v/12/app/"
-  },
-  {
-    "v": 11,
-    "title": "Confetti on completion + a themed prompt dialog",
-    "date": "Jul 3, 2026, 6:24 PM CT",
-    "path": "/v/11/app/"
   }
 ]

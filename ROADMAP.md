@@ -305,7 +305,17 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 ---
 
 ## 💡 Idea parking lot
-- Natural-language quick-add ("rush social post for Membership due Friday").
+- [x] **Natural-language quick-add** ✅ Shipped — a wand icon in the top bar
+  (press `Q`, or "Quick add a job…" in the command palette) opens a single
+  text field: type something like *"rush social post for Membership due
+  Friday"* and a live preview shows the type, client/campaign, due date and
+  rush flag it picked out as you go, using the workspace's own pick lists
+  (fuzzy-matched, so renamed types/clients still resolve) and a small
+  hand-rolled date parser (weekdays, "in N days", "end of month", explicit
+  dates — no dependency). Hitting Enter or "Create job" hands off to the
+  normal new-job flow (still opens the full editor afterward, confetti/
+  duplicate-detection and all) with whatever it inferred pre-filled — nothing
+  here is final, it's just a head start. Leftover words become the job name.
 - Client/requester portal (read-only status via token).
 - Time tracking per job; capacity planning.
 - Slack/email digest export (copy-to-clipboard summaries).
