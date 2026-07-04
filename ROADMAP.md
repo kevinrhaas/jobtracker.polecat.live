@@ -335,10 +335,19 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
   commands and jobs in a fixed order; ranking by recency + frequency of use
   (a small localStorage tally, no new schema) would make the 2nd and 3rd
   keystrokes far more often land on the right result.
-- **Recurring jobs** — let a job template repeat on a cadence (weekly
-  newsletter, monthly report, annual renewal) so a fresh instance auto-seeds
-  itself (with the same checklist/type/owner) a configurable number of days
-  before the next due date, instead of someone remembering to clone it.
+- [x] **Recurring jobs** ✅ Shipped — the job editor's Details tab (full mode)
+  gained a **Recurring** section: a "Repeat this job" toggle (needs a due
+  date), a cadence (Weekly / Every 2 weeks / Monthly / Quarterly / Annually),
+  and "create next occurrence N days before due" lead time. Once today
+  crosses that trigger point, the next occurrence auto-spawns — same type,
+  owner, division, campaign and checklist, milestones shifted by the same
+  interval — with a toast on load and an audit-trail entry on both jobs. A
+  `spawnedNextId` flag stops a job from spawning twice; the clone carries a
+  fresh copy of the recurrence config so the chain continues indefinitely. A
+  "Repeats" chip shows in the job hero, and the section links straight to
+  the already-created next occurrence once one exists. Manually duplicating
+  a job (the hero's clone button) does *not* carry recurrence forward, so
+  duplicating a recurring job never accidentally starts a second series.
 - **Board card "quiet hours" auto-collapse** — a column that's been at zero
   WIP-limit overage and untouched for N days could offer to collapse itself
   (like the rail nav already does) so a board with 10+ statuses stays scannable
