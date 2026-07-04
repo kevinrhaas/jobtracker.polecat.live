@@ -56,10 +56,19 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       rotating the device needs no rerender, same trick as the inventory
       card list), and picking a view explicitly via the toggle overrides that
       at any width, remembered in localStorage.
+      [x] **Safe-area insets** ✅ Shipped — every full-bleed fixed surface (the
+      app shell `#app`, the mobile slide-out rail + its collapse toggle, the
+      login gate, Focus mode, the mobile full-screen modal sheet, toast stack
+      and the "viewing an archived release" bar) now pads itself with
+      `env(safe-area-inset-*)`, so installed as a home-screen PWA on a
+      notched/home-indicator phone (portrait or landscape), nothing sits
+      under the status bar, the camera cutout, or the swipe-up gesture area.
+      Resolves to `0px` with no visual change on any device without insets
+      (desktop, older phones, plain browser tabs), so nothing to test there.
       Still to do: board columns swipeable with snap; filter bar as a bottom
       sheet; settings nav as a scrollable segmented control (already mostly
-      there via horizontal-scroll tabs); remaining ≥44px tap target audit;
-      safe-area insets. The smoke test now runs a 390px pass — extend per view.
+      there via horizontal-scroll tabs); remaining ≥44px tap target audit.
+      The smoke test now runs a 390px pass — extend per view.
 - [x] **Marketing site: real media — screenshots, carousel, video.** ✅ Shipped —
       the hero now frames a real dashboard capture; a "See it in action" section
       tabs through eight real views (Dashboard, Jobs, Board, Calendar, Timeline,
@@ -272,8 +281,16 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       once at least one job finishes this calendar week, reusing `celebrate()`;
       clicking it re-fires the confetti, and it auto-celebrates once per week
       the first time it appears.
-- [ ] Smooth board reflow when cards move between columns (currently an
-      instant re-render).
+- [x] **Smooth board reflow when cards move between columns** ✅ Shipped — the
+      Board now uses a small FLIP (First-Last-Invert-Play) helper: before a
+      re-render it snapshots every visible card's on-screen rect, then after
+      rebuilding, any card that landed somewhere new is nudged back to its old
+      spot and eased into place with a transform transition, instead of
+      instantly popping into its new column/position. Applies to drag-drop,
+      the ◀ ▶ buttons, Shift+←/→ keyboard moves, and toolbar filter changes.
+      Automatically degrades to the old instant jump under the OS or in-app
+      "reduce motion" setting since both already force `transition:none` /
+      near-zero durations globally — no extra motion-preference check needed.
 - [x] **Empty-state illustrations per section** ✅ Shipped — a new
       `js/illustrations.js` draws small themed SVG "hero" scenes (a rocket for
       the dashboard's first run, kanban lanes with a card in flight for the
@@ -402,3 +419,27 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
   remembered per saved view alongside columns/sort — compact rows would help
   the "virtualize very large lists" backlog item feel less urgent for
   mid-size workspaces (200–1000 jobs) even before virtualization lands.
+- **"Board FLIP" everywhere** — now that the Board eases cards into their new
+  position instead of popping (see Polish backlog), the same tiny FLIP helper
+  could animate Jobs table rows re-sorting/re-filtering, Campaign cards
+  reordering, and Timeline bars shifting zoom levels — one small shared
+  utility (`js/ui.js`) instead of one bespoke copy per view.
+- **Board columns as a horizontal snap-scroll on phones** — one column at a
+  time, full-bleed width, with a small dot/segment indicator and swipe
+  left/right between statuses (CSS scroll-snap, no JS gesture library) —
+  the natural mobile counterpart to the "Inventory table → card list" and
+  "Calendar agenda mode" work already shipped.
+- **Ambient "today" nudge on the Dashboard** — a small, dismissible-per-day
+  card surfacing the single most time-sensitive thing (the most overdue job,
+  or the nearest rush due today) right under the KPIs — a lighter-weight,
+  always-on companion to the existing "since you've been away" digest, for
+  days when nothing eventful happened but something is still due today.
+- **Cross-job dependency links** — an optional "blocked by / blocks" link
+  between two jobs (a searchable picker on the Details tab), surfaced as a
+  small chip on the card/row and a warning if you try to move a blocked job
+  into an in-progress/done status — useful for agencies where one deliverable
+  (e.g. photography) gates another (e.g. the print ad using it).
+- **Theming: per-workspace accent color picker** (already parked above) could
+  extend to a small built-in palette gallery (5–6 curated accent pairs beyond
+  the two brand palettes) so a workspace can feel distinct without anyone
+  having to pick raw hex values.
