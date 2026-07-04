@@ -39,6 +39,14 @@ understand where things stand, then do **one substantial iteration**.
   and a11y issues, and **reflect**: update `ROADMAP.md` with new ambitious,
   groundbreaking, fun ideas. Still ship a visible improvement.
 
+## Marketing screenshots
+The public site's screenshot carousel and phone shots are **real captures of the
+app**, regenerated automatically at deploy time by `.github/gen-shots.mjs` — you
+do **not** need to (and should not) commit PNGs. If you add a **major new
+top-level view** worth showing off, add it to the `DESKTOP` list in
+`gen-shots.mjs` AND a matching tab + `<img>` + caption to the showcase in
+`index.html`. If you restructure the marketing site, keep it in sync with the generator.
+
 ## Every run must end green
 1. If you touched `js/changelog.js`, run `node .github/stamp-changelog.mjs`.
 2. Run the smoke test: `node .github/smoke-test.mjs`. It must pass (marketing +

@@ -125,6 +125,15 @@ jobs:
           if [ "$pushed" != true ]; then echo "Could not push to main after retries"; exit 1; fi
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
+      # Keep the marketing site's screenshots in lock-step with the app as it
+      # evolves. Regenerated into the Pages artifact (working tree) but NOT
+      # committed — so the live site always matches the just-built app without
+      # adding ~3 MB of PNGs to git history every single hour. Non-fatal: a
+      # flaky capture falls back to the committed baseline screenshots.
+      - name: Refresh marketing screenshots
+        if: steps.commit.outputs.changed == 'true'
+        run: node .github/gen-shots.mjs || echo "gen-shots failed; keeping committed baseline screenshots"
+
       # Deploy Pages ourselves (the bot's push to main won't trigger deploy.yml).
       - name: Prepare artifact
         if: steps.commit.outputs.changed == 'true'
