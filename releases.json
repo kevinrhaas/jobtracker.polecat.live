@@ -1,5 +1,11 @@
 [
   {
+    "v": 27,
+    "title": "Polish: illustrated empty states across the app",
+    "date": "Jul 4, 2026, 7:59 AM CT",
+    "path": "/v/27/app/"
+  },
+  {
     "v": 26,
     "title": "Focus mode: a calm, deep-linkable single-job view",
     "date": "Jul 4, 2026, 7:22 AM CT",
@@ -136,11 +142,5 @@
     "title": "Media-type filter + a tidier filter bar",
     "date": "Jul 3, 2026, 1:48 PM CT",
     "path": "/v/4/app/"
-  },
-  {
-    "v": 3,
-    "title": "Version switcher — flip between released builds",
-    "date": "Jul 3, 2026, 1:30 PM CT",
-    "path": "/v/3/app/"
   }
 ]

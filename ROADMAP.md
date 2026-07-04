@@ -238,8 +238,19 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       the first time it appears.
 - [ ] Smooth board reflow when cards move between columns (currently an
       instant re-render).
-- [ ] Empty-state illustrations per section (small inline SVGs instead of the
-      shared generic icon-in-a-circle empty state).
+- [x] **Empty-state illustrations per section** ✅ Shipped — a new
+      `js/illustrations.js` draws small themed SVG "hero" scenes (a rocket for
+      the dashboard's first run, kanban lanes with a card in flight for the
+      Board, a gantt bar with a "today" marker for Timeline, a flag with
+      linked-job dots for Campaigns, a folder for Documents, bar charts for
+      Metrics/Reports, a calendar grid, and a locked shield for Admin) in
+      place of the generic icon-in-a-circle, for every section's true
+      "nothing here yet" state. Every shape is drawn purely with the app's
+      CSS custom properties, so it repaints correctly across all six themes
+      for free — nothing new to store, and lighter filtered/no-match empties
+      (e.g. "no cards match", "no attachments match your search") keep the
+      smaller icon treatment since they're a quick nudge, not a first-run
+      moment.
 - [ ] Performance: virtualize very large lists/boards (>1000 jobs).
 - [x] **Focus hygiene for anchored popovers** ✅ Shipped — `modal()` already
       trapped Tab and restored focus to the trigger on close, but the three
@@ -307,3 +318,19 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
   commands and jobs in a fixed order; ranking by recency + frequency of use
   (a small localStorage tally, no new schema) would make the 2nd and 3rd
   keystrokes far more often land on the right result.
+- **Recurring jobs** — let a job template repeat on a cadence (weekly
+  newsletter, monthly report, annual renewal) so a fresh instance auto-seeds
+  itself (with the same checklist/type/owner) a configurable number of days
+  before the next due date, instead of someone remembering to clone it.
+- **Board card "quiet hours" auto-collapse** — a column that's been at zero
+  WIP-limit overage and untouched for N days could offer to collapse itself
+  (like the rail nav already does) so a board with 10+ statuses stays scannable
+  without everyone having to manually manage column width.
+- **Relative due-date entry** ("in 3 days", "next Friday", "end of month") for
+  the Due Date / Date In fields, parsed client-side with a tiny hand-rolled
+  parser (no dependency) and a live preview of the resolved date — quicker
+  than opening the date picker for the common cases.
+- **Per-view row density toggle** (comfortable / compact) for the Jobs table,
+  remembered per saved view alongside columns/sort — compact rows would help
+  the "virtualize very large lists" backlog item feel less urgent for
+  mid-size workspaces (200–1000 jobs) even before virtualization lands.
