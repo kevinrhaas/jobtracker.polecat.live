@@ -1,5 +1,11 @@
 [
   {
+    "v": 33,
+    "title": "Calendar: an Agenda view for mobile",
+    "date": "Jul 4, 2026, 11:17 AM CT",
+    "path": "/v/33/app/"
+  },
+  {
     "v": 32,
     "title": "One name everywhere: “JobTracker”",
     "date": "Jul 4, 2026, 10:49 AM CT",
@@ -136,11 +142,5 @@
     "title": "Command palette + keyboard shortcut cheat-sheet",
     "date": "Jul 3, 2026, 5:44 PM CT",
     "path": "/v/10/app/"
-  },
-  {
-    "v": 9,
-    "title": "Mobile polish — nav, topbar & full-screen job sheet",
-    "date": "Jul 3, 2026, 5:11 PM CT",
-    "path": "/v/9/app/"
   }
 ]

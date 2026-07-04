@@ -47,11 +47,19 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       table, so bulk edit keeps working unchanged. Pure CSS toggle (both are
       rendered, one hidden per breakpoint) — no JS resize listener, survives
       device rotation for free.
-      Still to do: board columns swipeable with snap; calendar compact/agenda
-      mode; filter bar as a bottom sheet; settings nav as a scrollable
-      segmented control (already mostly there via horizontal-scroll tabs);
-      remaining ≥44px tap target audit; safe-area insets. The smoke test now
-      runs a 390px pass — extend per view.
+      [x] **Calendar: compact/agenda mode** ✅ Shipped — the Calendar's header
+      gained a Month/Agenda segmented toggle. Agenda flattens the month's due
+      dates + milestones into a day-grouped scrolling list (today's section
+      highlighted, tap straight into a job) instead of the 7-column grid,
+      which cramps badly under ~400px. Both views render every time; a pure
+      CSS media query picks Agenda under 700px and Month above by default (so
+      rotating the device needs no rerender, same trick as the inventory
+      card list), and picking a view explicitly via the toggle overrides that
+      at any width, remembered in localStorage.
+      Still to do: board columns swipeable with snap; filter bar as a bottom
+      sheet; settings nav as a scrollable segmented control (already mostly
+      there via horizontal-scroll tabs); remaining ≥44px tap target audit;
+      safe-area insets. The smoke test now runs a 390px pass — extend per view.
 - [x] **Marketing site: real media — screenshots, carousel, video.** ✅ Shipped —
       the hero now frames a real dashboard capture; a "See it in action" section
       tabs through eight real views (Dashboard, Jobs, Board, Calendar, Timeline,
