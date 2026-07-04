@@ -1,5 +1,5 @@
 {
-  "name": "Agency Job Tracker",
+  "name": "JobTracker",
   "short_name": "Job Tracker",
   "description": "Track, manage, and deliver marketing jobs end to end — the agency creative job console.",
   "start_url": "/app/",

@@ -1,4 +1,4 @@
-# Agency Job Tracker — creative job console
+# JobTracker — creative job console
 
 A delightful, **local-first** console for a marketing & creative agency
 team to track, manage, and deliver marketing jobs end to end — from
