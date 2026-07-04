@@ -38,11 +38,20 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 
 - [ ] **Radically improve mobile across the whole app.** Test every screen at
       360–430px. Immediate fixes shipped (marketing brand wrap, topbar crowding,
-      full-screen job sheet, letter shown with the job #). Do a thorough pass:
-      inventory table → card list on phones (or sticky first column); board columns
-      swipeable with snap; calendar compact/agenda mode; filter bar as a bottom
-      sheet; settings nav as a scrollable segmented control; ≥44px tap targets;
-      safe-area insets. The smoke test now runs a 390px pass — extend per view.
+      full-screen job sheet, letter shown with the job #).
+      [x] **Inventory table → card list on phones** ✅ Shipped — under ~700px the
+      Jobs table is replaced by a stacked card list (icon, name, job #, status,
+      rush flag, due date with age dot, client/owner), each card opening the job
+      on tap with a 44px "more actions" kebab (Open/Clone/Favorite/Delete) and a
+      44px-tall checkbox hit-area wired into the same selection Set as the
+      table, so bulk edit keeps working unchanged. Pure CSS toggle (both are
+      rendered, one hidden per breakpoint) — no JS resize listener, survives
+      device rotation for free.
+      Still to do: board columns swipeable with snap; calendar compact/agenda
+      mode; filter bar as a bottom sheet; settings nav as a scrollable
+      segmented control (already mostly there via horizontal-scroll tabs);
+      remaining ≥44px tap target audit; safe-area insets. The smoke test now
+      runs a 390px pass — extend per view.
 - [ ] **Marketing site: real media — screenshots, carousel, video.** Replace the
       single CSS mock with a swipeable screenshot gallery (dashboard, board,
       calendar, job editor, metrics), an autoplaying muted looping hero demo video
