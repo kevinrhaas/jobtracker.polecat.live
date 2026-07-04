@@ -334,9 +334,14 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
   existing job never leaves an orphaned duplicate behind — anything with real
   content is always left alone. Dismissing the suggestion for the current text
   won't nag again until the name changes further.
-- **Keyboard-only board mode** — arrow keys to move focus between cards, a
-  single keypress to cycle a focused card through statuses, so power users
-  never need the mouse for triage.
+- [x] **Keyboard-only board mode** ✅ Shipped — a focused Board card now
+  responds to ↑/↓ to move focus to the next/previous card in the same
+  column, and ←/→ to jump into the adjacent column at the same row.
+  `Shift`+←/→ moves the focused card to that adjacent status (same rules,
+  confirmation and confetti as dragging or the ◀ ▶ buttons) and keeps
+  keyboard focus on it in its new column, so a whole triage pass — reading
+  a card, deciding, moving it — never needs the mouse. Documented in the
+  `?` shortcut sheet's new "Board" group and in the in-app Views docs.
 - [x] **Workload heatmap** ✅ Shipped — Metrics' "Workload heatmap" card grids
   the top 8 people by active workload against a 21-day window, one cell per
   person per day, colored by how many active jobs they have due that day

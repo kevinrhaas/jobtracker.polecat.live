@@ -1,5 +1,11 @@
 [
   {
+    "v": 36,
+    "title": "Keyboard-only board mode",
+    "date": "Jul 4, 2026, 12:42 PM CT",
+    "path": "/v/36/app/"
+  },
+  {
     "v": 35,
     "title": "Quick add: create a job from plain text",
     "date": "Jul 4, 2026, 12:21 PM CT",
@@ -136,11 +142,5 @@
     "title": "Status workflow rules — a heads-up on unusual moves",
     "date": "Jul 3, 2026, 7:18 PM CT",
     "path": "/v/13/app/"
-  },
-  {
-    "v": 12,
-    "title": "Timeline — a Gantt view of your jobs",
-    "date": "Jul 3, 2026, 6:47 PM CT",
-    "path": "/v/12/app/"
   }
 ]
