@@ -107,8 +107,23 @@ async function checkPage(browser, url, mustFind, label){
       const body=document.querySelector('.modal-body');
       return (m.width>innerWidth+1) || (body && body.scrollWidth>body.clientWidth+1);
     })) throw new Error('mobile: job editor modal is wider than the 390px viewport');
+    // The dashboard (and every primary view) must render VISIBLE content on
+    // mobile — not just exist in the DOM. Catches blank-screen regressions.
+    for(const sec of ['home','inventory','board','calendar','metrics']){
+      await mp.evaluate(s=>location.hash=s, sec); await mp.waitForTimeout(450);
+      const blank = await mp.evaluate(()=>{
+        const v=document.querySelector('#view'); if(!v||!v.childElementCount) return 'empty #view';
+        // any real, painted element occupying visible space in the viewport
+        const vis=[...v.querySelectorAll('*')].some(e=>{
+          const r=e.getBoundingClientRect();
+          return r.height>=24 && r.width>=60 && r.top<innerHeight && r.bottom>44;
+        });
+        return vis ? null : 'no visible content in viewport';
+      });
+      if(blank) throw new Error(`mobile: ${sec} shows ${blank}`);
+    }
     if(mobErrs.length) throw new Error('mobile console errors:\n  '+mobErrs.join('\n  '));
-    console.log('✓ mobile (390px): nav, topbar and job sheet all fit');
+    console.log('✓ mobile (390px): nav/topbar/sheet fit + every view renders visible content');
     await mp.close();
 
     console.log('\n✅ smoke test passed');

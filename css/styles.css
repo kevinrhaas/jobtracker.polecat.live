@@ -880,3 +880,18 @@ input[type=color].color-input{width:34px;height:30px;flex:none;padding:2px;borde
   .job-hero{flex-wrap:wrap;gap:12px}
   .job-hero .jh-actions{width:100%;justify-content:flex-start;flex-wrap:wrap}
 }
+
+/* =========================================================================
+   iOS Safari mobile stability. A position:fixed element with mix-blend-mode
+   (the aurora) can be mis-composited on top of the scrolling view on iOS,
+   hiding all content behind it (the screen looks blank with only the gradient
+   showing). On phones we drop the aurora — the solid --bg reads clean and it's
+   faster — and we isolate #main so views always paint in their own layer.
+   Also use the dynamic viewport height so 100vh doesn't overshoot on iOS.
+   ========================================================================= */
+#main{isolation:isolate}
+@supports (height:100dvh){ #app{height:100dvh} }
+@media (max-width:820px){
+  .aurora{display:none}
+  #main{background:var(--bg)}
+}
