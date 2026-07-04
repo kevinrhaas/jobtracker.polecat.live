@@ -65,10 +65,12 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       under the status bar, the camera cutout, or the swipe-up gesture area.
       Resolves to `0px` with no visual change on any device without insets
       (desktop, older phones, plain browser tabs), so nothing to test there.
-      Still to do: board columns swipeable with snap; filter bar as a bottom
-      sheet; settings nav as a scrollable segmented control (already mostly
-      there via horizontal-scroll tabs); remaining ≥44px tap target audit.
-      The smoke test now runs a 390px pass — extend per view.
+      [x] **Board columns swipeable with snap** ✅ Shipped — see the Idea
+      parking lot entry below.
+      Still to do: filter bar as a bottom sheet; settings nav as a scrollable
+      segmented control (already mostly there via horizontal-scroll tabs);
+      remaining ≥44px tap target audit. The smoke test now runs a 390px
+      pass — extend per view.
 - [x] **Marketing site: real media — screenshots, carousel, video.** ✅ Shipped —
       the hero now frames a real dashboard capture; a "See it in action" section
       tabs through eight real views (Dashboard, Jobs, Board, Calendar, Timeline,
@@ -424,11 +426,18 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
   could animate Jobs table rows re-sorting/re-filtering, Campaign cards
   reordering, and Timeline bars shifting zoom levels — one small shared
   utility (`js/ui.js`) instead of one bespoke copy per view.
-- **Board columns as a horizontal snap-scroll on phones** — one column at a
-  time, full-bleed width, with a small dot/segment indicator and swipe
-  left/right between statuses (CSS scroll-snap, no JS gesture library) —
-  the natural mobile counterpart to the "Inventory table → card list" and
-  "Calendar agenda mode" work already shipped.
+- [x] **Board columns as a horizontal snap-scroll on phones** ✅ Shipped —
+  under ~700px the Board's columns become a one-at-a-time, full-bleed
+  horizontal snap-scroll (pure CSS `scroll-snap-type`/`scroll-snap-align`,
+  no gesture library), replacing the desktop legend with a live label
+  ("In Review · 3 jobs") plus a row of tappable dots — one per visible
+  status, colored to match — above the board. Tapping a dot smooth-scrolls
+  straight to that column; swiping between columns keeps the label and
+  active dot in sync via a lightweight scroll listener. Degrades to instant
+  jumps under reduce-motion. Desktop is untouched (legend + narrow columns,
+  dots row stays `display:none`) — the natural mobile counterpart to the
+  "Inventory table → card list" and "Calendar agenda mode" work already
+  shipped.
 - **Ambient "today" nudge on the Dashboard** — a small, dismissible-per-day
   card surfacing the single most time-sensitive thing (the most overdue job,
   or the nearest rush due today) right under the KPIs — a lighter-weight,
