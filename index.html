@@ -153,8 +153,8 @@
       <div class="wrap">
         <div class="sec-head">
           <div class="kick">See it in action</div>
-          <h2>Eight views of the same work, one click apart.</h2>
-          <p>These are real screenshots — no marketing mock-ups. Tap a view to explore the actual app.</p>
+          <h2>Every screen, one click apart.</h2>
+          <p>These are real screenshots — no marketing mock-ups. Click through, or use the arrows, to explore the actual app.</p>
         </div>
         <div class="showcase reveal">
           <div class="sc-tabs" role="tablist" aria-label="App views">
@@ -165,23 +165,31 @@
             <button class="sc-tab" role="tab" data-i="4">Timeline</button>
             <button class="sc-tab" role="tab" data-i="5">Metrics</button>
             <button class="sc-tab" role="tab" data-i="6">Reports</button>
-            <button class="sc-tab" role="tab" data-i="7">Editor</button>
+            <button class="sc-tab" role="tab" data-i="7">Job editor</button>
+            <button class="sc-tab" role="tab" data-i="8">Import</button>
+            <button class="sc-tab" role="tab" data-i="9">Themes</button>
           </div>
-          <div class="sc-stage">
-            <div class="shot">
-              <div class="bar"><i></i><i></i><i></i><span class="url">jobtracker.polecat.live/app</span></div>
-              <div class="sc-frames">
-                <img class="sc-img on" data-i="0" src="/assets/shots/dashboard.png"  width="1950" height="1260" alt="Dashboard">
-                <img class="sc-img"    data-i="1" src="/assets/shots/jobs.png"       width="1950" height="1260" loading="lazy" alt="Jobs list">
-                <img class="sc-img"    data-i="2" src="/assets/shots/board.png"      width="1950" height="1260" loading="lazy" alt="Kanban board">
-                <img class="sc-img"    data-i="3" src="/assets/shots/calendar.png"   width="1950" height="1260" loading="lazy" alt="Calendar">
-                <img class="sc-img"    data-i="4" src="/assets/shots/timeline.png"   width="1950" height="1260" loading="lazy" alt="Timeline">
-                <img class="sc-img"    data-i="5" src="/assets/shots/metrics.png"    width="1950" height="1260" loading="lazy" alt="Metrics">
-                <img class="sc-img"    data-i="6" src="/assets/shots/reports.png"    width="1950" height="1260" loading="lazy" alt="Reports">
-                <img class="sc-img"    data-i="7" src="/assets/shots/job-editor.png" width="1950" height="1260" loading="lazy" alt="Job editor">
+          <div class="sc-carousel">
+            <button class="sc-arrow" id="scPrev" aria-label="Previous screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="sc-stage">
+              <div class="shot">
+                <div class="bar"><i></i><i></i><i></i><span class="url">jobtracker.polecat.live/app</span></div>
+                <div class="sc-frames">
+                  <img class="sc-img on" data-i="0" src="/assets/shots/dashboard.png"  width="1950" height="1260" alt="Dashboard">
+                  <img class="sc-img"    data-i="1" src="/assets/shots/jobs.png"       width="1950" height="1260" loading="lazy" alt="Jobs list">
+                  <img class="sc-img"    data-i="2" src="/assets/shots/board.png"      width="1950" height="1260" loading="lazy" alt="Kanban board">
+                  <img class="sc-img"    data-i="3" src="/assets/shots/calendar.png"   width="1950" height="1260" loading="lazy" alt="Calendar">
+                  <img class="sc-img"    data-i="4" src="/assets/shots/timeline.png"   width="1950" height="1260" loading="lazy" alt="Timeline">
+                  <img class="sc-img"    data-i="5" src="/assets/shots/metrics.png"    width="1950" height="1260" loading="lazy" alt="Metrics">
+                  <img class="sc-img"    data-i="6" src="/assets/shots/reports.png"    width="1950" height="1260" loading="lazy" alt="Reports">
+                  <img class="sc-img"    data-i="7" src="/assets/shots/job-editor.png" width="1950" height="1260" loading="lazy" alt="Job editor">
+                  <img class="sc-img"    data-i="8" src="/assets/shots/import.png"     width="1950" height="1260" loading="lazy" alt="Import wizard">
+                  <img class="sc-img"    data-i="9" src="/assets/shots/settings.png"   width="1950" height="1260" loading="lazy" alt="Themes and settings">
+                </div>
               </div>
+              <p class="sc-cap" id="scCap"></p>
             </div>
-            <p class="sc-cap" id="scCap"></p>
+            <button class="sc-arrow" id="scNext" aria-label="Next screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
           </div>
         </div>
       </div>
@@ -197,7 +205,6 @@
         </div>
         <div class="phones">
           <div class="phone reveal"><div class="dev"><img src="/assets/shots/m-dashboard.png" width="780" height="1688" loading="lazy" alt="Dashboard on mobile"></div><span>Dashboard</span></div>
-          <div class="phone reveal"><div class="dev"><img src="/assets/shots/m-jobs.png" width="780" height="1688" loading="lazy" alt="Jobs on mobile"></div><span>Jobs — card list</span></div>
           <div class="phone reveal"><div class="dev"><img src="/assets/shots/m-board.png" width="780" height="1688" loading="lazy" alt="Board on mobile"></div><span>Board</span></div>
         </div>
       </div>
@@ -287,18 +294,23 @@
         '<b>Metrics.</b> Cycle time, throughput per month, on-time delivery and workload per person — computed live.',
         '<b>Reports.</b> The end-of-year report, generated: KPIs with trends and breakdowns by client and owner, ready to export or print.',
         '<b>Job editor.</b> Rich details, comments, a checklist, milestones, attachments and a lightweight approval flow — all in one sheet.',
+        '<b>Import.</b> A guided wizard for your Excel, CSV, JSON or Microsoft Forms export — column mapping, a validation preview, and it all stays on your device.',
+        '<b>Themes.</b> Six looks — Agency and Polecat palettes each in dark, light and system — applied instantly, plus every workspace preference.',
       ];
       let cur=0, timer=null;
       const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
       function show(i){
-        cur=i;
-        tabs.forEach(t=>{const on=+t.dataset.i===i;t.classList.toggle('on',on);t.setAttribute('aria-selected',on);});
-        imgs.forEach(m=>m.classList.toggle('on',+m.dataset.i===i));
-        cap.innerHTML=CAPS[i]||'';
+        cur=(i+tabs.length)%tabs.length;
+        tabs.forEach(t=>{const on=+t.dataset.i===cur;t.classList.toggle('on',on);t.setAttribute('aria-selected',on);});
+        imgs.forEach(m=>m.classList.toggle('on',+m.dataset.i===cur));
+        cap.innerHTML=CAPS[cur]||'';
       }
       function stop(){ if(timer){clearInterval(timer);timer=null;} }
-      function play(){ if(reduce||timer) return; timer=setInterval(()=>show((cur+1)%tabs.length),4500); }
+      function play(){ if(reduce||timer) return; timer=setInterval(()=>show(cur+1),4500); }
       tabs.forEach(t=>t.addEventListener('click',()=>{ stop(); show(+t.dataset.i); }));
+      const prev=document.getElementById('scPrev'), next=document.getElementById('scNext');
+      prev&&prev.addEventListener('click',()=>{ stop(); show(cur-1); });
+      next&&next.addEventListener('click',()=>{ stop(); show(cur+1); });
       const sc=document.getElementById('showcase');
       sc.addEventListener('mouseenter',stop); sc.addEventListener('mouseleave',play);
       sc.addEventListener('focusin',stop);
