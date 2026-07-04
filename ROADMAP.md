@@ -82,14 +82,24 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       views row links straight to the View Library with an explanatory tooltip.
 
 ### Data & attachments
-- [ ] **IndexedDB attachment store** — move real file binaries from in-session
-      object URLs to IndexedDB (via a tiny `idb` wrapper written in-repo), with a
-      Document Library section: upload, preview, tag, organize, remove, and
-      per-job linkage. Honor Mock Upload mode + size/extension limits.
+- [x] **IndexedDB attachment store** ✅ Shipped — non-mock uploads now persist
+      real file bytes to IndexedDB (`js/idb.js`, a tiny promise-based wrapper,
+      db `jt-files`) keyed by attachment id, instead of a leaking in-session
+      `URL.createObjectURL`. Attachment metadata gains a free-form `tags`
+      list. Mock Uploads (the existing setting) and the size/extension limits
+      work exactly as before — turning it on simply skips the IndexedDB write
+      and keeps metadata only. **Reset all local data** now clears IndexedDB
+      too, and workspace export/import stays text-only (bytes never leave
+      the browser, by design).
 - [ ] **Attachment versioning** — keep prior versions of a file with a version
       history and restore.
-- [ ] **Global Document Library view** — a top-level section to manage all files
-      across jobs (search, filter by type/tag, bulk actions).
+- [x] **Global Document Library view** ✅ Shipped — a new **Documents** nav
+      section flattens every attachment across every job into one searchable
+      list: search by file/job name/#, filter by type (Images/Video/Docs) or
+      tag, preview images or download inline, add/remove tags, jump to the
+      linked job, and bulk-select + delete. The job editor's Attachments tab
+      links straight here and gained the same tagging + IndexedDB-backed
+      preview/download.
 
 ### Workflow depth
 - [ ] **Job intake form** — a dedicated, friendly "New job request" form (a
