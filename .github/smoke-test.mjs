@@ -122,8 +122,25 @@ async function checkPage(browser, url, mustFind, label){
       });
       if(blank) throw new Error(`mobile: ${sec} shows ${blank}`);
     }
+    // A view whose content overflows the viewport MUST be able to scroll all
+    // the way to its last row on mobile — a nested-flex height bug (missing
+    // min-height:0) silently clamps the scroll short of the bottom. Disable
+    // smooth-scroll first so scrollTop jumps are instant and measurable.
+    await mp.addStyleTag({ content:'*{scroll-behavior:auto !important}' });
+    for(const sec of ['inventory','metrics','docs']){
+      await mp.evaluate(s=>location.hash=s, sec); await mp.waitForTimeout(400);
+      const s = await mp.evaluate(()=>{
+        const v=document.querySelector('#view'); if(!v) return {err:'no #view'};
+        v.scrollTop = 1e7;                       // request the very bottom
+        const max = v.scrollHeight - v.clientHeight;
+        return { max, reached:v.scrollTop, overflows:max>40 };
+      });
+      if(s.err) throw new Error(`mobile scroll: ${sec} ${s.err}`);
+      if(s.overflows && s.reached < s.max-2)
+        throw new Error(`mobile: ${sec} cannot scroll to bottom (reached ${s.reached}/${s.max}) — nested-flex min-height:0 regression`);
+    }
     if(mobErrs.length) throw new Error('mobile console errors:\n  '+mobErrs.join('\n  '));
-    console.log('✓ mobile (390px): nav/topbar/sheet fit + every view renders visible content');
+    console.log('✓ mobile (390px): nav/topbar/sheet fit + every view renders visible content & scrolls to bottom');
     await mp.close();
 
     console.log('\n✅ smoke test passed');
