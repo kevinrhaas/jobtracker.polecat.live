@@ -104,7 +104,13 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       on illegal moves; aging indicators surfaced on board/list.
 
 ### Views & UX
-- [ ] **Timeline / Gantt view** by date range.
+- [x] **Timeline / Gantt view** ✅ Shipped — a new **Timeline** nav section plots
+      every dated job as a bar from Date In to Due Date, grouped by status
+      (colored like the board), with milestone diamonds overlaid on each job's
+      lane and a live "today" line. Zoom between Week / Month / Quarter and
+      step with Prev / Today / Next; search, Rush-only, Show-done and a status
+      filter narrow what's plotted. Jobs with only one date, or no due date
+      yet (drawn open-ended with a trailing arrow), still show up.
 - [ ] **Column drag-to-reorder & resize** in the inventory table; sticky first column.
 - [ ] **Inline cell editing** in the inventory list (edit without opening a job).
 - [ ] **Saved view sharing** via token links; per-view default sort/columns polish.

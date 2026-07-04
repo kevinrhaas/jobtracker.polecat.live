@@ -63,7 +63,7 @@ async function checkPage(browser, url, mustFind, label){
     const errs=[]; page.on('pageerror',e=>errs.push(String(e)));
     await page.goto(`http://localhost:${PORT}/app/?token=${encodeURIComponent(TEAM_TOKEN)}`, { waitUntil:'networkidle' });
     const garbage = [];
-    for(const sec of ['inventory','board','calendar','metrics','import','docs','settings']){
+    for(const sec of ['inventory','board','calendar','timeline','metrics','import','docs','settings']){
       await page.click(`.rail-item[data-sec="${sec}"]`).catch(()=>{});
       await page.waitForTimeout(350);
       // A view that renders a bare "undefined" / "null" / "[object Object]" text
