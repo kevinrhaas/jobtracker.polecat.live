@@ -329,6 +329,7 @@ table.tbl tr:last-child td{border-bottom:none}
 .modal-back{position:fixed;inset:0;background:rgba(6,4,20,.6);backdrop-filter:blur(4px);z-index:100;display:grid;place-items:center;padding:20px;opacity:0;transition:opacity .2s}
 .modal-back.in{opacity:1}
 .modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow);width:min(560px,100%);max-height:90vh;display:flex;flex-direction:column;transform:translateY(12px) scale(.98);transition:transform .2s}
+.modal:focus-visible{outline:none;box-shadow:var(--shadow),var(--ring)}
 .modal-back.in .modal{transform:none}
 .modal.wide{width:min(920px,100%)}
 .modal.full{width:min(1100px,100%);height:90vh}
@@ -638,6 +639,13 @@ input[type=color].color-input{width:34px;height:30px;flex:none;padding:2px;borde
 .hero h2{font-size:22px}
 .hero p{color:var(--text-2);font-size:13.5px;margin-top:3px}
 .hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.streak-badge{display:inline-flex;align-items:center;gap:6px;margin-top:9px;padding:5px 11px 5px 8px;
+  border:1px solid color-mix(in srgb,var(--success) 45%,var(--border));border-radius:99px;
+  background:color-mix(in srgb,var(--success) 16%,var(--surface));color:var(--success);
+  font-size:12px;font-weight:700;cursor:pointer;transition:transform .15s}
+.streak-badge:hover{transform:translateY(-1px)}
+.streak-badge:focus-visible{outline:none;box-shadow:var(--ring)}
+.streak-ic{display:flex;color:var(--success)}
 
 /* status glance + quick links */
 .glance{display:flex;flex-wrap:wrap;gap:9px}

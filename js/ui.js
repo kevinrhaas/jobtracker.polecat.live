@@ -64,11 +64,19 @@ export function toast(title, {body='', kind='info', ms=3200}={}){
   return kill;
 }
 
+// Selector for elements a keyboard user can land on, used by the modal
+// focus trap below.
+const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), ' +
+  'select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 // ---- modal --------------------------------------------------------------
 // Returns { root, hide }. Body/foot are DOM nodes or arrays of nodes.
+// Traps Tab focus inside the dialog while open (WAI-ARIA dialog pattern) and
+// restores focus to whatever triggered it on close.
 export function modal({ title, icon:iconHtml='', body, foot, wide=false, onClose }={}){
+  const trigger = document.activeElement;
   const back = el('div',{class:'modal-back'});
-  const box  = el('div',{class:'modal'+(wide?' wide':''), role:'dialog', 'aria-modal':'true', 'aria-label':title||'Dialog'});
+  const box  = el('div',{class:'modal'+(wide?' wide':''), role:'dialog', 'aria-modal':'true', 'aria-label':title||'Dialog', tabindex:'-1'});
   const head = el('div',{class:'modal-head'});
   head.append(el('div',{class:'modal-title', html:`${iconHtml||''}<span>${escapeHtml(title||'')}</span>`}));
   const x = el('button',{class:'btn icon ghost', 'aria-label':'Close', html:'&times;', onclick:()=>hide()});
@@ -79,9 +87,35 @@ export function modal({ title, icon:iconHtml='', body, foot, wide=false, onClose
   if(foot){ const f=el('div',{class:'modal-foot'}); (Array.isArray(foot)?foot:[foot]).forEach(b=>f.append(b)); box.append(f); }
   back.append(box);
   (document.body).append(back);
-  requestAnimationFrame(()=>back.classList.add('in'));
-  function hide(){ back.classList.remove('in'); setTimeout(()=>back.remove(),200); onClose&&onClose(); document.removeEventListener('keydown',onKey); }
-  function onKey(e){ if(e.key==='Escape') hide(); }
+  requestAnimationFrame(()=>{
+    back.classList.add('in');
+    const first = box.querySelector(FOCUSABLE);
+    (first||box).focus();
+  });
+  let closed = false;
+  function hide(){
+    if(closed) return; closed = true;
+    back.classList.remove('in'); setTimeout(()=>back.remove(),200); onClose&&onClose();
+    document.removeEventListener('keydown', onKey);
+    // Return focus to whatever opened this dialog, if it's still around —
+    // otherwise the browser silently drops focus to <body>.
+    if(trigger && document.contains(trigger) && typeof trigger.focus==='function') trigger.focus();
+  }
+  function onKey(e){
+    // When dialogs stack (e.g. a confirm on top of the job editor), only the
+    // topmost should react — otherwise Escape would close every layer at
+    // once and the Tab trap below would fight over focus.
+    const stack = $$('.modal-back');
+    if(stack[stack.length-1] !== back) return;
+    if(e.key==='Escape'){ hide(); return; }
+    if(e.key!=='Tab') return;
+    const focusable = $$(FOCUSABLE, box);
+    if(!focusable.length){ e.preventDefault(); return; }
+    const firstEl = focusable[0], lastEl = focusable[focusable.length-1];
+    if(e.shiftKey && document.activeElement===firstEl){ e.preventDefault(); lastEl.focus(); }
+    else if(!e.shiftKey && document.activeElement===lastEl){ e.preventDefault(); firstEl.focus(); }
+    else if(!box.contains(document.activeElement)){ e.preventDefault(); firstEl.focus(); }
+  }
   document.addEventListener('keydown', onKey);
   back.addEventListener('mousedown', e=>{ if(e.target===back) hide(); });
   return { root:box, back, hide };

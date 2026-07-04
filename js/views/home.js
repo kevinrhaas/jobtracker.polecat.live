@@ -7,7 +7,7 @@
 // aging/overdue helpers so it always reflects the current data.
 // -----------------------------------------------------------------------
 import { Store } from '../store.js';
-import { el, escapeHtml, fmtDate, relTime } from '../ui.js';
+import { el, escapeHtml, fmtDate, relTime, celebrate } from '../ui.js';
 import { icon, jobIconFor } from '../icons.js';
 import { isOverdue, dueSoon, ageState } from './shared.js';
 
@@ -43,6 +43,23 @@ const isCompleted = j => isTerminal(j) && j.status !== 'Canceled';
 const completedAt = j => (j.dateCompleted ? Date.parse(j.dateCompleted) : j.updatedAt);
 const ctMonthKey  = ts => new Intl.DateTimeFormat('en-US',{ timeZone:CT, year:'numeric', month:'2-digit' })
   .format(new Date(ts)).replace('/', '-').split('-').reverse().join('-'); // -> 'YYYY-MM'
+
+// The Monday that starts ts's calendar week, as a 'YYYY-MM-DD' key (Central Time).
+function ctWeekStart(ts){
+  const ymd = new Intl.DateTimeFormat('en-CA',{ timeZone:CT, year:'numeric', month:'2-digit', day:'2-digit' }).format(new Date(ts));
+  const d = new Date(ymd+'T00:00:00Z');
+  d.setUTCDate(d.getUTCDate() - (d.getUTCDay()+6)%7);   // back up to Monday
+  return d.toISOString().slice(0,10);
+}
+
+// Has this week's completed-jobs streak already gotten its confetti moment?
+// Keyed by week so a fresh week can celebrate again; UI-only, so it lives in
+// its own localStorage key rather than the versioned workspace blob.
+const STREAK_KEY = 'jt.streakCelebrated';
+function alreadyCelebrated(weekKey){
+  try{ return localStorage.getItem(STREAK_KEY)===weekKey; }catch{ return false; }
+}
+function markCelebrated(weekKey){ try{ localStorage.setItem(STREAK_KEY, weekKey); }catch{} }
 
 // Animated count-up from 0 → value. Respects reduced motion (jumps to final).
 function countUp(node, to, { decimals=0, suffix='', duration=850 }={}){
@@ -184,14 +201,29 @@ export function renderHome(view, ctx, params){
       (dueWeek.length ? `, ${dueWeek.length} due this week` : '') +
       (overdue.length ? `, and ${overdue.length} overdue` : '') + '.'
     : 'All caught up — no active jobs right now. Time to start something great.';
+  // ---- weekly streak badge ---------------------------------------------
+  const weekKey = ctWeekStart(Date.now());
+  const completedWeekCount = jobs.filter(j=>isCompleted(j) && ctWeekStart(completedAt(j))===weekKey).length;
+  const heroText = el('div',{},[
+    el('h2',{text: greeting() + (who ? ', ' + who : '')}),
+    el('p',{text: summary}),
+  ]);
+  if(completedWeekCount > 0){
+    const streak = el('button',{ class:'streak-badge', type:'button',
+      'aria-label':`${completedWeekCount} job${completedWeekCount===1?'':'s'} completed this week — click to celebrate`,
+      title:'Click to celebrate', onclick:()=>celebrate() },[
+      el('span',{class:'streak-ic', html:icon('sparkle',16)}),
+      el('span',{text:`${completedWeekCount} completed this week`}),
+    ]);
+    heroText.append(streak);
+    if(!alreadyCelebrated(weekKey)){ markCelebrated(weekKey); celebrate(); }
+  }
+
   const hero = el('div',{class:'hero'});
   hero.append(
     el('div',{class:'hero-main'},[
       el('div',{class:'hero-badge', html:icon(greetIcon(), 26)}),
-      el('div',{},[
-        el('h2',{text: greeting() + (who ? ', ' + who : '')}),
-        el('p',{text: summary}),
-      ]),
+      heroText,
     ]),
     el('div',{class:'hero-actions'},[
       el('button',{class:'btn primary', html:`${icon('plus')} New Job`, onclick:()=>ctx.newJob()}),
