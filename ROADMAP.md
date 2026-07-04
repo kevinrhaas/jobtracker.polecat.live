@@ -221,16 +221,29 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 - [x] PWA manifest + offline service worker — already shipped (`manifest.json`
       + `sw.js`, network-first with cache fallback, scoped to `/app/`); marking
       done for the same reason.
+- [x] **Celebratory streak counter** ✅ Shipped (already live, backlog hadn't
+      caught up) — the dashboard hero shows a "N completed this week" badge
+      once at least one job finishes this calendar week, reusing `celebrate()`;
+      clicking it re-fires the confetti, and it auto-celebrates once per week
+      the first time it appears.
 - [ ] Smooth board reflow when cards move between columns (currently an
-      instant re-render); a celebratory streak counter ("3 jobs completed this
-      week!") on the dashboard hero, reusing the new `celebrate()` confetti.
+      instant re-render).
 - [ ] Empty-state illustrations per section (small inline SVGs instead of the
       shared generic icon-in-a-circle empty state).
 - [ ] Performance: virtualize very large lists/boards (>1000 jobs).
-- [ ] Full a11y audit pass (axe) + focus-trap review on modals — verify Tab
-      stays trapped inside an open modal and focus returns to the trigger
-      element on close (`modal()`/`confirmDialog()`/the new `promptDialog()`
-      in `ui.js` are the first place to check).
+- [x] **Focus hygiene for anchored popovers** ✅ Shipped — `modal()` already
+      trapped Tab and restored focus to the trigger on close, but the three
+      lighter-weight anchored popovers (Jobs' Type/Filters checklist
+      dropdowns, the Export menu, the Notifications bell panel) didn't: a
+      keyboard user opening one with Enter/Space could Tab straight out into
+      the rest of the page behind it, with no way back without a mouse.
+      Extracted a shared `anchoredPopover()` helper in `ui.js` (position +
+      outside-click/Escape-close + Tab trap + return-focus-to-anchor,
+      mirroring `modal()`'s pattern) and rebuilt all three call sites on it,
+      cutting ~30 lines of duplicated close/outside-click/Escape plumbing.
+      Also fixed a small listener leak where re-opening the notifications
+      panel didn't unwire the previous instance's document-level listeners.
+      Remaining: a full axe pass across every view is still open.
 
 ---
 
@@ -254,3 +267,21 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 - **Workload heatmap** — a calendar-style grid colored by how many jobs are
   due per person per day, to spot overload before it happens (complements the
   existing per-person workload bars in Metrics).
+- **"Since you've been away" digest** — a one-time card on the dashboard after
+  a gap in usage (say, >3 days since last open) summarizing what changed:
+  jobs that moved status, new comments, approvals resolved. Everything needed
+  (job history + `updatedAt`) already exists; purely a derived read like the
+  notifications feed.
+- **Board WIP limits** — an optional soft cap per board column (set in
+  Settings → Pick lists → Statuses, alongside the existing "can move to"
+  workflow map) that visually flags a column as over-capacity, nudging
+  triage before work piles up in one stage.
+- **Undo toast for destructive bulk actions** — bulk delete / bulk status
+  change already goes through the existing undo/redo stack, but a job editor
+  or inventory action taken *outside* that flow (e.g. Documents' bulk
+  attachment delete) should surface a "Undo" toast for a few seconds, the
+  same safety net users already get elsewhere.
+- **Command palette recent/frequent ranking** — the `/` palette lists
+  commands and jobs in a fixed order; ranking by recency + frequency of use
+  (a small localStorage tally, no new schema) would make the 2nd and 3rd
+  keystrokes far more often land on the right result.
