@@ -1,5 +1,11 @@
 [
   {
+    "v": 29,
+    "title": "Saved views: share a filter/column/sort combo via link",
+    "date": "Jul 4, 2026, 9:01 AM CT",
+    "path": "/v/29/app/"
+  },
+  {
     "v": 28,
     "title": "Attachment version history",
     "date": "Jul 4, 2026, 8:21 AM CT",
@@ -136,11 +142,5 @@
     "title": "View Library — fully manageable saved views",
     "date": "Jul 3, 2026, 2:58 PM CT",
     "path": "/v/6/app/"
-  },
-  {
-    "v": 5,
-    "title": "Reorganized job editor — collapsible sections",
-    "date": "Jul 3, 2026, 2:20 PM CT",
-    "path": "/v/5/app/"
   }
 ]

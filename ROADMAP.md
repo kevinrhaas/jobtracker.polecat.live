@@ -192,7 +192,15 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       transitions, and still fires the completion confetti. The mobile card
       list is unchanged (tap still opens the job) since a full-width control
       doesn't suit a card.
-- [ ] **Saved view sharing** via token links; per-view default sort/columns polish.
+- [x] **Saved view sharing** ✅ Shipped — a link icon on any saved view (in the
+      Jobs list's views row, or Settings → Saved views' View Library) copies a
+      `#view/<code>` URL that packs the view's filters, columns, sort and
+      column widths straight into the link — no server, nothing new to store.
+      Opening it jumps to Jobs and applies that config as an unsaved working
+      view, with a dismissible banner ("Save as view") to adopt it into your
+      own library, or just browse it once and move on. Each view already
+      carries its own sort/column set independent of the others, so nothing
+      further was needed there.
 - [x] **Command palette actions** ✅ Shipped — the `/` palette now has a
       **Jobs / Commands** toggle (press `Tab`, or type `>` to jump straight
       in). Commands cover new job, jump to any section, toggle light/dark,
