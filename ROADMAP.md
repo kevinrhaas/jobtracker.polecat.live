@@ -313,9 +313,17 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 - **"On this day" / job anniversary nudges** — surface jobs whose due date or
   completion date lines up with today from a prior year, useful for recurring
   annual campaigns (e.g. "Membership Drive" every spring).
-- **Smart duplicate detection on New Job** — as the name is typed, fuzzy-match
-  against existing job names/clients and suggest "Did you mean to duplicate
-  #14522 instead?" to cut down on accidental re-entry.
+- [x] **Smart duplicate detection on New Job** ✅ Shipped — as a job's name is
+  typed in the hero field, a themed callout fuzzy-matches it (Sørensen–Dice
+  over character bigrams, plus a same-client boost — no dependency, just a
+  small helper in `shared.js`) against every other job's name and, above a
+  similarity threshold, lists the near-matches with "Open it" / "Duplicate
+  instead" actions. If the job you're editing is still a fresh, untouched
+  blank (no name/client/comments/attachments/checked subtasks when the editor
+  opened), picking either option quietly discards it too, so choosing the
+  existing job never leaves an orphaned duplicate behind — anything with real
+  content is always left alone. Dismissing the suggestion for the current text
+  won't nag again until the name changes further.
 - **Keyboard-only board mode** — arrow keys to move focus between cards, a
   single keypress to cycle a focused card through statuses, so power users
   never need the mouse for triage.

@@ -1,5 +1,11 @@
 [
   {
+    "v": 34,
+    "title": "Smart duplicate detection when naming a job",
+    "date": "Jul 4, 2026, 11:45 AM CT",
+    "path": "/v/34/app/"
+  },
+  {
     "v": 33,
     "title": "Calendar: an Agenda view for mobile",
     "date": "Jul 4, 2026, 11:17 AM CT",
@@ -136,11 +142,5 @@
     "title": "Confetti on completion + a themed prompt dialog",
     "date": "Jul 3, 2026, 6:24 PM CT",
     "path": "/v/11/app/"
-  },
-  {
-    "v": 10,
-    "title": "Command palette + keyboard shortcut cheat-sheet",
-    "date": "Jul 3, 2026, 5:44 PM CT",
-    "path": "/v/10/app/"
   }
 ]
