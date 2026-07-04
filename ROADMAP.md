@@ -100,8 +100,17 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       job automatically (jobs still link via the existing free-text Campaign
       field, so the job editor needed no changes). Campaign names already in use
       on jobs are auto-adopted as real campaigns on upgrade — nothing to redo.
-- [ ] **Status transition rules** — optional allowed-transition map + confirmation
-      on illegal moves; aging indicators surfaced on board/list.
+- [x] **Status transition rules** ✅ Shipped — each status in **Settings →
+      Pick lists → Statuses** now has an optional "Can move to" workflow map
+      (a button on each row opens a checklist of allowed next statuses).
+      Leaving it unset keeps a status unrestricted — the default for every
+      upgraded workspace, so nothing that worked before changes. The demo
+      data ships with a sensible workflow pre-wired. Moving a job somewhere
+      not on the list (via the Details tab's Status field, dragging a board
+      card, or a bulk "Set status…" edit) still works, it just asks for a
+      quick confirmation first instead of silently allowing or blocking it.
+      Aging indicators were already surfaced on the board (age dot per card)
+      and inventory list (age dot + overdue highlight in the Due column).
 
 ### Views & UX
 - [x] **Timeline / Gantt view** ✅ Shipped — a new **Timeline** nav section plots
