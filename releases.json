@@ -1,5 +1,11 @@
 [
   {
+    "v": 31,
+    "title": "Custom KPI dashboards",
+    "date": "Jul 4, 2026, 10:24 AM CT",
+    "path": "/v/31/app/"
+  },
+  {
     "v": 30,
     "title": "Recurring jobs",
     "date": "Jul 4, 2026, 9:54 AM CT",
@@ -136,11 +142,5 @@
     "title": "Notifications — a live feed of what needs attention",
     "date": "Jul 3, 2026, 4:54 PM CT",
     "path": "/v/8/app/"
-  },
-  {
-    "v": 7,
-    "title": "Checklists — subtasks & milestones on every job",
-    "date": "Jul 3, 2026, 4:21 PM CT",
-    "path": "/v/7/app/"
   }
 ]

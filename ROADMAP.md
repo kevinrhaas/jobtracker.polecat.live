@@ -221,7 +221,18 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       (plain text), **Export Excel** (.xls, KPIs + every breakdown table), or
       **Print report** (clean print stylesheet, Save-as-PDF from the browser).
       Everything is computed live from Store.jobs() — nothing new to store.
-- [ ] **Custom KPI builder** + savable dashboards.
+- [x] **Custom KPI builder** + savable dashboards. ✅ Shipped — Metrics gained
+      an **Overview / Custom** toggle. Custom lets you build your own KPI
+      cards: pick a metric (job count, sum/average of a numeric field, average
+      cycle time, or on-time delivery %), filter it by status/type/division/
+      owner/client + rush, and optionally scope it to a date period (this
+      year/quarter/month, last 12 months, or all time). Cards live in named,
+      savable **dashboards** — keep several (e.g. a studio-wide one plus a
+      per-client one) and switch between them; each card supports edit,
+      duplicate and delete from its own menu. A fresh install ships one
+      example "Studio Overview" dashboard to show it off; existing workspaces
+      upgrade to an empty list (nothing retrofitted). Purely config — every
+      value is computed live from `Store.jobs()`, nothing is cached.
 - [x] **In-app notifications feed** ✅ Shipped — a bell in the top bar with a live
       unread count surfaces overdue jobs, jobs due within 2 days, approval
       requests, jobs gone stale in their stage, and upcoming/overdue milestones.
