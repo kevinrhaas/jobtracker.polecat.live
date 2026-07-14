@@ -1,5 +1,11 @@
 [
   {
+    "v": 42,
+    "title": "Import understands your request emails & creative exports",
+    "date": "Jul 14, 2026, 2:30 PM CT",
+    "path": "/v/42/app/"
+  },
+  {
     "v": 41,
     "title": "Saved views on the dashboard + a clearer Local-mode notice",
     "date": "Jul 14, 2026, 12:47 PM CT",
@@ -136,11 +142,5 @@
     "title": "Inline cell editing in the Jobs table",
     "date": "Jul 4, 2026, 1:37 AM CT",
     "path": "/v/19/app/"
-  },
-  {
-    "v": 18,
-    "title": "Fixed the blank dashboard on iPhone / iOS",
-    "date": "Jul 4, 2026, 12:43 AM CT",
-    "path": "/v/18/app/"
   }
 ]
