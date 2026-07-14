@@ -1,5 +1,11 @@
 [
   {
+    "v": 41,
+    "title": "Saved views on the dashboard + a clearer Local-mode notice",
+    "date": "Jul 14, 2026, 12:47 PM CT",
+    "path": "/v/41/app/"
+  },
+  {
     "v": 40,
     "title": "Jobs list: review feedback, round one",
     "date": "Jul 14, 2026, 11:58 AM CT",
@@ -136,11 +142,5 @@
     "title": "Fixed the blank dashboard on iPhone / iOS",
     "date": "Jul 4, 2026, 12:43 AM CT",
     "path": "/v/18/app/"
-  },
-  {
-    "v": 17,
-    "title": "Long lists now scroll all the way to the bottom on mobile",
-    "date": "Jul 4, 2026, 12:26 AM CT",
-    "path": "/v/17/app/"
   }
 ]
