@@ -1,5 +1,11 @@
 [
   {
+    "v": 43,
+    "title": "Metrics & Reports combined, optional sections, and a simpler job form",
+    "date": "Jul 14, 2026, 6:04 PM CT",
+    "path": "/v/43/app/"
+  },
+  {
     "v": 42,
     "title": "Import understands your request emails & creative exports",
     "date": "Jul 14, 2026, 2:30 PM CT",
@@ -136,11 +142,5 @@
     "title": "Job intake form — a friendly front door for job requests",
     "date": "Jul 4, 2026, 2:54 AM CT",
     "path": "/v/20/app/"
-  },
-  {
-    "v": 19,
-    "title": "Inline cell editing in the Jobs table",
-    "date": "Jul 4, 2026, 1:37 AM CT",
-    "path": "/v/19/app/"
   }
 ]
