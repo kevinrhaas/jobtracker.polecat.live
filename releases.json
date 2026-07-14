@@ -1,5 +1,11 @@
 [
   {
+    "v": 40,
+    "title": "Jobs list: review feedback, round one",
+    "date": "Jul 14, 2026, 11:58 AM CT",
+    "path": "/v/40/app/"
+  },
+  {
     "v": 39,
     "title": "Board: swipeable columns on phones",
     "date": "Jul 4, 2026, 2:22 PM CT",
@@ -136,11 +142,5 @@
     "title": "Long lists now scroll all the way to the bottom on mobile",
     "date": "Jul 4, 2026, 12:26 AM CT",
     "path": "/v/17/app/"
-  },
-  {
-    "v": 16,
-    "title": "Reports — the end-of-year report, generated for you",
-    "date": "Jul 4, 2026, 12:08 AM CT",
-    "path": "/v/16/app/"
   }
 ]
