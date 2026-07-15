@@ -1,40 +1,39 @@
-name: Hourly self-improvement
+name: Self-improvement (dispatch-only fallback)
 
-# Runs Claude Code on a schedule to build the next ROADMAP item (or, every 5th
-# feature run, do a polish/reflection sweep), gate it behind the smoke test,
-# then commit to main and deploy to production automatically.
+# DISPATCH-ONLY FALLBACK — superseded by the polecat-platform steward.
 #
-# Pause any time by disabling this workflow or removing CLAUDE_CODE_OAUTH_TOKEN.
+# Scheduled self-improvement for this app now runs centrally from
+# kevinrhaas/polecat-platform (.github/workflows/steward-improve.yml — focus
+# mode with app=jobtracker.polecat.live), per docs/AUTOMATION.md in that repo.
+# This workflow remains ONLY as a manual fallback: run it from the Actions tab
+# (workflow_dispatch) if the steward is unavailable. Its schedule stays
+# commented out permanently, and the file is slated for DELETION once the
+# steward has ~3 weeks of solid runs.
 #
-# Note: a push to main by the built-in GITHUB_TOKEN does NOT trigger deploy.yml
-# (GitHub blocks that to avoid loops), so this job deploys Pages itself.
+# What a run does: build the next ROADMAP item (or, every 5th run, a polish/
+# reflection sweep), stamp the changelog, gate behind the smoke test, archive
+# a /v/<n>/ release snapshot, then commit to main. Deployment is NOT done
+# here — this repo's "Deploy to GitHub Pages" workflow is the single deploy
+# authority and listens for this workflow's completion (workflow_run), since
+# a GITHUB_TOKEN push to main cannot trigger its `push` event.
 on:
-  # PAUSED to save tokens (requested 2026-07-04). The hourly schedule is
-  # disabled; re-enable by uncommenting the `schedule:` block below. The
-  # workflow can still be run on demand from the Actions tab (workflow_dispatch).
+  # Superseded by the platform steward (see header) — do not re-enable.
   # schedule:
-  #   # Off-peak minutes: GitHub heavily delays/drops scheduled jobs at :00.
-  #   # Two attempts/hour improve the odds of a roughly-hourly cadence; the
-  #   # concurrency lock keeps them from overlapping.
   #   - cron: '19,49 * * * *'
   workflow_dispatch: {}
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
+# Never let two improvement runs overlap.
 concurrency:
-  group: jobtracker-deploy
+  group: self-improve
   cancel-in-progress: false
 
 jobs:
   improve:
     runs-on: ubuntu-latest
     timeout-minutes: 40
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -101,19 +100,18 @@ jobs:
       - name: Archive this release
         run: node .github/archive-release.mjs
 
-      - name: Commit + push to main
-        id: commit
+      - name: Commit + push to main (triggers the deploy workflow)
         env:
           MODE: ${{ steps.mode.outputs.mode }}
         run: |
           if [ -z "$(git status --porcelain)" ]; then
-            echo "No changes produced this run."; echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0
+            echo "No changes produced this run."; exit 0
           fi
           git config user.name  "jobtracker-bot"
           git config user.email "bot@users.noreply.github.com"
           git add -A
           git commit -m "auto: self-improvement (${MODE})" \
-            -m "Automated hourly improvement; passed smoke test and auto-deployed."
+            -m "Automated improvement run; passed smoke test. Deploy runs via the Deploy to GitHub Pages workflow."
           # Integrate any commits that landed on main during this run (the owner
           # pushes to main too), then push. Retry with rebase so a concurrent
           # push never causes a non-fast-forward failure or lost work.
@@ -126,33 +124,3 @@ jobs:
             sleep $((3*i))
           done
           if [ "$pushed" != true ]; then echo "Could not push to main after retries"; exit 1; fi
-          echo "changed=true" >> "$GITHUB_OUTPUT"
-
-      # Keep the marketing site's screenshots in lock-step with the app as it
-      # evolves. Regenerated into the Pages artifact (working tree) but NOT
-      # committed — so the live site always matches the just-built app without
-      # adding ~3 MB of PNGs to git history every single hour. Non-fatal: a
-      # flaky capture falls back to the committed baseline screenshots.
-      - name: Refresh marketing screenshots
-        if: steps.commit.outputs.changed == 'true'
-        run: node .github/gen-shots.mjs || echo "gen-shots failed; keeping committed baseline screenshots"
-
-      # Deploy Pages ourselves (the bot's push to main won't trigger deploy.yml).
-      - name: Prepare artifact
-        if: steps.commit.outputs.changed == 'true'
-        run: rm -rf node_modules package.json package-lock.json
-
-      - name: Configure Pages
-        if: steps.commit.outputs.changed == 'true'
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        if: steps.commit.outputs.changed == 'true'
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "."
-
-      - name: Deploy to GitHub Pages
-        if: steps.commit.outputs.changed == 'true'
-        id: deploy
-        uses: actions/deploy-pages@v4
