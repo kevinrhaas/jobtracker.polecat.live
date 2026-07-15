@@ -14,6 +14,10 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 - [x] Invite-only, admin-token access gate (ECDSA-signed tokens) + gate screen.
 - [x] Marketing website with token access section + one-click launch links.
 - [x] App shell: collapsible rail nav, topbar, global search (`/`), undo/redo.
+- [x] Polecat Shell adoption (v0.1.0): the rail/topbar/right-panel chrome, fleet
+      app-switcher and What's-New feed now come from `vendor/polecat-shell/`
+      (read-only, synced from kevinrhaas/polecat-platform), keeping all
+      historical storage keys. Views system stays app-local until shell v2.
 - [x] Six themes (Agency / Polecat × dark / light / system), default Agency Dark.
 - [x] Data model with versioned schema + forward migration, history/audit, undo/redo.
 - [x] Dashboard with live KPIs, recent + favorites, status-at-a-glance.

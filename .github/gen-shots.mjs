@@ -42,7 +42,7 @@ function serve(){
 // Remove first-run chrome so screenshots show the clean, populated app:
 // the welcome tour overlay, any confetti burst, transient toasts, and (mobile)
 // the slide-in nav drawer.
-const DECLUTTER = `document.querySelectorAll('.tour-back,.tour-pop,.confetti-root,#toasts .toast,.rail-backdrop').forEach(e=>e.remove()); document.querySelector('#rail')?.classList.remove('open');`;
+const DECLUTTER = `document.querySelectorAll('.tour-back,.tour-pop,.confetti-root,#toasts .toast,.ps-rail-backdrop').forEach(e=>e.remove()); document.querySelector('.ps-rail')?.classList.remove('open');`;
 
 // Desktop views to capture: [hash section, output filename].
 const DESKTOP = [
@@ -71,7 +71,7 @@ const MOBILE = [ ['home','m-dashboard'], ['board','m-board'] ];
     const ctx = await browser.newContext({ viewport:{ width:1300, height:840 }, deviceScaleFactor:1.5 });
     const p = await ctx.newPage();
     await p.goto(url, { waitUntil:'networkidle', timeout:20000 });
-    await p.waitForSelector('#rail .rail-item', { timeout:12000 });
+    await p.waitForSelector('.ps-rail .ps-rail-item', { timeout:12000 });
     await p.waitForTimeout(1400);                 // let the seed settle & render
     await p.evaluate(DECLUTTER);
     for(const [sec,name] of DESKTOP) await shoot(p, sec, name);
@@ -90,7 +90,7 @@ const MOBILE = [ ['home','m-dashboard'], ['board','m-board'] ];
     const mctx = await browser.newContext({ viewport:{ width:390, height:844 }, isMobile:true, deviceScaleFactor:2 });
     const mp = await mctx.newPage();
     await mp.goto(url, { waitUntil:'networkidle', timeout:20000 });
-    await mp.waitForSelector('#rail .rail-item', { timeout:12000 });
+    await mp.waitForSelector('.ps-rail .ps-rail-item', { timeout:12000 });
     await mp.waitForTimeout(1400);
     for(const [sec,name] of MOBILE) await shoot(mp, sec, name);
     await mctx.close();

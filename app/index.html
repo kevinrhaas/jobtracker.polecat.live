@@ -9,6 +9,10 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
   <link rel="apple-touch-icon" href="/favicon.svg"/>
   <link rel="manifest" href="/manifest.json"/>
+  <!-- Polecat Shell (vendored): design tokens first, then the shell chrome;
+       the app's own stylesheet loads last so it can skin/override both. -->
+  <link rel="stylesheet" href="/vendor/polecat-shell/tokens.css"/>
+  <link rel="stylesheet" href="/vendor/polecat-shell/shell.css"/>
   <link rel="stylesheet" href="/css/styles.css"/>
   <!-- Apply saved theme + reduced-motion before first paint to avoid a flash. -->
   <script>
