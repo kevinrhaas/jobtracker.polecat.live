@@ -1,6 +1,6 @@
 // tour.js — a lightweight, restartable welcome tour.
 // Highlights key rail items with a popover. Restartable from Settings.
-import { el, $ } from './ui.js';
+import { el, $ } from '../vendor/polecat-shell/ui.js';
 import { Store } from './store.js';
 import { icon } from './icons.js';
 

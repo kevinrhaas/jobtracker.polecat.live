@@ -9,7 +9,7 @@ import { Access } from '../access.js';
 import { icon, jobIconFor } from '../icons.js';
 import {
   el, toast, copy, escapeHtml, avatarColor, initials, fmtDateTime, relTime,
-} from '../ui.js';
+} from '../../vendor/polecat-shell/ui.js';
 import { emptyBlock, isOverdue } from './shared.js';
 
 function currentActor(){

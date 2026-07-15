@@ -12,6 +12,11 @@ understand where things stand, then do **one substantial iteration**.
 ## Ground rules
 - **Only HTML, CSS, and JavaScript.** No new languages, frameworks, build steps,
   bundlers, or npm runtime dependencies. `playwright` is a dev-only test dep.
+- **`vendor/polecat-shell/` is READ-ONLY.** It's a versioned copy of the shared
+  Polecat Shell from kevinrhaas/polecat-platform (sha256-drift-checked); changes
+  there ship in the platform repo and arrive via `chore: polecat-shell vX.Y.Z`
+  sync PRs. App code imports the shell's ui/theme/icons from the vendor path;
+  `js/icons.js` stays app-local (the app's icon family via `registerIcons()`).
 - Keep it **local-first**: data lives in `localStorage` (key `jt.workspace`) via
   `js/store.js`, with versioned forward migration — **never wipe or break
   existing local data** on upgrade. Bump `SCHEMA` and extend `_migrate()` when

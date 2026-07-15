@@ -13,7 +13,7 @@ import { icon, JOB_ICONS, jobIconFor } from '../icons.js';
 import {
   el, field, modal, confirmDialog, promptDialog, toast, copy, debounce, celebrate,
   avatarColor, initials, fmtDate, fmtDateTime, relTime, isoDate, download,
-} from '../ui.js';
+} from '../../vendor/polecat-shell/ui.js';
 import { humanSize, attIcon, emptyBlock, attachmentHistoryNode, findSimilarJobs, confirmStatusChange } from './shared.js';
 import { putBlob, getBlob, deleteBlob } from '../idb.js';
 import { openFocusMode } from './focus.js';

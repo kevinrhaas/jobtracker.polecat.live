@@ -10,7 +10,7 @@
 // workspace this browser holds — same local-first model as everything else,
 // just with a friendlier, narrower front door.
 // -----------------------------------------------------------------------
-import { el, field } from '../ui.js';
+import { el, field } from '../../vendor/polecat-shell/ui.js';
 import { icon } from '../icons.js';
 import { Store } from '../store.js';
 import { Access } from '../access.js';

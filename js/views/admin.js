@@ -7,7 +7,7 @@
 // forget them. Everything is client-side and signed with the admin's private
 // key (see access.js) — no server is contacted.
 // -----------------------------------------------------------------------
-import { el, field, toast, copy, confirmDialog, fmtDate, fmtDateTime } from '../ui.js';
+import { el, field, toast, copy, confirmDialog, fmtDate, fmtDateTime } from '../../vendor/polecat-shell/ui.js';
 import { icon } from '../icons.js';
 import { Store } from '../store.js';
 import { Access } from '../access.js';

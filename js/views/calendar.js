@@ -11,7 +11,7 @@
 // is computed in Central Time to match the rest of the app.
 // -----------------------------------------------------------------------
 import { Store } from '../store.js';
-import { el, modal, fmtDate, initials, avatarColor, escapeHtml } from '../ui.js';
+import { el, modal, fmtDate, initials, avatarColor, escapeHtml } from '../../vendor/polecat-shell/ui.js';
 import { icon } from '../icons.js';
 import { emptyHero } from './shared.js';
 

@@ -10,10 +10,10 @@
 // -----------------------------------------------------------------------
 import { Store } from '../store.js';
 import { icon, jobIconFor } from '../icons.js';
-import { el, modal } from '../ui.js';
+import { el, modal } from '../../vendor/polecat-shell/ui.js';
 import { openJob } from './job.js';
 import { SECTIONS } from '../shell.js';
-import { toggleMode, effectiveMode } from '../theme.js';
+import { toggleMode, effectiveMode } from '../../vendor/polecat-shell/theme.js';
 import { exportCSV, exportXLS, exportJSON } from './shared.js';
 import { openWhatsNew } from '../changelog.js';
 import { startTour } from '../tour.js';
