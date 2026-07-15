@@ -117,6 +117,32 @@ async function checkPage(browser, url, mustFind, label){
       const body=document.querySelector('.modal-body');
       return (m.width>innerWidth+1) || (body && body.scrollWidth>body.clientWidth+1);
     })) throw new Error('mobile: job editor modal is wider than the 390px viewport');
+    await mp.keyboard.press('Escape'); await mp.waitForTimeout(300);
+
+    // The Jobs filter bar collapses to a single "Filters" button on phones —
+    // it must be visible, open the bottom sheet, apply a filter live (list
+    // rerenders behind the sheet), and close cleanly via Done.
+    await mp.waitForSelector('.fb-mobile', { timeout:8000 });
+    if(await mp.evaluate(()=>getComputedStyle(document.querySelector('.fb-mobile')).display==='none'))
+      throw new Error('mobile: the Filters button is hidden at 390px');
+    await mp.evaluate(()=>document.querySelector('.fb-mobile').click());
+    await mp.waitForSelector('.modal.sheet[data-side="bottom"]', { timeout:8000 });
+    // toggle the first Type pill on, verify the sheet survives the rerender, toggle it back off
+    await mp.evaluate(()=>document.querySelector('.filter-sheet .fs-pills .pill')?.click());
+    await mp.waitForTimeout(250);
+    const sheetErr = await mp.evaluate(()=>{
+      const s=document.querySelector('.modal.sheet[data-side="bottom"]');
+      if(!s) return 'sheet closed unexpectedly after toggling a filter';
+      if(s.getBoundingClientRect().width>innerWidth+1) return 'sheet is wider than the viewport';
+      if(!document.querySelector('.filter-sheet .fs-pills .pill.on')) return 'type pill did not toggle on';
+      return null;
+    });
+    if(sheetErr) throw new Error('mobile filter sheet: '+sheetErr);
+    await mp.evaluate(()=>document.querySelector('.filter-sheet .fs-pills .pill')?.click());
+    await mp.waitForTimeout(200);
+    await mp.evaluate(()=>{ [...document.querySelectorAll('.modal.sheet .btn.primary')].find(b=>b.textContent==='Done')?.click(); });
+    await mp.waitForSelector('.modal-back.sheet-back', { state:'detached', timeout:5000 })
+      .catch(()=>{ throw new Error('mobile filter sheet: Done did not close the sheet'); });
     // The dashboard (and every primary view) must render VISIBLE content on
     // mobile — not just exist in the DOM. Catches blank-screen regressions.
     for(const sec of ['home','inventory','board','calendar','metrics','reports']){
