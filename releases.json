@@ -1,5 +1,11 @@
 [
   {
+    "v": 46,
+    "title": "Filters on your phone: one button, one thumb-friendly sheet",
+    "date": "Jul 15, 2026, 4:52 PM CT",
+    "path": "/v/46/app/"
+  },
+  {
     "v": 45,
     "title": "JobTracker joins the Polecat Shell — fleet switcher and a new What’s-New panel",
     "date": "Jul 15, 2026, 4:07 PM CT",
@@ -136,11 +142,5 @@
     "title": "Metrics: a workload heatmap to spot overload before it happens",
     "date": "Jul 4, 2026, 5:35 AM CT",
     "path": "/v/23/app/"
-  },
-  {
-    "v": 22,
-    "title": "Polish: keyboard focus fixed in dropdown menus & panels",
-    "date": "Jul 4, 2026, 4:38 AM CT",
-    "path": "/v/22/app/"
   }
 ]
