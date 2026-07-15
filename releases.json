@@ -1,5 +1,11 @@
 [
   {
+    "v": 44,
+    "title": "Connect a shared database — your jobs, durable and team-shared",
+    "date": "Jul 14, 2026, 7:47 PM CT",
+    "path": "/v/44/app/"
+  },
+  {
     "v": 43,
     "title": "Metrics & Reports combined, optional sections, and a simpler job form",
     "date": "Jul 14, 2026, 6:04 PM CT",
@@ -136,11 +142,5 @@
     "title": "Jobs table: drag-to-reorder & resize columns, sticky first column",
     "date": "Jul 4, 2026, 3:48 AM CT",
     "path": "/v/21/app/"
-  },
-  {
-    "v": 20,
-    "title": "Job intake form — a friendly front door for job requests",
-    "date": "Jul 4, 2026, 2:54 AM CT",
-    "path": "/v/20/app/"
   }
 ]
