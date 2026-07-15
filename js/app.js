@@ -1,9 +1,9 @@
 // app.js — main controller: boot, invite gate, routing, topbar, global glue.
 import { Store } from './store.js';
 import { Access } from './access.js';
-import { applyTheme, toggleMode, effectiveMode } from './theme.js';
+import { applyTheme, toggleMode, effectiveMode, configure as configureTheme, setReduceMotion } from '../vendor/polecat-shell/theme.js';
 import { buildRail, SECTIONS } from './shell.js';
-import { el, $, toast, modal, debounce, fmtDate } from './ui.js';
+import { el, $, toast, modal, debounce, fmtDate } from '../vendor/polecat-shell/ui.js';
 import { icon } from './icons.js';
 import { renderHome } from './views/home.js';
 import { renderInventory } from './views/inventory.js';
@@ -51,6 +51,15 @@ let currentSection='home', currentParams={};
 })();
 
 async function boot(){
+  // Shell theme module: keep JobTracker's historical storage key + palettes
+  // (configure() must run before the first applyTheme()).
+  configureTheme({ storageKey:'jt.theme.v1', defaultTheme:'ada:dark', palettes:[
+    { key:'ada',     label:'Agency',  hint:'Agency violet / magenta / teal' },
+    { key:'polecat', label:'Polecat', hint:'Warm polecat.live house style' },
+  ]});
+  // Mirror the workspace's reduce-motion setting into the shell's override
+  // key (true = force on; null = follow the OS preference).
+  setReduceMotion(Store.settings().reduceMotion ? true : null);
   applyTheme();
   const gate = await Access.init();
   if(!gate.granted){ renderGate(gate.inviteError); return; }

@@ -9,7 +9,7 @@
 // tab, so removing or tagging a file here and there stay in sync.
 // -----------------------------------------------------------------------
 import { Store } from '../store.js';
-import { el, modal, confirmDialog, promptDialog, toast, debounce, escapeHtml, fmtDateTime, download } from '../ui.js';
+import { el, modal, confirmDialog, promptDialog, toast, debounce, escapeHtml, fmtDateTime, download } from '../../vendor/polecat-shell/ui.js';
 import { icon } from '../icons.js';
 import { humanSize, attIcon, emptyBlock, emptyHero, attachmentHistoryNode } from './shared.js';
 import { getBlob, putBlob, deleteBlob } from '../idb.js';

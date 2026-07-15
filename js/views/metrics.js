@@ -7,7 +7,7 @@
 // the picture is always current. No external charting library — just divs.
 // -----------------------------------------------------------------------
 import { Store } from '../store.js';
-import { el, escapeHtml, relTime, fmtDateTime, modal, field, toast, confirmDialog, promptDialog, anchoredPopover, uuid } from '../ui.js';
+import { el, escapeHtml, relTime, fmtDateTime, modal, field, toast, confirmDialog, promptDialog, anchoredPopover, uuid } from '../../vendor/polecat-shell/ui.js';
 import { icon, jobIconFor } from '../icons.js';
 import { isOverdue, dueSoon, ageState, emptyHero } from './shared.js';
 import { renderReports } from './reports.js';

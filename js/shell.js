@@ -1,6 +1,6 @@
 // shell.js — the collapsible, drag-to-resize "rail" navigation.
 // 64px collapsed → expandable, localStorage-persisted, mobile drawer.
-import { el } from './ui.js';
+import { el } from '../vendor/polecat-shell/ui.js';
 import { icon } from './icons.js';
 import { Store } from './store.js';
 

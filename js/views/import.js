@@ -15,7 +15,7 @@
 // rollback — the wizard just resets and no data was touched.
 // -----------------------------------------------------------------------
 import { Store } from '../store.js';
-import { el, field, toast, download, escapeHtml } from '../ui.js';
+import { el, field, toast, download, escapeHtml } from '../../vendor/polecat-shell/ui.js';
 import { icon } from '../icons.js';
 import { generateSampleJobs } from '../seed.js';
 

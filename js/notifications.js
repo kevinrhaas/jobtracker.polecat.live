@@ -11,7 +11,7 @@
 // -----------------------------------------------------------------------
 import { Store } from './store.js';
 import { isOverdue, dueSoon, ageState } from './views/shared.js';
-import { el, relTime, fmtDate, anchoredPopover } from './ui.js';
+import { el, relTime, fmtDate, anchoredPopover } from '../vendor/polecat-shell/ui.js';
 import { icon } from './icons.js';
 
 const DISMISS_KEY = 'jt.notif.dismissed';

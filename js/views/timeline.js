@@ -12,7 +12,7 @@
 // parses as UTC and drifts a day). "Today" is computed in Central Time.
 // -----------------------------------------------------------------------
 import { Store } from '../store.js';
-import { el, debounce, fmtDate, escapeHtml } from '../ui.js';
+import { el, debounce, fmtDate, escapeHtml } from '../../vendor/polecat-shell/ui.js';
 import { icon } from '../icons.js';
 import { emptyHero } from './shared.js';
 

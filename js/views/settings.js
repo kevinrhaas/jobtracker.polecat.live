@@ -8,11 +8,11 @@
 // active section/list are kept in module-level state so we land back where
 // the user was after a re-render.
 // -----------------------------------------------------------------------
-import { el, field, toast, modal, confirmDialog, download, escapeHtml, uuid, isoDate, avatarColor, initials, copy } from '../ui.js';
+import { el, field, toast, modal, confirmDialog, download, escapeHtml, uuid, isoDate, avatarColor, initials, copy } from '../../vendor/polecat-shell/ui.js';
 import { icon, JOB_ICONS } from '../icons.js';
 import { Store } from '../store.js';
 import { COLUMNS, encodeViewShare } from './shared.js';
-import { PALETTES, MODES, getTheme, setTheme } from '../theme.js';
+import { PALETTES, MODES, getTheme, setTheme, setReduceMotion } from '../../vendor/polecat-shell/theme.js';
 import { startTour } from '../tour.js';
 import { APP_VERSION, LATEST, RELEASE, openWhatsNew } from '../changelog.js';
 import { REMOTE_SOURCES, sourceById } from '../sources/index.js';
@@ -117,7 +117,9 @@ export function renderSettings(view, ctx, params={}){
       switchRow('Reduce motion', 'Minimize animations and transitions across the app.',
         !!Store.settings().reduceMotion, v=>{
           Store.setSetting('reduceMotion', v);
-          document.documentElement.setAttribute('data-reduce-motion', v?'1':'');
+          // Shell theme module stamps html[data-reduce-motion] (true = force
+          // on; null = follow the OS preference again).
+          setReduceMotion(v ? true : null);
           toast(v?'Motion reduced':'Motion restored',{kind:'ok', ms:1500});
         }),
       switchRow('Simple mode', 'Hide advanced fields (POs, GL, invoicing) in the job editor for a cleaner form.',

@@ -8,7 +8,7 @@
 // Store.updateCampaign / removeCampaign, so nothing goes stale.
 // -----------------------------------------------------------------------
 import { Store } from '../store.js';
-import { el, field, modal, toast, confirmDialog, escapeHtml, fmtDate } from '../ui.js';
+import { el, field, modal, toast, confirmDialog, escapeHtml, fmtDate } from '../../vendor/polecat-shell/ui.js';
 import { icon, jobIconFor } from '../icons.js';
 import { isOverdue, emptyHero } from './shared.js';
 

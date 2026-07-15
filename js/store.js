@@ -15,7 +15,7 @@
 //   • Job numbers auto-increment and are guaranteed unique.
 //   • last-write-wins with updatedAt; conflict detection warns the caller.
 // -----------------------------------------------------------------------
-import { uuid, isoDate } from './ui.js';
+import { uuid, isoDate } from '../vendor/polecat-shell/ui.js';
 import { jobIconFor } from './icons.js';
 import { seedJobs, DEFAULT_META, DEFAULT_VIEWS, DEFAULT_DASHBOARDS } from './seed.js';
 import { clearBlobs } from './idb.js';

@@ -11,7 +11,7 @@
 // stamps it with the real commit time so timestamps are never fabricated.
 // `ts` is ISO-8601 UTC; `date` is a derived human-readable Central Time alias
 // (regenerated from `ts` by .github/stamp-changelog.mjs — do NOT hand-edit it).
-import { el, modal } from './ui.js';
+import { el, modal } from '../vendor/polecat-shell/ui.js';
 import { icon } from './icons.js';
 
 export const CHANGELOG = [

@@ -4,7 +4,7 @@
 // Purely a reference overlay: no state, no side effects beyond rendering a
 // modal. Grouped so it doubles as a quick "what can this app do" primer.
 // -----------------------------------------------------------------------
-import { el, modal } from './ui.js';
+import { el, modal } from '../vendor/polecat-shell/ui.js';
 import { icon } from './icons.js';
 
 const GROUPS = [

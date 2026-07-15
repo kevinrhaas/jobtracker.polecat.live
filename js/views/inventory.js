@@ -9,7 +9,7 @@
 // survives the fresh re-render app.js fires on every 'jobs'/'meta' event.
 // -----------------------------------------------------------------------
 import { Store } from '../store.js';
-import { el, $$, field, modal, confirmDialog, toast, debounce, escapeHtml, fmtDate, isoDate, celebrate, anchoredPopover, copy } from '../ui.js';
+import { el, $$, field, modal, confirmDialog, toast, debounce, escapeHtml, fmtDate, isoDate, celebrate, anchoredPopover, copy } from '../../vendor/polecat-shell/ui.js';
 import { icon } from '../icons.js';
 import {
   COLUMNS, ALL_COLUMN_KEYS, applyFilters, sortJobs,

@@ -7,7 +7,7 @@
 // aging/overdue helpers so it always reflects the current data.
 // -----------------------------------------------------------------------
 import { Store } from '../store.js';
-import { el, escapeHtml, fmtDate, relTime, celebrate } from '../ui.js';
+import { el, escapeHtml, fmtDate, relTime, celebrate } from '../../vendor/polecat-shell/ui.js';
 import { icon, jobIconFor } from '../icons.js';
 import { isOverdue, dueSoon, ageState, emptyHero, applyFilters } from './shared.js';
 

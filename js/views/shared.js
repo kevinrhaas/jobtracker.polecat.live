@@ -3,7 +3,7 @@
 // shared by the inventory list, board, calendar and metrics views.
 // -----------------------------------------------------------------------
 import { Store } from '../store.js';
-import { fmtDate, fmtDateTime, download, el, confirmDialog } from '../ui.js';
+import { fmtDate, fmtDateTime, download, el, confirmDialog } from '../../vendor/polecat-shell/ui.js';
 import { icon } from '../icons.js';
 import { illo } from '../illustrations.js';
 

@@ -7,7 +7,7 @@
 // (see store.js / access.js / theme.js / app.js). Topic clicks scroll to the
 // matching section; an IntersectionObserver keeps the nav highlight in sync.
 // -----------------------------------------------------------------------
-import { el, escapeHtml } from '../ui.js';
+import { el, escapeHtml } from '../../vendor/polecat-shell/ui.js';
 import { icon } from '../icons.js';
 import { startTour } from '../tour.js';
 import { openWhatsNew } from '../changelog.js';

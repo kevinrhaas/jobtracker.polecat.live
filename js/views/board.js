@@ -12,7 +12,7 @@
 // is visible without touching the underlying data.
 // -----------------------------------------------------------------------
 import { Store } from '../store.js';
-import { el, debounce, avatarColor, initials, fmtDate, toast, celebrate } from '../ui.js';
+import { el, debounce, avatarColor, initials, fmtDate, toast, celebrate } from '../../vendor/polecat-shell/ui.js';
 import { icon } from '../icons.js';
 import { ageState, isOverdue, emptyHero, confirmStatusChange } from './shared.js';
 

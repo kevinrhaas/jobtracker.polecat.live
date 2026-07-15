@@ -1,10 +1,12 @@
 // -----------------------------------------------------------------------
-// ui.js — tiny DOM toolkit shared by every view.
+// ui.js — Polecat Shell DOM toolkit + feedback primitives.
 //
 // No framework, no build step. `el()` builds elements from a props object,
-// plus a small set of primitives (toast, modal, confirm) and formatting
-// helpers used across the app. Everything here is pure and side-effect free
-// except the toast/modal mounts, which append to well-known root nodes.
+// plus a small set of primitives (toast, modal, sheet, popover, confirm)
+// and formatting helpers shared across the fleet. Everything here is pure
+// and side-effect free except the toast/modal mounts, which append to
+// well-known root nodes. Ported from JobTracker's js/ui.js (class names kept
+// verbatim — the shell CSS is the matching port), plus sheet() from Relay.
 // -----------------------------------------------------------------------
 
 export const $  = (sel, root=document) => root.querySelector(sel);
@@ -64,10 +66,14 @@ export function toast(title, {body='', kind='info', ms=3200}={}){
   return kill;
 }
 
-// Selector for elements a keyboard user can land on, used by the modal
-// focus trap below.
+// Selector for elements a keyboard user can land on, used by the dialog
+// focus traps below.
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), ' +
   'select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+// Modals and sheets share one dialog stack: only the TOPMOST overlay reacts
+// to Escape/Tab (a confirm over a sheet must not close the sheet too).
+const DIALOG_BACKS = '.modal-back, .sheet-back';
 
 // ---- modal --------------------------------------------------------------
 // Returns { root, hide }. Body/foot are DOM nodes or arrays of nodes.
@@ -102,10 +108,10 @@ export function modal({ title, icon:iconHtml='', body, foot, wide=false, onClose
     if(trigger && document.contains(trigger) && typeof trigger.focus==='function') trigger.focus();
   }
   function onKey(e){
-    // When dialogs stack (e.g. a confirm on top of the job editor), only the
+    // When dialogs stack (e.g. a confirm on top of an editor), only the
     // topmost should react — otherwise Escape would close every layer at
     // once and the Tab trap below would fight over focus.
-    const stack = $$('.modal-back');
+    const stack = $$(DIALOG_BACKS);
     if(stack[stack.length-1] !== back) return;
     if(e.key==='Escape'){ hide(); return; }
     if(e.key!=='Tab') return;
@@ -121,9 +127,62 @@ export function modal({ title, icon:iconHtml='', body, foot, wide=false, onClose
   return { root:box, back, hide };
 }
 
+// ---- sheet ----------------------------------------------------------------
+// Slide-in side panel (record editors, What's-New) — modal()'s tall sibling.
+// Ported from Relay's ui.js sheet(); class names ADAPTED to this file's
+// modal-family naming (Relay used overlay/.show): the backdrop is
+// `.sheet-back` (cf. `.modal-back`), the panel `.sheet` with `.sheet-head` >
+// `.sheet-title`, `.sheet-body`, `.sheet-foot`, and the shown-state class is
+// `.in` like every other overlay here. The panel RIDES the modal classes
+// (`modal-back sheet-back` / `modal sheet`) so shell.css styles one dialog
+// family; `data-side="left"|"bottom"` picks the edge (default slides in from
+// the right). Same focus-trap / Escape / stacking behavior as modal().
+export function sheet({ title, icon:iconHtml='', body, foot, side='right', onClose }={}){
+  const trigger = document.activeElement;
+  const back = el('div',{class:'modal-back sheet-back'});
+  const box  = el('div',{class:'modal sheet', 'data-side':side, role:'dialog', 'aria-modal':'true', 'aria-label':title||'Panel', tabindex:'-1'});
+  const head = el('div',{class:'sheet-head'});
+  head.append(el('div',{class:'sheet-title', html:`${iconHtml||''}<span>${escapeHtml(title||'')}</span>`}));
+  head.append(el('button',{class:'btn icon ghost', 'aria-label':'Close', html:'&times;', onclick:()=>hide()}));
+  const content = el('div',{class:'sheet-body'});
+  if(body) (Array.isArray(body)?body:[body]).forEach(b=>content.append(b));
+  box.append(head, content);
+  if(foot){ const f=el('div',{class:'sheet-foot'}); (Array.isArray(foot)?foot:[foot]).forEach(b=>f.append(b)); box.append(f); }
+  back.append(box);
+  document.body.append(back);
+  requestAnimationFrame(()=>{
+    back.classList.add('in');
+    const first = box.querySelector(FOCUSABLE);
+    (first||box).focus();
+  });
+  let closed = false;
+  function hide(){
+    if(closed) return; closed = true;
+    // 240ms matches the slide-out transition (slightly longer than modal's fade).
+    back.classList.remove('in'); setTimeout(()=>back.remove(),240); onClose&&onClose();
+    document.removeEventListener('keydown', onKey);
+    if(trigger && document.contains(trigger) && typeof trigger.focus==='function') trigger.focus();
+  }
+  function onKey(e){
+    const stack = $$(DIALOG_BACKS);
+    if(stack[stack.length-1] !== back) return;
+    if(e.key==='Escape'){ hide(); return; }
+    if(e.key!=='Tab') return;
+    const focusable = $$(FOCUSABLE, box);
+    if(!focusable.length){ e.preventDefault(); return; }
+    const firstEl = focusable[0], lastEl = focusable[focusable.length-1];
+    if(e.shiftKey && document.activeElement===firstEl){ e.preventDefault(); lastEl.focus(); }
+    else if(!e.shiftKey && document.activeElement===lastEl){ e.preventDefault(); firstEl.focus(); }
+    else if(!box.contains(document.activeElement)){ e.preventDefault(); firstEl.focus(); }
+  }
+  document.addEventListener('keydown', onKey);
+  back.addEventListener('mousedown', e=>{ if(e.target===back) hide(); });
+  return { root:box, back, body:content, hide };
+}
+
 // ---- anchored popover -----------------------------------------------------
 // Shared plumbing for the lightweight dropdown/menu panels anchored to a
-// button (filter checklists, the notifications feed, export menus) — as
+// button (filter checklists, notification feeds, export menus) — as
 // opposed to modal()'s full backdrop dialog. Positions the panel, closes on
 // outside click / Escape, keeps Tab cycling inside while open, and returns
 // focus to the anchor on close, matching modal()'s focus hygiene.
@@ -204,8 +263,8 @@ export function promptDialog({ title='', message='', label='', placeholder='', o
 // ---- confetti celebration -------------------------------------------------
 // A lightweight, dependency-free confetti burst for delightful moments (e.g.
 // marking a job complete). Skips entirely when the OS or in-app "reduce
-// motion" preference is set — html[data-reduce-motion] is toggled by
-// Settings → Appearance (see theme.js / settings.js).
+// motion" preference is set — html[data-reduce-motion] is toggled by the
+// shell's theme/settings modules.
 const CONFETTI_COLORS = ['var(--brand)','var(--brand-2)','var(--accent)','var(--accent-2)','var(--success)','var(--warning)'];
 export function celebrate(n=42){
   const reduced = document.documentElement.getAttribute('data-reduce-motion')==='1' ||
@@ -236,7 +295,7 @@ export function initials(name){
 }
 
 // ---- Central Time formatting -------------------------------------------
-// All timestamps display in Central Time (CT) per requirements.
+// All timestamps display in Central Time (CT) per fleet requirements.
 const CT = 'America/Chicago';
 export function fmtDate(d){
   if(!d) return '';

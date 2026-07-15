@@ -8,7 +8,7 @@
 // this is a head start, not a replacement for the editor).
 // -----------------------------------------------------------------------
 import { Store } from '../store.js';
-import { el, modal, isoDate } from '../ui.js';
+import { el, modal, isoDate } from '../../vendor/polecat-shell/ui.js';
 import { icon, jobIconFor } from '../icons.js';
 import { normName, diceSimilarity } from './shared.js';
 

@@ -9,7 +9,7 @@
 // works as the "end of year report" a manager would otherwise build by hand.
 // -----------------------------------------------------------------------
 import { Store } from '../store.js';
-import { el, download, toast } from '../ui.js';
+import { el, download, toast } from '../../vendor/polecat-shell/ui.js';
 import { icon } from '../icons.js';
 import { emptyHero } from './shared.js';
 
