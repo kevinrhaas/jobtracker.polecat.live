@@ -26,6 +26,7 @@ export async function finalizeSnapshot(dir, v){
   shell = shell
     .replace(/"\/css\//g, `"/${dir}/css/`)
     .replace(/"\/js\//g,  `"/${dir}/js/`)
+    .replace(/"\/vendor\//g, `"/${dir}/vendor/`)
     .replace(/"\/favicon\.svg"/g, `"/${dir}/favicon.svg"`);
   if(!shell.includes('id="__archived"')){
     shell = shell.replace(/<\/body>/i, archivedBanner(v) + '\n</body>');
@@ -85,7 +86,10 @@ if(import.meta.url === `file://${process.argv[1]}`){
   const dir = `v/${v}`;
   await rm(dir, { recursive:true, force:true });
   await mkdir(dir, { recursive:true });
-  for(const item of ['app','css','js','favicon.svg','assets']){
+  // vendor/ (the Polecat Shell) ships inside every snapshot: the app's JS
+  // imports it RELATIVELY (../vendor/…), so a frozen build must carry the
+  // exact shell version it was built against.
+  for(const item of ['app','css','js','vendor','favicon.svg','assets']){
     if(existsSync(item)) await cp(item, `${dir}/${item}`, { recursive:true });
   }
   await finalizeSnapshot(dir, v);

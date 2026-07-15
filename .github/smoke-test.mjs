@@ -60,7 +60,7 @@ async function checkPage(browser, url, mustFind, label){
     // 1) marketing page
     await checkPage(browser, `http://localhost:${PORT}/`, '.hero h1', 'marketing');
     // 2) gated app — token in URL should unlock and render the rail
-    await checkPage(browser, `http://localhost:${PORT}/app/?token=${encodeURIComponent(TEAM_TOKEN)}`, '#rail .rail-item', 'app');
+    await checkPage(browser, `http://localhost:${PORT}/app/?token=${encodeURIComponent(TEAM_TOKEN)}`, '.ps-rail .ps-rail-item', 'app');
     // 3) app deep sections shouldn't throw — click a few rail items
     const page = await browser.newPage();
     const errs=[]; page.on('pageerror',e=>errs.push(String(e)));
@@ -74,7 +74,7 @@ async function checkPage(browser, url, mustFind, label){
       // every remaining section. Dispatch the click straight on the element
       // instead: it still exercises the real rail-item onclick handler, just
       // without the actionability/occlusion wait.
-      await page.evaluate(s=>document.querySelector(`.rail-item[data-sec="${s}"]`)?.click(), sec);
+      await page.evaluate(s=>document.querySelector(`.ps-rail-item[data-sec="${s}"]`)?.click(), sec);
       await page.waitForTimeout(350);
       // A view that renders a bare "undefined" / "null" / "[object Object]" text
       // node (e.g. a step function that forgot to return its element) doesn't
@@ -106,8 +106,8 @@ async function checkPage(browser, url, mustFind, label){
       throw new Error('mobile: marketing page overflows horizontally at 390px');
 
     await mp.goto(`http://localhost:${PORT}/app/?token=${encodeURIComponent(TEAM_TOKEN)}#inventory`, { waitUntil:'domcontentloaded' });
-    await mp.waitForSelector('#rail .rail-item'); await mp.waitForTimeout(300);
-    if(await mp.evaluate(()=>{ const b=[...document.querySelectorAll('.topbar > *')].pop(); return b ? b.getBoundingClientRect().right > innerWidth+1 : false; }))
+    await mp.waitForSelector('.ps-rail .ps-rail-item'); await mp.waitForTimeout(300);
+    if(await mp.evaluate(()=>{ const b=[...document.querySelectorAll('.ps-topbar > *')].pop(); return b ? b.getBoundingClientRect().right > innerWidth+1 : false; }))
       throw new Error('mobile: app topbar buttons overflow the 390px viewport');
     await mp.waitForSelector('table.tbl tbody tr', { timeout:8000 }).catch(()=>{});
     await mp.evaluate(()=>{ const r=document.querySelector('table.tbl tbody tr'); if(r) r.click(); });
@@ -169,7 +169,7 @@ async function checkPage(browser, url, mustFind, label){
         wp.on('pageerror', e=>wErrs.push('pageerror: '+e));
         wp.on('console', m=>{ if(m.type()==='error') wErrs.push('console: '+m.text()); });
         await wp.goto(`http://localhost:${PORT}/app/?token=${encodeURIComponent(TEAM_TOKEN)}`, { waitUntil:'networkidle', timeout:20000 });
-        await wp.waitForSelector('#rail .rail-item', { timeout:12000 });
+        await wp.waitForSelector('.ps-rail .ps-rail-item', { timeout:12000 });
         const bad = [];
         for(const sec of SECTIONS){
           await wp.evaluate(s=>location.hash=s, sec); await wp.waitForTimeout(320);

@@ -1,5 +1,11 @@
 [
   {
+    "v": 45,
+    "title": "JobTracker joins the Polecat Shell — fleet switcher and a new What’s-New panel",
+    "date": "Jul 15, 2026, 4:07 PM CT",
+    "path": "/v/45/app/"
+  },
+  {
     "v": 44,
     "title": "Connect a shared database — your jobs, durable and team-shared",
     "date": "Jul 14, 2026, 7:47 PM CT",
@@ -136,11 +142,5 @@
     "title": "Polish: keyboard focus fixed in dropdown menus & panels",
     "date": "Jul 4, 2026, 4:38 AM CT",
     "path": "/v/22/app/"
-  },
-  {
-    "v": 21,
-    "title": "Jobs table: drag-to-reorder & resize columns, sticky first column",
-    "date": "Jul 4, 2026, 3:48 AM CT",
-    "path": "/v/21/app/"
   }
 ]
