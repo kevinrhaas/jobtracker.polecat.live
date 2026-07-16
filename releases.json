@@ -1,5 +1,11 @@
 [
   {
+    "v": 48,
+    "title": "Big workspaces stay fast: Board and Timeline scale to 1,000+ jobs",
+    "date": "Jul 15, 2026, 10:09 PM CT",
+    "path": "/v/48/app/"
+  },
+  {
     "v": 47,
     "title": "Deleting files: undo instead of \"are you sure?\"",
     "date": "Jul 15, 2026, 9:54 PM CT",
@@ -136,11 +142,5 @@
     "title": "Focus mode: a calm, deep-linkable single-job view",
     "date": "Jul 4, 2026, 6:57 AM CT",
     "path": "/v/25/app/"
-  },
-  {
-    "v": 24,
-    "title": "Board: WIP limits to flag overloaded stages",
-    "date": "Jul 4, 2026, 6:20 AM CT",
-    "path": "/v/24/app/"
   }
 ]

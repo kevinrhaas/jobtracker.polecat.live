@@ -310,7 +310,15 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       (e.g. "no cards match", "no attachments match your search") keep the
       smaller icon treatment since they're a quick nudge, not a first-run
       moment.
-- [ ] Performance: virtualize very large lists/boards (>1000 jobs).
+- [x] Performance: virtualize very large lists/boards (>1000 jobs). ✅ Shipped —
+      Board columns materialize cards in chunks of 40 as you scroll (an
+      IntersectionObserver sentinel that's also a "Show more" button; column
+      counts always show the true total; drops target the column body so drag
+      works regardless). Timeline caps the grid at 200 rows with an explicit
+      "Show all N" footer button (never a silent cut). Verified with a
+      1,500-job workspace: board materializes 280 cards instead of ~1,500,
+      timeline renders in ~100ms. Inventory was already paginated; Calendar
+      already caps per-day chips.
 - [x] **Focus hygiene for anchored popovers** ✅ Shipped — `modal()` already
       trapped Tab and restored focus to the trigger on close, but the three
       lighter-weight anchored popovers (Jobs' Type/Filters checklist
