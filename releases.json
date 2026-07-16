@@ -1,5 +1,11 @@
 [
   {
+    "v": 50,
+    "title": "Sync conflicts: see them, pick a winner — no more silent overwrites",
+    "date": "Jul 15, 2026, 10:56 PM CT",
+    "path": "/v/50/app/"
+  },
+  {
     "v": 49,
     "title": "Connecting a database is harder to get wrong",
     "date": "Jul 15, 2026, 10:34 PM CT",
@@ -136,11 +142,5 @@
     "title": "Polish: illustrated empty states across the app",
     "date": "Jul 4, 2026, 7:59 AM CT",
     "path": "/v/27/app/"
-  },
-  {
-    "v": 26,
-    "title": "Focus mode: a calm, deep-linkable single-job view",
-    "date": "Jul 4, 2026, 7:22 AM CT",
-    "path": "/v/26/app/"
   }
 ]

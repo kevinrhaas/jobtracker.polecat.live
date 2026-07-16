@@ -270,7 +270,15 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       foreign-DB table summary, one-tap pre-adopt backup download, and a
       failed adopt no longer strands the sync status on "connecting")
       against a configured endpoint (mocked adapter first).
-- [ ] **Conflict UI** — surface last-write-wins conflicts with a diff + resolve.
+- [x] **Conflict UI** ✅ Shipped — every save now stamps a revision + writer id
+      in the shared database's meta; before pushing, sync.js checks whether
+      another writer moved the revision and, if so, flags a Conflict (pulsing
+      top-bar chip) instead of clobbering them. Clicking it opens a resolve
+      dialog with a job-level diff (changed in both / only theirs / only
+      yours) and three ways out: Keep mine (force-push), Take theirs (adopt,
+      with a one-tap backup first), or decide later. Also fixed along the way:
+      settings-only edits never triggered a sync push, and the sync chip
+      claimed "Synced" while still connecting.
 
 ### Polish backlog (for polish runs)
 - [x] **Micro-interactions: confetti on job completion.** ✅ Shipped — moving a
