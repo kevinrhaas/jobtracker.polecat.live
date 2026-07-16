@@ -1,5 +1,11 @@
 [
   {
+    "v": 47,
+    "title": "Deleting files: undo instead of \"are you sure?\"",
+    "date": "Jul 15, 2026, 9:54 PM CT",
+    "path": "/v/47/app/"
+  },
+  {
     "v": 46,
     "title": "Filters on your phone: one button, one thumb-friendly sheet",
     "date": "Jul 15, 2026, 4:52 PM CT",
@@ -136,11 +142,5 @@
     "title": "Board: WIP limits to flag overloaded stages",
     "date": "Jul 4, 2026, 6:20 AM CT",
     "path": "/v/24/app/"
-  },
-  {
-    "v": 23,
-    "title": "Metrics: a workload heatmap to spot overload before it happens",
-    "date": "Jul 4, 2026, 5:35 AM CT",
-    "path": "/v/23/app/"
   }
 ]

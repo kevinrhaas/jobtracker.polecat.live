@@ -391,11 +391,13 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
   "N/limit" so the overage is obvious at a glance — purely visual, moving a
   card into a full column still works, it just nudges triage before work
   piles up in one stage.
-- **Undo toast for destructive bulk actions** — bulk delete / bulk status
-  change already goes through the existing undo/redo stack, but a job editor
-  or inventory action taken *outside* that flow (e.g. Documents' bulk
-  attachment delete) should surface a "Undo" toast for a few seconds, the
-  same safety net users already get elsewhere.
+- **Undo toast for destructive bulk actions** ✅ Shipped — attachment deletes
+  (Documents bulk + single, and the job editor's Attachments tab) now apply
+  instantly and surface a 7-second "Undo" toast instead of a confirm dialog;
+  the IndexedDB blob is only deleted once the window closes (flushed on
+  pagehide so closing the tab can't leak), so Undo restores the file
+  completely. Helper: `undoToast()` in views/shared.js — reuse it for any
+  future destructive action outside the store's undo stack.
 - **Command palette recent/frequent ranking** — the `/` palette lists
   commands and jobs in a fixed order; ranking by recency + frequency of use
   (a small localStorage tally, no new schema) would make the 2nd and 3rd
