@@ -265,7 +265,10 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 ### Backend progression (design only until asked)
 - [ ] **Phase 2 API bridge** — a settings-driven `fetch()` data adapter behind a
       feature flag; graceful fallback to local. Document the REST contract.
-- [ ] **Remote DB connect flow** — real "inspect source → seed if empty" wizard
+- [x] **Remote DB connect flow** ✅ Shipped (v44 built the inspect→seed wizard;
+      v49 hardened it: busy-guarded connect button, newer-schema block,
+      foreign-DB table summary, one-tap pre-adopt backup download, and a
+      failed adopt no longer strands the sync status on "connecting")
       against a configured endpoint (mocked adapter first).
 - [ ] **Conflict UI** — surface last-write-wins conflicts with a diff + resolve.
 
