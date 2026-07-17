@@ -16,6 +16,17 @@ import { initWhatsNew, hasUnseen } from '../vendor/polecat-shell/whatsnew.js';
 
 export const CHANGELOG = [
   {
+    v: 51,
+    title: 'Fleet shell refreshed under the hood',
+    kind: 'polish',
+    ts: '2026-07-17T00:54:52.077Z',
+    date: 'Jul 16, 2026, 7:54 PM CT',
+    items: [
+      'The shared Polecat Shell (rail, topbar, waffle switcher, toasts, dialogs) synced up to its latest release: the fleet switcher now lists Model Server, keyboard focus rings on the rail toggle/brand button, and toasts support an inline “Undo” action.',
+      'No workflow changes — this is plumbing under the app frame you already use.',
+    ],
+  },
+  {
     v: 50,
     title: 'Sync conflicts: see them, pick a winner — no more silent overwrites',
     kind: 'feature',
