@@ -7,7 +7,7 @@
 // online visit is never served stale JS after a deploy (this app ships new
 // builds hourly). The cache only kicks in when the network is unavailable,
 // which is exactly what "installable / offline-capable" needs here.
-const CACHE = 'jt-shell-v3';   // bumped: shell chrome adoption (initShell + rightPanel + waffle)
+const CACHE = 'jt-shell-v4';   // bumped: vendored polecat-shell synced 0.1.0 -> 0.4.0
 
 self.addEventListener('install', (e) => {
   self.skipWaiting();
