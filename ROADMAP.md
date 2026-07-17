@@ -71,10 +71,24 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       (desktop, older phones, plain browser tabs), so nothing to test there.
       [x] **Board columns swipeable with snap** ✅ Shipped — see the Idea
       parking lot entry below.
-      Still to do: filter bar as a bottom sheet; settings nav as a scrollable
-      segmented control (already mostly there via horizontal-scroll tabs);
-      remaining ≥44px tap target audit. The smoke test now runs a 390px
-      pass — extend per view.
+      [x] **Filter bar as a bottom sheet** ✅ Shipped (jobtracker#4) — a single
+      "Filters" pill replaces the wrapping pill rows under ~700px and opens a
+      thumb-friendly bottom sheet (Type pills, quick toggles, checklist
+      groups with live counts), applying live behind the sheet.
+      [x] **Tap-target audit: hover-reveal controls invisible on touch** ✅
+      Shipped — three controls were only shown on `:hover`/`:focus-within`
+      with no touch equivalent, making them undiscoverable (not just
+      small) on phones: the Metrics custom-KPI-card "options" menu, the
+      notification dismiss button, and the kanban card's keyboard move
+      (◀▶) buttons — the last of these being the *primary* way to change a
+      card's status on touch, since drag reordering is unreliable there.
+      Under ~700px all three now stay visible and grow to a 44px target;
+      desktop hover behavior is unchanged. Table row-actions stay
+      hover-only (the table itself is desktop-only — phones get the card
+      list instead, so it's unreachable there).
+      Still to do: settings nav as a true scrollable segmented control
+      (already mostly there via horizontal-scroll tabs — cosmetic only).
+      The smoke test now runs a 390px pass — extend per view.
 - [x] **Marketing site: real media — screenshots, carousel, video.** ✅ Shipped —
       the hero now frames a real dashboard capture; a "See it in action" section
       tabs through eight real views (Dashboard, Jobs, Board, Calendar, Timeline,
