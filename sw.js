@@ -7,7 +7,7 @@
 // online visit is never served stale JS after a deploy (this app ships new
 // builds hourly). The cache only kicks in when the network is unavailable,
 // which is exactly what "installable / offline-capable" needs here.
-const CACHE = 'jt-shell-v5';   // bumped: mobile tap-target fixes to styles.css
+const CACHE = 'jt-shell-v6';   // bumped: settings nav segmented control on styles.css
 
 self.addEventListener('install', (e) => {
   self.skipWaiting();
