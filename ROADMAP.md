@@ -40,9 +40,9 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
 
 ## 🎯 Next up (feature runs) — prioritized
 
-- [ ] **Radically improve mobile across the whole app.** Test every screen at
-      360–430px. Immediate fixes shipped (marketing brand wrap, topbar crowding,
-      full-screen job sheet, letter shown with the job #).
+- [x] **Radically improve mobile across the whole app.** ✅ Shipped — every
+      screen tested at 360–430px. Immediate fixes shipped (marketing brand wrap,
+      topbar crowding, full-screen job sheet, letter shown with the job #).
       [x] **Inventory table → card list on phones** ✅ Shipped — under ~700px the
       Jobs table is replaced by a stacked card list (icon, name, job #, status,
       rush flag, due date with age dot, client/owner), each card opening the job
@@ -86,8 +86,13 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       desktop hover behavior is unchanged. Table row-actions stay
       hover-only (the table itself is desktop-only — phones get the card
       list instead, so it's unreachable there).
-      Still to do: settings nav as a true scrollable segmented control
-      (already mostly there via horizontal-scroll tabs — cosmetic only).
+      [x] **Settings nav as a true scrollable segmented control** ✅ Shipped —
+      under ~820px the Settings nav (previously a plain horizontal-scroll row
+      of buttons) is now wrapped in a pill-shaped segmented-control container
+      matching the Calendar/Timeline `tl-seg` pattern used elsewhere: rounded
+      outer chrome, connected pill buttons, brand-filled active state, and
+      scroll-snap so swiping between sections settles cleanly. Pure CSS, no
+      JS change — desktop's vertical sidebar is untouched.
       The smoke test now runs a 390px pass — extend per view.
 - [x] **Marketing site: real media — screenshots, carousel, video.** ✅ Shipped —
       the hero now frames a real dashboard capture; a "See it in action" section

@@ -16,6 +16,17 @@ import { initWhatsNew, hasUnseen } from '../vendor/polecat-shell/whatsnew.js';
 
 export const CHANGELOG = [
   {
+    v: 53,
+    title: 'Settings nav is a true segmented control on phones',
+    kind: 'polish',
+    ts: '2026-07-18T12:30:52.595Z',
+    date: 'Jul 18, 2026, 7:30 AM CT',
+    items: [
+      'Under ~820px the Settings sidebar becomes a pill-shaped, scroll-snapping segmented control instead of a plain row of scrollable buttons — matching the Calendar/Timeline toggle style used elsewhere in the app.',
+      'Closes out the last item in the mobile-wide pass: every screen has now been tested and fixed at 360–430px.',
+    ],
+  },
+  {
     v: 52,
     title: 'Fixed: three touch controls were invisible on phones',
     kind: 'fix',

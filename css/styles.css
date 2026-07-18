@@ -675,9 +675,13 @@ input[type=color].color-input{width:34px;height:30px;flex:none;padding:2px;borde
 
 @media (max-width:820px){
   .settings-layout{grid-template-columns:1fr}
-  .set-nav{flex-direction:row;overflow-x:auto;position:static;padding-bottom:4px;scrollbar-width:thin}
-  .set-nav .nav-item{white-space:nowrap;width:auto}
+  .set-nav{flex-direction:row;overflow-x:auto;position:static;gap:2px;padding:3px;margin-bottom:4px;
+    border:1px solid var(--border);border-radius:999px;background:var(--surface);
+    scrollbar-width:thin;scroll-snap-type:x proximity}
+  .set-nav .nav-item{white-space:nowrap;width:auto;flex:none;border-radius:999px;padding:8px 14px;scroll-snap-align:start}
   .set-nav .nav-item span{display:inline}
+  .set-nav .nav-item.active{background:var(--brand);color:#fff}
+  .set-nav .nav-item.active .ic{opacity:1}
 }
 
 /* =========================================================================
