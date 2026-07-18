@@ -1,5 +1,11 @@
 [
   {
+    "v": 54,
+    "title": "Dashboard KPI tiles are real links now",
+    "date": "Jul 18, 2026, 5:35 PM CT",
+    "path": "/v/54/app/"
+  },
+  {
     "v": 52,
     "title": "Fixed: three touch controls were invisible on phones",
     "date": "Jul 17, 2026, 1:34 PM CT",
@@ -136,11 +142,5 @@
     "title": "Saved views: share a filter/column/sort combo via link",
     "date": "Jul 4, 2026, 9:01 AM CT",
     "path": "/v/29/app/"
-  },
-  {
-    "v": 28,
-    "title": "Attachment version history",
-    "date": "Jul 4, 2026, 8:21 AM CT",
-    "path": "/v/28/app/"
   }
 ]
