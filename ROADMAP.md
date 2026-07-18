@@ -300,6 +300,16 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       claimed "Synced" while still connecting.
 
 ### Polish backlog (for polish runs)
+- [x] **Dashboard KPI tiles are clickable.** ✅ Shipped — the six stat tiles
+      (Active jobs, Due this week, Overdue, Completed this month, Avg cycle,
+      On-time delivery) were plain unclickable numbers, flagged repeatedly
+      across UX sweeps. Each now jumps to Jobs filtered to exactly the set
+      behind it (keyboard-accessible, matching the "Status at a glance"
+      pills), with a dismissible "Filtered from the Dashboard" banner since
+      an ids-based filter has no pill of its own to show/clear. Same pattern
+      manager and relay already shipped on their dashboards. Also added the
+      changelog's missing `LATEST_VERSION` export (fleet contract, flagged
+      three tech sweeps running).
 - [x] **Micro-interactions: confetti on job completion.** ✅ Shipped — moving a
       job into any terminal, non-Canceled status (via the Details tab's Status
       field, or dragging a card into a terminal board column) fires a themed
