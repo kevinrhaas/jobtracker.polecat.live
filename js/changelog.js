@@ -16,6 +16,17 @@ import { initWhatsNew, hasUnseen } from '../vendor/polecat-shell/whatsnew.js';
 
 export const CHANGELOG = [
   {
+    v: 59,
+    title: 'One blue-green brand color, everywhere',
+    kind: 'polish',
+    ts: '2026-07-22T20:56:53.101Z',
+    date: 'Jul 22, 2026, 3:56 PM CT',
+    items: [
+      'JobTracker’s blue-green brand gradient now shows up consistently — the rail mark, the app-switcher tiles, and the polecat.live launcher tile all match the favicon, replacing an off-brand purple that had crept onto the launcher.',
+      'Built on Polecat Shell v0.5.4.',
+    ],
+  },
+  {
     v: 58,
     title: 'The app rail now wears JobTracker’s own mark',
     kind: 'polish',
