@@ -70,7 +70,7 @@ export function renderAdmin(view, ctx){
       el('span',{class:'sp'}),
       el('span',{class:'chip', style:'gap:6px'},[ el('span',{html:icon('shield',14)}), el('span',{text:'Admin mode'}) ]),
     );
-    const lockBtn = el('button',{class:'btn sm ghost', html:icon('key',15)+' Lock admin', title:'Lock admin on this device',
+    const lockBtn = el('button',{class:'btn sm ghost admin-lock-btn', html:icon('key',15)+' Lock admin', title:'Lock admin on this device',
       onclick:async()=>{ if(await confirmDialog({ title:'Lock admin?', message:'You’ll need to paste the admin token again to mint links on this device.', okText:'Lock admin' })){
         Access.lockAdmin(); toast('Admin locked',{kind:'ok'}); ctx.refresh(); } }});
     head.append(lockBtn);
@@ -100,7 +100,7 @@ export function renderAdmin(view, ctx){
     kioskInput.addEventListener('change', ()=>{ jobSel.disabled = kioskInput.checked; if(kioskInput.checked) jobSel.value=''; });
 
     const result = el('div',{class:'mint-result'});
-    const genBtn = el('button',{class:'btn primary', html:icon('link',16)+' Generate link', onclick:async()=>{
+    const genBtn = el('button',{class:'btn primary admin-gen-btn', html:icon('link',16)+' Generate link', onclick:async()=>{
       genBtn.disabled = true;
       try{
         const inv = await Access.mintInvite({
