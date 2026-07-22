@@ -16,6 +16,17 @@ import { initWhatsNew, hasUnseen } from '../vendor/polecat-shell/whatsnew.js';
 
 export const CHANGELOG = [
   {
+    v: 57,
+    title: 'The landing page now wears the shared fleet header & footer',
+    kind: 'polish',
+    ts: '2026-07-22T18:38:36.206Z',
+    date: 'Jul 22, 2026, 1:38 PM CT',
+    items: [
+      'JobTracker’s front door adopts the suite-wide header and footer, so it matches every Polecat app — the same brand tile, a consistent “Polecat” link back to the suite, and the standard footer.',
+      'Built on Polecat Shell v0.5.2 (the shared site-chrome plus the ~44px mobile touch targets).',
+    ],
+  },
+  {
     v: 56,
     title: 'Ambient "today" nudge on the Dashboard',
     kind: 'feature',
