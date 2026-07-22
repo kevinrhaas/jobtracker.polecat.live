@@ -13,6 +13,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
   <link rel="apple-touch-icon" href="/favicon.svg"/>
   <link rel="stylesheet" href="/css/landing.css"/>
+  <link rel="stylesheet" href="/vendor/polecat-shell/site-chrome.css"/>
   <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
   <!-- Open Graph -->
   <meta property="og:site_name" content="JobTracker"/>
@@ -80,17 +81,8 @@
     <g id="i-copy" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></g>
   </defs></svg>
 
-  <header class="nav" id="nav">
-    <div class="wrap nav-in">
-      <a class="brand" href="/"><span class="logo"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-rocket"/></svg></span> JobTracker <small>polecat.live</small></a>
-      <nav class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#showcase">Screenshots</a>
-        <a href="#how">How it works</a>
-        <a class="btn primary" href="/app/">Launch app <svg width="16" height="16" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></a>
-      </nav>
-    </div>
-  </header>
+  <!-- Shared fleet header (site-chrome.js) — see polecat-platform docs/BRAND.md -->
+  <header id="siteHeader"></header>
 
   <main>
     <!-- hero -->
@@ -216,22 +208,11 @@
     </section>
   </main>
 
-  <footer>
-    <div class="wrap foot-in">
-      <a class="brand" href="/"><span class="logo"><svg width="16" height="16" viewBox="0 0 24 24"><use href="#i-rocket"/></svg></span> JobTracker</a>
-      <span>Part of the <a href="https://polecat.live" style="color:var(--brand-2)">polecat.live</a> family · © 2026</span>
-      <div class="foot-links">
-        <a href="/app/">App</a>
-        <a href="/app/#docs">Docs</a>
-        <a href="https://polecat.live" target="_blank" rel="noopener">polecat.live</a>
-      </div>
-    </div>
-  </footer>
+  <!-- Shared fleet footer (site-chrome.js) — see polecat-platform docs/BRAND.md -->
+  <footer id="siteFooter"></footer>
 
   <script>
-    // sticky nav shadow
-    const nav=document.getElementById('nav');
-    addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>8),{passive:true});
+    // (sticky-header scroll shadow handled by the shared site-chrome header now)
 
     // reveal on scroll
     const reveals=document.querySelectorAll('.reveal');
@@ -290,6 +271,20 @@
         o.observe(frame);
       } else play();
     })();
+  </script>
+  <!-- Mount the shared header + footer -->
+  <script type="module">
+    import { siteHeader, siteFooter } from '/vendor/polecat-shell/site-chrome.js';
+    siteHeader('#siteHeader', {
+      app: 'jobtracker',
+      nav: [
+        { href: '#features', label: 'Features' },
+        { href: '#showcase', label: 'Screenshots' },
+        { href: '#how', label: 'How it works' },
+      ],
+      cta: { href: '/app/', label: 'Launch app' },
+    });
+    siteFooter('#siteFooter', { app: 'jobtracker', docs: '/app/#docs', appUrl: '/app/', notices: '/THIRD-PARTY-NOTICES.md' });
   </script>
 </body>
 </html>
