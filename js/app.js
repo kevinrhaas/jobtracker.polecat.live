@@ -110,7 +110,7 @@ function buildShell(){
   app.innerHTML='';
   const tb = ensureTopbarNodes();
   const shell = initShell({
-    app: { id:'jobtracker', name:'JobTracker', wordmark: icon('rocket',22) },
+    app: { id:'jobtracker', name:'JobTracker', icon: icon('briefcase',22) },
     sections: SECTIONS
       .filter(s => s.group || !s.pref || Store.settings()[s.pref])
       .map(s => s.group ? s : { ...s, icon: icon(s.icon) }),
