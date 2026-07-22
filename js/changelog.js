@@ -16,6 +16,16 @@ import { initWhatsNew, hasUnseen } from '../vendor/polecat-shell/whatsnew.js';
 
 export const CHANGELOG = [
   {
+    v: 55,
+    title: 'Admin console buttons grow to a thumb-sized target on phones',
+    kind: 'fix',
+    ts: '2026-07-22T16:46:32.733Z',
+    date: 'Jul 22, 2026, 11:46 AM CT',
+    items: [
+      'The Admin console\'s "Lock admin" (29px) and "Generate link" (34px) buttons sat under the 44px thumb-target minimum on phones, flagged across several UX sweeps. Both now grow to 44px tall under ~700px; desktop is unchanged.',
+    ],
+  },
+  {
     v: 54,
     title: 'Dashboard KPI tiles are real links now',
     kind: 'fix',

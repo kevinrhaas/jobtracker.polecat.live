@@ -675,6 +675,13 @@ input[type=color].color-input{width:34px;height:30px;flex:none;padding:2px;borde
 .tok-line{display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap}
 .chip.danger-chip{background:color-mix(in srgb,var(--danger) 18%,var(--surface-3));color:var(--danger)}
 
+/* Admin console's Lock admin / Generate link buttons sat under the
+   thumb-sized 44px minimum (29px and 34px tall) — same tap-target audit
+   pattern used elsewhere (.kpi .kpi-menu-btn, .bc-move .btn.icon.sm). */
+@media (max-width:700px){
+  .admin-lock-btn.btn,.admin-gen-btn.btn{min-height:44px}
+}
+
 @media (max-width:820px){
   .settings-layout{grid-template-columns:1fr}
   .set-nav{flex-direction:row;overflow-x:auto;position:static;gap:2px;padding:3px;margin-bottom:4px;

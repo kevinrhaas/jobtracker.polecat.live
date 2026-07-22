@@ -372,6 +372,14 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
       Also fixed a small listener leak where re-opening the notifications
       panel didn't unwire the previous instance's document-level listeners.
       Remaining: a full axe pass across every view is still open.
+- [x] **Admin console tap targets** ✅ Shipped — "Lock admin" (29px) and
+      "Generate link" (34px) were both under the 44px thumb-target minimum on
+      phones, carried across several UX sweeps. Scoped `.admin-lock-btn`/
+      `.admin-gen-btn` classes grow both to 44px tall under ~700px; desktop
+      density is unchanged, same targeted pattern as `.kpi .kpi-menu-btn` and
+      `.bc-move .btn.icon.sm`. (The rail's 38px `.ps-rail-item` touch target,
+      also flagged, lives in the vendored `polecat-shell` — out of scope for
+      an app-local fix; belongs in a platform `lib/` slice instead.)
 
 ---
 
