@@ -63,6 +63,11 @@ function ctWeekStart(ts){
   return d.toISOString().slice(0,10);
 }
 
+// ts's calendar day as a 'YYYY-MM-DD' key (Central Time), defaulting to now.
+function ctDateKey(ts=Date.now()){
+  return new Intl.DateTimeFormat('en-CA',{ timeZone:CT, year:'numeric', month:'2-digit', day:'2-digit' }).format(new Date(+ts));
+}
+
 // Has this week's completed-jobs streak already gotten its confetti moment?
 // Keyed by week so a fresh week can celebrate again; UI-only, so it lives in
 // its own localStorage key rather than the versioned workspace blob.
@@ -148,6 +153,26 @@ function awayRow(ev, ctx){
   main.append(el('div',{class:'ni-detail tiny muted', text:`${meta.label(ev)} · ${relTime(ev.ts)}`}));
   row.append(main);
   return row;
+}
+
+// ---- ambient "today" nudge -----------------------------------------------
+// A lighter-weight, always-on companion to the away digest above: the single
+// most time-sensitive open thing (the most-overdue job, or a rush job due
+// today), for days when nothing eventful happened but something is still
+// due. Dismissible for the day — same per-key localStorage pattern as the
+// streak celebration, keyed by date so it can resurface tomorrow.
+const NUDGE_DISMISSED_KEY = 'jt.todayNudge.dismissed';
+function nudgeDismissedToday(dateKey){
+  try{ return localStorage.getItem(NUDGE_DISMISSED_KEY)===dateKey; }catch{ return false; }
+}
+function dismissNudgeToday(dateKey){ try{ localStorage.setItem(NUDGE_DISMISSED_KEY, dateKey); }catch{} }
+function todayNudgeTarget(overdueJobs, activeJobs){
+  if(overdueJobs.length){
+    return { job: overdueJobs.slice().sort((a,b)=>Date.parse(a.dueDate)-Date.parse(b.dueDate))[0], reason:'overdue' };
+  }
+  const today = ctDateKey();
+  const rushToday = activeJobs.find(j=>j.rush && j.dueDate && ctDateKey(Date.parse(j.dueDate))===today);
+  return rushToday ? { job: rushToday, reason:'rush-today' } : null;
 }
 
 // Animated count-up from 0 → value. Respects reduced motion (jumps to final).
@@ -337,9 +362,11 @@ export function renderHome(view, ctx, params){
 
   // ---- since you've been away -------------------------------------------
   const digest = getAwayDigest();
+  let awayCardShown = false;
   if(digest){
     const rows = digest.events.map(ev=>awayRow(ev, ctx)).filter(Boolean).slice(0, 8);
     if(rows.length){
+      awayCardShown = true;
       const card = el('div',{class:'card pad away-digest', style:'margin-bottom:20px'});
       const head = el('div',{class:'section-head'});
       head.append(
@@ -352,6 +379,30 @@ export function renderHome(view, ctx, params){
       const list = el('div',{class:'away-list'});
       rows.forEach(r=>list.append(r));
       card.append(list);
+      view.append(card);
+    }
+  }
+
+  // ---- ambient "today" nudge ---------------------------------------------
+  // Only when the away digest isn't already showing — one gentle prompt at a
+  // time. Skipped entirely once dismissed for today's date key.
+  const todayKey = ctDateKey();
+  if(!awayCardShown && !nudgeDismissedToday(todayKey)){
+    const nudge = todayNudgeTarget(overdue, active);
+    if(nudge){
+      const { job, reason } = nudge;
+      const days = reason==='overdue' ? Math.max(1, Math.round((Date.now()-Date.parse(job.dueDate))/864e5)) : 0;
+      const msg = reason==='overdue'
+        ? `#${job.jobNumber} · ${job.name||'Untitled'} is ${days} day${days===1?'':'s'} overdue`
+        : `#${job.jobNumber} · ${job.name||'Untitled'} is a rush job due today`;
+      const card = el('div',{class:'callout'+(reason==='overdue'?' warn':''), style:'margin-bottom:20px;align-items:center'});
+      card.append(
+        el('span',{class:'ci', html:icon(reason==='overdue'?'warn':'flag',18)}),
+        el('span',{class:'link', role:'button', tabindex:'0', style:'flex:1', text:msg,
+          onclick:()=>ctx.openJob(job.id), onkeydown:e=>{ if(e.key==='Enter') ctx.openJob(job.id); }}),
+        el('button',{class:'btn icon ghost sm', title:'Dismiss for today', 'aria-label':'Dismiss for today', html:icon('close',15),
+          onclick:()=>{ card.remove(); dismissNudgeToday(todayKey); }}),
+      );
       view.append(card);
     }
   }

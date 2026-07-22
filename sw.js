@@ -7,7 +7,7 @@
 // online visit is never served stale JS after a deploy (this app ships new
 // builds hourly). The cache only kicks in when the network is unavailable,
 // which is exactly what "installable / offline-capable" needs here.
-const CACHE = 'jt-shell-v8';   // bumped: admin console button touch targets (css/styles.css)
+const CACHE = 'jt-shell-v9';   // bumped: ambient "today" nudge on the Dashboard (js/views/home.js)
 
 self.addEventListener('install', (e) => {
   self.skipWaiting();
