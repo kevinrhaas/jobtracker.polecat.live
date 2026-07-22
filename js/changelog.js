@@ -16,6 +16,18 @@ import { initWhatsNew, hasUnseen } from '../vendor/polecat-shell/whatsnew.js';
 
 export const CHANGELOG = [
   {
+    v: 58,
+    title: 'The app rail now wears JobTracker’s own mark',
+    kind: 'polish',
+    ts: '2026-07-22T19:53:02.519Z',
+    date: 'Jul 22, 2026, 2:53 PM CT',
+    items: [
+      'The rail brand is now the briefcase glyph — the same mark you see on JobTracker’s polecat.live launcher tile and its landing-page header, replacing the old rocket so the app reads as one identity everywhere.',
+      'A faint “polecat.live” link sits just under the name in the rail: a quiet way back to the suite.',
+      'Built on Polecat Shell v0.5.3.',
+    ],
+  },
+  {
     v: 57,
     title: 'The landing page now wears the shared fleet header & footer',
     kind: 'polish',

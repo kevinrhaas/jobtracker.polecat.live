@@ -7,7 +7,7 @@
 // online visit is never served stale JS after a deploy (this app ships new
 // builds hourly). The cache only kicks in when the network is unavailable,
 // which is exactly what "installable / offline-capable" needs here.
-const CACHE = 'jt-shell-v10';   // bumped: polecat-shell v0.5.2 (shell.css touch targets + site-chrome)
+const CACHE = 'jt-shell-v11';   // bumped: polecat-shell v0.5.3 (in-app rail brand)
 
 self.addEventListener('install', (e) => {
   self.skipWaiting();
