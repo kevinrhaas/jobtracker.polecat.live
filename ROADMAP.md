@@ -500,11 +500,13 @@ delightful + accessible + mobile-friendly, Central Time everywhere.
   dots row stays `display:none`) — the natural mobile counterpart to the
   "Inventory table → card list" and "Calendar agenda mode" work already
   shipped.
-- **Ambient "today" nudge on the Dashboard** — a small, dismissible-per-day
-  card surfacing the single most time-sensitive thing (the most overdue job,
-  or the nearest rush due today) right under the KPIs — a lighter-weight,
-  always-on companion to the existing "since you've been away" digest, for
-  days when nothing eventful happened but something is still due today.
+- [x] **Ambient "today" nudge on the Dashboard** ✅ Shipped — a small
+  dismissible callout surfaces the single most time-sensitive thing (the
+  most-overdue job, or a rush job due today), linking straight into it.
+  Only ever shows when the "since you've been away" digest isn't already
+  showing (one gentle prompt at a time), and dismissing it is remembered
+  per calendar day (Central Time) in its own `jt.todayNudge.dismissed`
+  localStorage key — nothing added to the workspace schema.
 - [x] **Cross-job dependency links** ✅ Shipped — the job editor's Details tab
   gained a **Dependencies** section: **Add blocker** opens a searchable
   picker of other jobs (cyclic candidates are grayed out and disabled, so a

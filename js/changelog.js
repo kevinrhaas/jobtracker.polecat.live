@@ -16,6 +16,17 @@ import { initWhatsNew, hasUnseen } from '../vendor/polecat-shell/whatsnew.js';
 
 export const CHANGELOG = [
   {
+    v: 56,
+    title: 'Ambient "today" nudge on the Dashboard',
+    kind: 'feature',
+    ts: '2026-07-22T16:52:27.867Z',
+    date: 'Jul 22, 2026, 11:52 AM CT',
+    items: [
+      'On days when nothing eventful happened while you were away, the Dashboard now surfaces the single most time-sensitive open thing — the most-overdue job, or a rush job due today — as a small dismissible callout linking straight into it.',
+      'Dismiss for today and it stays quiet until tomorrow; a lighter-weight companion to the existing "Since you\'ve been away" digest, and never shows alongside it.',
+    ],
+  },
+  {
     v: 55,
     title: 'Admin console buttons grow to a thumb-sized target on phones',
     kind: 'fix',
