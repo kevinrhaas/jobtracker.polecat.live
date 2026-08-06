@@ -16,6 +16,18 @@ import { initWhatsNew, hasUnseen } from '../vendor/polecat-shell/whatsnew.js';
 
 export const CHANGELOG = [
   {
+    v: 60,
+    title: 'Staged releases: dev and qa previews before production',
+    kind: 'infra',
+    ts: '2026-08-06T19:04:12.839Z',
+    date: 'Aug 6, 2026, 2:04 PM CT',
+    items: [
+      'JobTracker now pilots the fleet’s dev → qa → production pipeline: work lands on a dev branch first, gets promoted to a qa candidate on command or on a schedule, and only reaches production when a promotion is explicitly approved.',
+      'Live previews of the next builds are hosted at /dev/ and /qa/ — each marked with a stage banner and kept out of search engines, while production at / is untouched.',
+      'Every production release is tagged and archived, and a failed qa candidate rolls itself back automatically — see docs/PIPELINE.md for the full runbook.',
+    ],
+  },
+  {
     v: 59,
     title: 'One blue-green brand color, everywhere',
     kind: 'polish',
