@@ -1,0 +1,776 @@
+// Changelog powering the in-app "What's new" panel. Newest first.
+//
+// Fleet convention (shared with relay / manager / the polecat family): every
+// project publishes its release history as a `CHANGELOG` array exported from
+// `js/changelog.js`, so any app's "Sync changelog" can fetch it. Each entry:
+//   { v:int, title, kind?, ts, date, items:[…] }   (newest first)
+//
+// The hourly self-improvement loop appends a new entry at the TOP for each
+// user-visible change (bump `v` by 1, short `title`, optional `kind`, 1–4
+// `items`). Leave `ts` as an EMPTY string on the new entry — the workflow
+// stamps it with the real commit time so timestamps are never fabricated.
+// `ts` is ISO-8601 UTC; `date` is a derived human-readable Central Time alias
+// (regenerated from `ts` by .github/stamp-changelog.mjs — do NOT hand-edit it).
+import { rightPanel } from '../vendor/polecat-shell/shell.js';
+import { initWhatsNew, hasUnseen } from '../vendor/polecat-shell/whatsnew.js';
+
+export const CHANGELOG = [
+  {
+    v: 60,
+    title: 'Staged releases: dev and qa previews before production',
+    kind: 'infra',
+    ts: '2026-08-06T19:04:12.839Z',
+    date: 'Aug 6, 2026, 2:04 PM CT',
+    items: [
+      'JobTracker now pilots the fleet’s dev → qa → production pipeline: work lands on a dev branch first, gets promoted to a qa candidate on command or on a schedule, and only reaches production when a promotion is explicitly approved.',
+      'Live previews of the next builds are hosted at /dev/ and /qa/ — each marked with a stage banner and kept out of search engines, while production at / is untouched.',
+      'Every production release is tagged and archived, and a failed qa candidate rolls itself back automatically — see docs/PIPELINE.md for the full runbook.',
+    ],
+  },
+  {
+    v: 59,
+    title: 'One blue-green brand color, everywhere',
+    kind: 'polish',
+    ts: '2026-07-22T20:56:53.101Z',
+    date: 'Jul 22, 2026, 3:56 PM CT',
+    items: [
+      'JobTracker’s blue-green brand gradient now shows up consistently — the rail mark, the app-switcher tiles, and the polecat.live launcher tile all match the favicon, replacing an off-brand purple that had crept onto the launcher.',
+      'Built on Polecat Shell v0.5.4.',
+    ],
+  },
+  {
+    v: 58,
+    title: 'The app rail now wears JobTracker’s own mark',
+    kind: 'polish',
+    ts: '2026-07-22T19:53:02.519Z',
+    date: 'Jul 22, 2026, 2:53 PM CT',
+    items: [
+      'The rail brand is now the briefcase glyph — the same mark you see on JobTracker’s polecat.live launcher tile and its landing-page header, replacing the old rocket so the app reads as one identity everywhere.',
+      'A faint “polecat.live” link sits just under the name in the rail: a quiet way back to the suite.',
+      'Built on Polecat Shell v0.5.3.',
+    ],
+  },
+  {
+    v: 57,
+    title: 'The landing page now wears the shared fleet header & footer',
+    kind: 'polish',
+    ts: '2026-07-22T18:38:36.206Z',
+    date: 'Jul 22, 2026, 1:38 PM CT',
+    items: [
+      'JobTracker’s front door adopts the suite-wide header and footer, so it matches every Polecat app — the same brand tile, a consistent “Polecat” link back to the suite, and the standard footer.',
+      'Built on Polecat Shell v0.5.2 (the shared site-chrome plus the ~44px mobile touch targets).',
+    ],
+  },
+  {
+    v: 56,
+    title: 'Ambient "today" nudge on the Dashboard',
+    kind: 'feature',
+    ts: '2026-07-22T16:52:27.867Z',
+    date: 'Jul 22, 2026, 11:52 AM CT',
+    items: [
+      'On days when nothing eventful happened while you were away, the Dashboard now surfaces the single most time-sensitive open thing — the most-overdue job, or a rush job due today — as a small dismissible callout linking straight into it.',
+      'Dismiss for today and it stays quiet until tomorrow; a lighter-weight companion to the existing "Since you\'ve been away" digest, and never shows alongside it.',
+    ],
+  },
+  {
+    v: 55,
+    title: 'Admin console buttons grow to a thumb-sized target on phones',
+    kind: 'fix',
+    ts: '2026-07-22T16:46:32.733Z',
+    date: 'Jul 22, 2026, 11:46 AM CT',
+    items: [
+      'The Admin console\'s "Lock admin" (29px) and "Generate link" (34px) buttons sat under the 44px thumb-target minimum on phones, flagged across several UX sweeps. Both now grow to 44px tall under ~700px; desktop is unchanged.',
+    ],
+  },
+  {
+    v: 54,
+    title: 'Dashboard KPI tiles are real links now',
+    kind: 'fix',
+    ts: '2026-07-18T22:35:38.910Z',
+    date: 'Jul 18, 2026, 5:35 PM CT',
+    items: [
+      'The six dashboard stat tiles (Active jobs, Due this week, Overdue, Completed this month, Avg cycle, On-time delivery) were plain, unclickable numbers. Each now jumps to Jobs pre-filtered to exactly the set behind it, with hover/focus affordance and full keyboard access (Tab + Enter/Space) — matching the "Status at a glance" pills right next to them.',
+      'Landing on a KPI-filtered list shows a dismissible "Filtered from the Dashboard" banner, since these drill-downs have no pill of their own in the filter bar to show or clear otherwise.',
+      'Closes a finding carried across the last several UX sweeps (#15 and its predecessors) — and matches the same fix manager and relay already shipped on their own dashboards.',
+    ],
+  },
+  {
+    v: 53,
+    title: 'Settings nav is a true segmented control on phones',
+    kind: 'polish',
+    ts: '2026-07-18T12:30:52.595Z',
+    date: 'Jul 18, 2026, 7:30 AM CT',
+    items: [
+      'Under ~820px the Settings sidebar becomes a pill-shaped, scroll-snapping segmented control instead of a plain row of scrollable buttons — matching the Calendar/Timeline toggle style used elsewhere in the app.',
+      'Closes out the last item in the mobile-wide pass: every screen has now been tested and fixed at 360–430px.',
+    ],
+  },
+  {
+    v: 52,
+    title: 'Fixed: three touch controls were invisible on phones',
+    kind: 'fix',
+    ts: '2026-07-17T18:34:47.709Z',
+    date: 'Jul 17, 2026, 1:34 PM CT',
+    items: [
+      'The Metrics custom-KPI-card "options" menu, the notification dismiss button, and the kanban card\'s keyboard move (◀▶) buttons only ever appeared on hover — with no touch equivalent, they were undiscoverable on phones. The board move buttons matter most there, since drag-reordering a card is unreliable on touch.',
+      'All three now stay visible and grow to a thumb-sized 44px target under ~700px; nothing changes on desktop.',
+    ],
+  },
+  {
+    v: 51,
+    title: 'Fleet shell refreshed under the hood',
+    kind: 'polish',
+    ts: '2026-07-17T00:54:52.077Z',
+    date: 'Jul 16, 2026, 7:54 PM CT',
+    items: [
+      'The shared Polecat Shell (rail, topbar, waffle switcher, toasts, dialogs) synced up to its latest release: the fleet switcher now lists Model Server, keyboard focus rings on the rail toggle/brand button, and toasts support an inline “Undo” action.',
+      'No workflow changes — this is plumbing under the app frame you already use.',
+    ],
+  },
+  {
+    v: 50,
+    title: 'Sync conflicts: see them, pick a winner — no more silent overwrites',
+    kind: 'feature',
+    ts: '2026-07-16T03:56:40.734Z',
+    date: 'Jul 15, 2026, 10:56 PM CT',
+    items: [
+      'When two people edit the shared workspace at the same time, JobTracker now notices before saving would wipe out the other person’s changes — the top-bar badge turns into a pulsing “Conflict” instead of overwriting silently.',
+      'Click the badge to see what actually differs, job by job — changed in both places, only in the database, or only in this browser — then pick a winner: “Keep mine” or “Take theirs” (with a one-tap backup of your copy first). Or decide later; nothing saves until you choose.',
+      'Two fixes along the way: changes made in Settings now sync to the shared database like everything else (they previously never pushed), and the badge honestly says “Connecting…” while loading instead of an early “Synced”.',
+    ],
+  },
+  {
+    v: 49,
+    title: 'Connecting a database is harder to get wrong',
+    kind: 'polish',
+    ts: '2026-07-16T03:34:29.815Z',
+    date: 'Jul 15, 2026, 10:34 PM CT',
+    items: [
+      'Before loading a shared workspace over your local one, the confirmation now offers a one-tap “Download backup” of what’s in this browser — re-importable anytime from Settings → Data & privacy.',
+      'A workspace written by a newer JobTracker is politely refused (reload this app first) instead of risking a mixed-version write; a database that belongs to something else now lists exactly which tables are in the way.',
+      'The connect button locks while it works, so a double-click can’t set the database up twice — and if a connection attempt fails midway, the sync badge no longer sticks on “connecting”.',
+    ],
+  },
+  {
+    v: 48,
+    title: 'Big workspaces stay fast: Board and Timeline scale to 1,000+ jobs',
+    kind: 'polish',
+    ts: '2026-07-16T03:09:13.679Z',
+    date: 'Jul 15, 2026, 10:09 PM CT',
+    items: [
+      'Board columns now load cards in batches as you scroll — a huge board appears instantly instead of building every card up front, and the column counts always show the true totals.',
+      'Reach the bottom of a column and the next batch appears automatically (or tap “Show more”); dragging and dropping between columns works exactly as before.',
+      'The Timeline starts with the first 200 rows and offers a one-tap “Show all” when a window holds more — verified snappy with a 1,500-job workspace.',
+    ],
+  },
+  {
+    v: 47,
+    title: 'Deleting files: undo instead of "are you sure?"',
+    kind: 'feature',
+    ts: '2026-07-16T02:54:09.779Z',
+    date: 'Jul 15, 2026, 9:54 PM CT',
+    items: [
+      'Removing attachments — one at a time or a bulk selection, from the Document Library or the job editor — no longer interrupts you with a confirm dialog. The files disappear immediately and a toast offers Undo for a few seconds.',
+      'Undo brings the file back completely, bytes and all — the stored file is only truly deleted once the undo window closes.',
+      'Closing the tab mid-window is safe too: pending deletions complete on the way out, so nothing is left half-removed.',
+    ],
+  },
+  {
+    v: 46,
+    title: 'Filters on your phone: one button, one thumb-friendly sheet',
+    kind: 'feature',
+    ts: '2026-07-15T21:52:25.651Z',
+    date: 'Jul 15, 2026, 4:52 PM CT',
+    items: [
+      'On phones, the Jobs screen’s wrapping rows of tiny filter pills are gone — a single “Filters” button (with a count of everything active) opens a bottom sheet instead.',
+      'The sheet groups everything in one place: Type, quick toggles (Rush / Overdue / My jobs), Status, Division, Priority, Client and Letter — every row and pill sized for thumbs (44px), with live match counts.',
+      'Filters apply instantly while the sheet is open, so you can watch the list narrow behind it; “Clear all” resets everything in one tap.',
+      'Desktop is unchanged — the inline pill bar stays exactly as it was.',
+    ],
+  },
+  {
+    v: 45,
+    title: 'JobTracker joins the Polecat Shell — fleet switcher and a new What’s-New panel',
+    kind: 'feature',
+    ts: '2026-07-15T21:07:10.831Z',
+    date: 'Jul 15, 2026, 4:07 PM CT',
+    items: [
+      'A new app-switcher in the top bar (the 3×3 grid) jumps between every Polecat app — JobTracker now shares the fleet’s common shell for its sidebar, top bar and panels.',
+      '“What’s new” moved from a pop-up dialog to a slide-in panel, and it’s better there: search every release, and filter by Feature / Polish / Fix.',
+      'Everything you’ve customized carries over exactly — your theme, sidebar width and collapsed state, optional sections, and seen-releases are all remembered.',
+      'Finishing the welcome tour on a phone now tucks the navigation drawer away instead of leaving it open over the app.',
+    ],
+  },
+  {
+    v: 44,
+    title: 'Connect a shared database — your jobs, durable and team-shared',
+    kind: 'feature',
+    ts: '2026-07-15T00:47:02.042Z',
+    date: 'Jul 14, 2026, 7:47 PM CT',
+    items: [
+      'New Settings → Data source: connect JobTracker to a shared SQLite database (Turso) so your workspace is durable and everyone connected sees the same jobs — no server to run, it all works from the browser.',
+      'Connecting an empty database sets itself up automatically (creates the tables and uploads your current jobs); pointing at one that already holds a JobTracker workspace loads it instead. “Sync now” pulls the latest, and you can disconnect back to local anytime.',
+      'Every change mirrors up automatically on a short delay, and the top-bar badge now shows “Local mode” vs “Synced” at a glance.',
+      'Built on a pluggable data-source layer (adapted from the polecat manager), so more backends can be added over time.',
+    ],
+  },
+  {
+    v: 43,
+    title: 'Metrics & Reports combined, optional sections, and a simpler job form',
+    kind: 'feature',
+    ts: '2026-07-14T23:04:31.991Z',
+    date: 'Jul 14, 2026, 6:04 PM CT',
+    items: [
+      'Metrics and Reports are now one section — “Metrics” — with an Overview / Report / Custom toggle at the top. The old Reports link (and any bookmarks) land right on the Report tab.',
+      'Board and Campaigns are now off by default to keep the sidebar focused — turn either back on anytime in Settings → Appearance → Sections. (Many teams run their Kanban in Trello.)',
+      'Removed the Owner field, which was causing confusion — Assignee is the person doing the work, and “My jobs”, the workload heatmap and custom dashboards now key off Assignee.',
+    ],
+  },
+  {
+    v: 42,
+    title: 'Import understands your request emails & creative exports',
+    kind: 'feature',
+    ts: '2026-07-14T19:30:26.808Z',
+    date: 'Jul 14, 2026, 2:30 PM CT',
+    items: [
+      'The Import screen now auto-detects two of your real intake formats: the “**Label:**” video/podcast request email (the one that also posts to Trello) and the creative request .txt export — no hand-mapping needed.',
+      'It fills in the fields for you — project name, requester, client (from Department), due date, type (Video / Podcast / Print), campaign, quantity and the description as notes, plus the Yes/No rush flag — and you can still review and adjust before creating.',
+      'Uploaded files that are UTF-16 (like the creative .txt) are decoded automatically, so you can skip the manual “convert the encoding” step entirely.',
+      'Paste a single request or a whole batch — each one becomes its own job.',
+    ],
+  },
+  {
+    v: 41,
+    title: 'Saved views on the dashboard + a clearer Local-mode notice',
+    kind: 'feature',
+    ts: '2026-07-14T17:47:50.493Z',
+    date: 'Jul 14, 2026, 12:47 PM CT',
+    items: [
+      'Your saved views now appear as tiles on the Dashboard, each with a live count — tap one to jump straight into that list.',
+      '“Manage views” now opens as a dialog right on the Jobs screen (rename, reorder, set default, delete) instead of throwing you into Settings.',
+      'Tweak a saved view and an “Update ‘…’” button appears so you can save those filter/column/sort changes back to it — no more accidental duplicates.',
+      'A new amber “Local mode” badge in the top bar makes it clear your data is stored only in this browser, with a click-through explaining the trade-offs and a shortcut to back up (Export).',
+    ],
+  },
+  {
+    v: 40,
+    title: 'Jobs list: review feedback, round one',
+    kind: 'feature',
+    ts: '2026-07-14T16:58:42.830Z',
+    date: 'Jul 14, 2026, 11:58 AM CT',
+    items: [
+      'Type (Design / Video / Podcast …) is now the primary pill row on the Jobs list, and Status moved into a dropdown filter — so you can jump straight to a media type. “Filters” is now “More filters”.',
+      'Added a Letter column (the A/B/C piece that goes with a job number) as both a column and a filter, and dropped the Owner column that was causing confusion.',
+      'Job numbers can now repeat — the letter distinguishes the separate pieces and revisions that share a number, so entering an existing number no longer blocks you.',
+      'New Notes column: a one-line preview that opens an expand box to read or edit the whole note in place, without opening the full job.',
+    ],
+  },
+  {
+    v: 39,
+    title: 'Board: swipeable columns on phones',
+    kind: 'feature',
+    ts: '2026-07-04T19:22:23.043Z',
+    date: 'Jul 4, 2026, 2:22 PM CT',
+    items: [
+      'On phones, the Board\'s status columns are now a one-at-a-time, full-bleed swipe (snap-scroll) instead of a cramped side-scroll of narrow columns.',
+      'A live label ("In Review · 3 jobs") plus a row of tappable, color-matched dots sits above the board — tap a dot to jump straight to that column, or just swipe.',
+      'Desktop is unchanged: the existing status legend and narrow multi-column layout stay exactly as they were.',
+    ],
+  },
+  {
+    v: 38,
+    title: 'Cross-job dependency links',
+    kind: 'feature',
+    ts: '2026-07-04T18:45:29.876Z',
+    date: 'Jul 4, 2026, 1:45 PM CT',
+    items: [
+      'The job editor\'s Details tab has a new Dependencies section — add another job as a "blocker" via a searchable picker, so one deliverable (like photography) can gate another (like the print ad using it).',
+      'A job blocked by an open (unfinished) dependency shows a Blocked chip in its hero, on its Board card, and next to its name in the Jobs table/card list.',
+      'Moving a blocked job\'s status — from the editor, the Board, or the Jobs table\'s inline/bulk edit — now asks for a quick confirmation first instead of silently letting it slide through.',
+      'A reverse "Blocks" list shows every job waiting on this one, and circular dependencies are rejected outright.',
+    ],
+  },
+  {
+    v: 37,
+    title: 'Polish: smooth board moves + safe-area insets',
+    kind: 'polish',
+    ts: '2026-07-04T18:17:48.265Z',
+    date: 'Jul 4, 2026, 1:17 PM CT',
+    items: [
+      'The Board now eases a card into its new spot when it changes status — dragging, the ◀ ▶ buttons, Shift+←/→, and toolbar filter changes all glide instead of instantly popping, and it drops straight back to instant under reduce-motion.',
+      "Every full-screen surface (the app shell, the mobile slide-out nav, the login gate, Focus mode, the mobile full-screen dialogs, toasts, and the archived-release bar) now respects a phone's safe area, so nothing sits under a notch, camera cutout or the home-indicator swipe zone when installed as a home-screen app.",
+    ],
+  },
+  {
+    v: 36,
+    title: 'Keyboard-only board mode',
+    kind: 'feature',
+    ts: '2026-07-04T17:42:43.751Z',
+    date: 'Jul 4, 2026, 12:42 PM CT',
+    items: [
+      'Focus a card on the Board and use the arrow keys: ↑/↓ moves focus to the next/previous card in the same column, ←/→ jumps into the adjacent column at the same row.',
+      'Shift+← / Shift+→ moves the focused card to that adjacent status — same confirmation and confetti as dragging — and keeps focus on it in its new column, so a full triage pass never needs the mouse.',
+      'Documented in the ? shortcut sheet (new "Board" group) and the in-app Views & filters docs.',
+    ],
+  },
+  {
+    v: 35,
+    title: 'Quick add: create a job from plain text',
+    kind: 'feature',
+    ts: '2026-07-04T17:21:19.985Z',
+    date: 'Jul 4, 2026, 12:21 PM CT',
+    items: [
+      'Press Q, or click the new wand icon in the top bar, and just describe the job — "rush social post for Membership due Friday" — instead of filling out a form field by field.',
+      'A live preview shows the type, client/campaign, due date and rush flag it picked out as you type, matched against your workspace\'s own pick lists.',
+      'Hit Enter or Create job and it hands off to the normal new-job flow with those fields pre-filled — the full editor still opens right after so you can adjust or add anything it missed.',
+      'Also reachable from the command palette ("Quick add a job…") and documented in the in-app Tips & shortcuts guide.',
+    ],
+  },
+  {
+    v: 34,
+    title: 'Smart duplicate detection when naming a job',
+    kind: 'feature',
+    ts: '2026-07-04T16:45:25.498Z',
+    date: 'Jul 4, 2026, 11:45 AM CT',
+    items: [
+      'As you type a project name in the job editor, JobTracker now fuzzy-matches it against every other job and, if something close already exists, shows it right there with "Open it" or "Duplicate instead" — no more discovering a re-entered job weeks later.',
+      'Picking either option on a still-blank, freshly-created job quietly cleans it up so you\'re not left with an empty orphan; anything with real content (comments, attachments, checked subtasks) is always left untouched.',
+      'A same-client match counts extra toward the similarity score, and dismissing a suggestion won\'t bring it back until you change the name further.',
+    ],
+  },
+  {
+    v: 33,
+    title: 'Calendar: an Agenda view for mobile',
+    kind: 'feature',
+    ts: '2026-07-04T16:17:41.162Z',
+    date: 'Jul 4, 2026, 11:17 AM CT',
+    items: [
+      'The Calendar now has a Month / Agenda toggle in the header. Agenda lists the month\'s due dates and milestones as a flat, day-grouped list — today\'s section is highlighted — instead of a cramped grid, so it\'s far easier to scan on a phone.',
+      'On narrow screens Agenda is picked automatically (and Month above ~700px), purely via CSS, so rotating the device just works with no extra tap. Pick a view explicitly and it sticks at any width, remembered for next time.',
+      'Tapping any due date or milestone opens the job straight away, same as the grid\'s day popup, which now shares the same row styling.',
+    ],
+  },
+  {
+    v: 32,
+    title: 'One name everywhere: “JobTracker”',
+    kind: 'polish',
+    ts: '2026-07-04T15:49:03.292Z',
+    date: 'Jul 4, 2026, 10:49 AM CT',
+    items: [
+      'Tidied the branding so the product is called “JobTracker” (one word) consistently — the sidebar wordmark, the sign-in screen, printed report footers, the marketing site, and all the page/social metadata now match the name used throughout the app.',
+      'No functional change — purely a naming cleanup for a more polished, consistent feel.',
+    ],
+  },
+  {
+    v: 31,
+    title: 'Custom KPI dashboards',
+    kind: 'feature',
+    ts: '2026-07-04T15:24:59.666Z',
+    date: 'Jul 4, 2026, 10:24 AM CT',
+    items: [
+      'Metrics gained an Overview / Custom toggle. Custom lets you build your own KPI cards — job count, sum/average of a field, average cycle time, or on-time delivery %, filtered by status, type, division, owner, client and rush, and optionally scoped to a date period.',
+      'Cards live in named, savable dashboards — keep several (a studio-wide one plus a per-client one) and switch between them, with edit/duplicate/delete on each card.',
+      'A fresh install ships one example "Studio Overview" dashboard to show it off; existing workspaces upgrade with an empty list, nothing retrofitted.',
+    ],
+  },
+  {
+    v: 30,
+    title: 'Recurring jobs',
+    kind: 'feature',
+    ts: '2026-07-04T14:54:04.057Z',
+    date: 'Jul 4, 2026, 9:54 AM CT',
+    items: [
+      'A new Recurring section in the job editor lets a job repeat on a cadence — weekly, every 2 weeks, monthly, quarterly, or annually — with a configurable lead time before the due date.',
+      'Once that lead time is reached, the next occurrence auto-creates itself with the same type, owner, division, campaign and checklist, and shifted milestones — no more remembering to clone the newsletter or monthly report by hand.',
+      'A "Repeats" chip shows in the job hero, a toast announces each new occurrence, and the section links straight to it once it exists. Duplicating a job manually never starts a second recurring series.',
+    ],
+  },
+  {
+    v: 29,
+    title: 'Saved views: share a filter/column/sort combo via link',
+    kind: 'feature',
+    ts: '2026-07-04T14:01:58.045Z',
+    date: 'Jul 4, 2026, 9:01 AM CT',
+    items: [
+      'A new link icon next to any saved view — in the Jobs list or the View Library (Settings → Saved views) — copies a shareable link that carries its filters, columns, sort and column widths.',
+      'Opening a shared link jumps straight to Jobs with that view applied, and offers a one-click "Save as view" to keep it in your own library, or just browse it once and dismiss the banner.',
+      'Nothing leaves the browser but the link text itself — no server round-trip, nothing new added to the workspace.',
+    ],
+  },
+  {
+    v: 28,
+    title: 'Attachment version history',
+    kind: 'feature',
+    ts: '2026-07-04T13:21:40.120Z',
+    date: 'Jul 4, 2026, 8:21 AM CT',
+    items: [
+      'Uploading a replacement file over an existing attachment no longer loses the original — an upload icon on each attachment row archives the outgoing file into a per-attachment version history.',
+      'A new clock icon opens Version history: download any prior version, or restore one as the current file (the file it replaces stays in history too).',
+      'Works in both the job editor\'s Attachments tab and the Document Library, and respects Mock Uploads the same way normal uploads do.',
+    ],
+  },
+  {
+    v: 27,
+    title: 'Polish: illustrated empty states across the app',
+    kind: 'polish',
+    ts: '2026-07-04T12:59:32.957Z',
+    date: 'Jul 4, 2026, 7:59 AM CT',
+    items: [
+      "Every section's \"nothing here yet\" screen — Dashboard, Jobs, Board, Calendar, Campaigns, Documents, Metrics, Reports, Timeline, and the locked Admin console — now shows a small themed illustration instead of a generic icon in a circle.",
+      "Purely decorative and drawn from the app's own theme colors, so it repaints correctly across all six themes with nothing new to configure.",
+      'Lighter "no matches" states (a search or filter coming up empty) keep the smaller icon treatment — the new illustrations are reserved for true first-run moments.',
+    ],
+  },
+  {
+    v: 26,
+    title: "Dashboard: a \"Since you've been away\" digest",
+    kind: 'feature',
+    ts: '2026-07-04T12:22:28.376Z',
+    date: 'Jul 4, 2026, 7:22 AM CT',
+    items: [
+      "After a few days away, the dashboard now opens with a quick digest of what changed while you were gone: status moves, new comments, approvals resolved, and new jobs created.",
+      'Each row jumps straight to the job it\'s about. Dismiss it with the × — it\'s a one-time catch-up card, not a permanent fixture.',
+      "Computed live from the existing activity/audit trail, so there's nothing new to configure or keep in sync.",
+    ],
+  },
+  {
+    v: 25,
+    title: 'Focus mode: a calm, deep-linkable single-job view',
+    kind: 'feature',
+    ts: '2026-07-04T11:57:38.964Z',
+    date: 'Jul 4, 2026, 6:57 AM CT',
+    items: [
+      'New Focus mode — click the target icon in a job\'s hero for a full-screen view of just that job\'s name, status and due date, its checklist, and its comment thread. No other tabs, no rail, no topbar.',
+      'Deep-linkable at #focus/<job>, with a "Copy focus link" button to share the exact state, and "Open full editor" to escalate whenever you need the rest of the job.',
+      'Also reachable from the Jobs list\'s mobile card menu. Esc or "Exit focus" returns you right where you were.',
+    ],
+  },
+  {
+    v: 24,
+    title: 'Board: WIP limits to flag overloaded stages',
+    kind: 'feature',
+    ts: '2026-07-04T11:20:15.471Z',
+    date: 'Jul 4, 2026, 6:20 AM CT',
+    items: [
+      'Each status in Settings → Pick lists → Statuses now has an optional WIP # field — a soft cap on how many jobs may sit in that stage at once. Leave it blank for unlimited.',
+      'On the Board, a column over its limit gets a red-tinted header, a warning icon, and its count switches to "N/limit" so the overage is obvious at a glance.',
+      'It\'s a nudge, not a blocker — dragging a card into a full column still works fine, it just flags for triage.',
+    ],
+  },
+  {
+    v: 23,
+    title: 'Metrics: a workload heatmap to spot overload before it happens',
+    kind: 'feature',
+    ts: '2026-07-04T10:35:22.574Z',
+    date: 'Jul 4, 2026, 5:35 AM CT',
+    items: [
+      'New "Workload heatmap" card in Metrics: a calendar-style grid of your busiest people (rows) against the next 3 weeks (columns), shaded by how many active jobs each person has due that day — darker means busier.',
+      'Step Prev / Next a week at a time, or jump back to "This week"; today\'s column is outlined and weekends are dimmed so the grid reads at a glance.',
+      'Click any colored cell to see exactly which jobs are due and open one directly, without leaving Metrics.',
+      'Computed live from your current jobs, same as the rest of Metrics — nothing new to configure or keep in sync.',
+    ],
+  },
+  {
+    v: 22,
+    title: 'Polish: keyboard focus fixed in dropdown menus & panels',
+    kind: 'polish',
+    ts: '2026-07-04T09:38:34.740Z',
+    date: 'Jul 4, 2026, 4:38 AM CT',
+    items: [
+      'The Jobs page’s Type/Filters checklist dropdowns, the Export menu, and the Notifications bell panel now keep keyboard focus inside them while open (Tab cycles through the options instead of escaping into the page behind), and return focus to the button you opened them from when you close them — matching how every full dialog in the app already behaved.',
+      'Fixed a small bug where quickly reopening the notifications panel could leave a stale listener behind.',
+      'Under-the-hood cleanup: the three panels now share one focus-handling helper instead of three copies of similar code.',
+    ],
+  },
+  {
+    v: 21,
+    title: 'Jobs table: drag-to-reorder & resize columns, sticky first column',
+    kind: 'feature',
+    ts: '2026-07-04T08:48:16.537Z',
+    date: 'Jul 4, 2026, 3:48 AM CT',
+    items: [
+      'Drag any column header in the Jobs table left or right to reorder it, with a live drop indicator — a plain click still sorts, so nothing about the existing sort behavior changes.',
+      'Drag the thin handle on the right edge of a header to resize that column; double-click the handle to reset it back to auto width.',
+      'Whichever column ends up first now stays pinned while you scroll right through a wide table — drag Name or Job # to the front to keep it in view alongside the row-select checkbox.',
+      'Column order and widths are saved as part of a saved view, right alongside filters and sort, using the same "Save view" / "Edit view" flow.',
+    ],
+  },
+  {
+    v: 20,
+    title: 'Job intake form — a friendly front door for job requests',
+    kind: 'feature',
+    ts: '2026-07-04T07:54:06.463Z',
+    date: 'Jul 4, 2026, 2:54 AM CT',
+    items: [
+      'Admin can now mint a "Kiosk / intake-only" link (a toggle in Admin → Mint an access link) that opens straight into a full-screen "Submit a job request" form — no dashboard, no nav, no other jobs visible.',
+      'Fields adapt to the job type: picking a print/event/banner-style type reveals Quantity + Vendor; other types keep the form short.',
+      'Submitting creates a real job immediately in the "Requested" status with a small "Intake" badge in the job editor, ready for the team to triage — no import step needed.',
+      'A "Done — lock this device" button on the confirmation screen re-locks access, so a shared kiosk (like a front-desk tablet) stays put between requests.',
+    ],
+  },
+  {
+    v: 19,
+    title: 'Inline cell editing in the Jobs table',
+    kind: 'feature',
+    ts: '2026-07-04T06:37:27.988Z',
+    date: 'Jul 4, 2026, 1:37 AM CT',
+    items: [
+      'Click any Name, Type, Client, Status, Priority, Owner, Assignee, Due date or Rush cell right in the Jobs table to edit it in place — no need to open the job editor for a quick change.',
+      'Status edits still ask for confirmation when moving somewhere unusual for that workflow, and completing a job still fires the confetti celebration, same as the full editor.',
+      'Fully keyboard-accessible: Tab to a cell, Enter to edit, Escape to cancel, Enter/click-away to save.',
+    ],
+  },
+  {
+    v: 18,
+    title: 'Fixed the blank dashboard on iPhone / iOS',
+    kind: 'fix',
+    ts: '2026-07-04T05:43:16.513Z',
+    date: 'Jul 4, 2026, 12:43 AM CT',
+    items: [
+      'The dashboard (and Metrics / Reports) could come up completely blank on iPhone — Safari and Chrome on iOS — while working fine everywhere else. Fixed.',
+      'Cause: iOS’s browser engine throws on an invalid date where other browsers quietly ignore it, and one demo field stored a month label ("Jun 2026") instead of a real date. That single bad value crashed the whole view before it could draw.',
+      'The date helpers are now bulletproof — any unparseable date (including from a spreadsheet import) is skipped instead of blanking the screen — and the demo data stores proper dates.',
+      'Added a safety net: if any screen ever fails to render, you now get a clear "hit a snag" card with Reload / Dashboard buttons instead of a blank page. The automated tests now also run on iOS’s engine (WebKit) so this class of bug can’t ship again.',
+    ],
+  },
+  {
+    v: 17,
+    title: 'Long lists now scroll all the way to the bottom on mobile',
+    kind: 'fix',
+    ts: '2026-07-04T05:26:02.897Z',
+    date: 'Jul 4, 2026, 12:26 AM CT',
+    items: [
+      'Fixed a bug where a long view (Jobs, Metrics, Docs) could stop scrolling before its last row on phones — you can now swipe all the way to the end of every list.',
+      'Root cause was a nested-flex height quirk (a missing min-height:0) that silently clamped the scroll container short; scrolling now uses momentum (-webkit-overflow-scrolling) for a native feel.',
+      'Added a mobile smoke-test guard that fails the build if any view can no longer reach its bottom, so this can’t come back.',
+    ],
+  },
+  {
+    v: 16,
+    title: 'Reports — the end-of-year report, generated for you',
+    kind: 'feature',
+    ts: '2026-07-04T05:08:15.394Z',
+    date: 'Jul 4, 2026, 12:08 AM CT',
+    items: [
+      'New Reports section: pick a period (this/last year, this/last quarter, this month, last 12 months, all time, or a custom month range) and get a summary of what shipped.',
+      'KPIs — completed, created, on-time delivery, average cycle time, rush share — each with a trend arrow versus the equivalent prior period.',
+      'Breakdowns of completed work by type, division, client and owner; click any bar to jump to that slice in the Jobs list, plus a monthly completed-jobs chart.',
+      'Share it with Copy summary (plain text), Export Excel (full KPI + breakdown tables), or Print report.',
+    ],
+  },
+  {
+    v: 15,
+    title: 'Document Library — every attachment, in one place',
+    kind: 'feature',
+    ts: '2026-07-04T02:10:51.273Z',
+    date: 'Jul 3, 2026, 9:10 PM CT',
+    items: [
+      'New Documents section: every file attached to every job, searchable by name or job, filterable by type (Images/Video/Docs) or tag, with bulk select + delete.',
+      'Non-mock uploads now keep their real file bytes in this browser (IndexedDB) instead of a session-only preview link — so preview and download still work after a reload.',
+      'Attachments can now be tagged, both from the job editor and the new library — add tags like "final" or "v2" to find things faster.',
+      'Mock Uploads and file size/type limits work exactly as before; Reset all local data now clears stored files too.',
+    ],
+  },
+  {
+    v: 14,
+    title: 'Jobs on your phone: a real card list, not a squeezed table',
+    kind: 'feature',
+    ts: '2026-07-04T01:04:13.453Z',
+    date: 'Jul 3, 2026, 8:04 PM CT',
+    items: [
+      'Under ~700px, the Jobs inventory now shows a stacked card per job — icon, name, job #, status, rush flag, due date with its age dot, client and owner — instead of a cramped, sideways-scrolling table.',
+      'Tap a card to open the job, or use its "more actions" button for Open / Clone / Favorite / Delete without leaving the list.',
+      'Selection and bulk edit work exactly as before — card checkboxes share the same selection as the desktop table, and both now have proper 44px touch targets.',
+      'Switches automatically at the breakpoint, including on rotation — no reload needed.',
+    ],
+  },
+  {
+    v: 13,
+    title: 'Status workflow rules — a heads-up on unusual moves',
+    kind: 'feature',
+    ts: '2026-07-04T00:18:04.669Z',
+    date: 'Jul 3, 2026, 7:18 PM CT',
+    items: [
+      'Settings → Pick lists → Statuses now has an optional "Can move to" map for each status — set which statuses it normally flows into.',
+      'Moving a job somewhere unexpected (Details tab, dragging a board card, or a bulk "Set status…" edit) now asks for a quick confirmation instead of silently allowing it — nothing is ever hard-blocked.',
+      'Fully optional and backward-compatible: every existing status stays unrestricted until you configure it, and the demo data ships with a sensible workflow already wired up.',
+    ],
+  },
+  {
+    v: 12,
+    title: 'Timeline — a Gantt view of your jobs',
+    kind: 'feature',
+    ts: '2026-07-03T23:47:16.752Z',
+    date: 'Jul 3, 2026, 6:47 PM CT',
+    items: [
+      'New Timeline section: every job with a Date In or Due Date draws as a bar across a date grid, grouped and colored by status, with milestones overlaid as diamonds and a live line marking today.',
+      'Zoom to Week, Month or Quarter and step back and forth with Prev / Today / Next.',
+      'Search, Rush-only, Show-done and a status filter narrow the view; jobs with no due date yet are drawn open-ended with a trailing arrow.',
+      'Reachable from the rail nav, Dashboard’s "Jump back in" links, and the command palette.',
+    ],
+  },
+  {
+    v: 11,
+    title: 'Confetti on completion + a themed prompt dialog',
+    kind: 'polish',
+    ts: '2026-07-03T23:24:43.615Z',
+    date: 'Jul 3, 2026, 6:24 PM CT',
+    items: [
+      'Marking a job Completed (from the Details tab or by dragging its board card into a done column) now fires a quick confetti burst in your theme\'s own colors — it skips itself automatically if you have reduce motion on.',
+      'The Approval tab\'s "Request changes" note now opens in a proper themed dialog instead of the browser\'s plain prompt box.',
+      'Polish pass: reviewed the app and marketing site for rough edges, refreshed the roadmap with fresh ideas.',
+    ],
+  },
+  {
+    v: 10,
+    title: 'Command palette + keyboard shortcut cheat-sheet',
+    kind: 'feature',
+    ts: '2026-07-03T22:44:34.568Z',
+    date: 'Jul 3, 2026, 5:44 PM CT',
+    items: [
+      'Press Ctrl/Cmd+K (or type > in search) for a command palette: jump to any section, toggle light/dark, undo/redo, export all jobs to CSV/Excel/JSON, restart the tour, or open What’s new — all without leaving the keyboard.',
+      'Press Tab inside search to switch between Jobs and Commands.',
+      'New – press ? anywhere to open a full keyboard shortcut cheat-sheet.',
+    ],
+  },
+  {
+    v: 9,
+    title: 'Mobile polish — nav, topbar & full-screen job sheet',
+    kind: 'fix',
+    ts: '2026-07-03T22:11:52.710Z',
+    date: 'Jul 3, 2026, 5:11 PM CT',
+    items: [
+      'Marketing header no longer wraps the "Agency Job Tracker" wordmark or overlaps the Launch button on phones.',
+      'The app top bar no longer crowds off-screen on mobile — Undo/Redo/What\u2019s-new tuck away so New and search stay reachable.',
+      'The job editor now opens as a proper full-screen sheet on phones instead of overflowing the viewport.',
+      'The job header shows the letter with the number (e.g. #14800-C) instead of a separate "Letter C".',
+      'Added a 390px mobile pass to the automated smoke test so these can\u2019t regress.',
+    ],
+  },
+  {
+    v: 8,
+    title: 'Notifications — a live feed of what needs attention',
+    kind: 'feature',
+    ts: '2026-07-03T21:54:00.254Z',
+    date: 'Jul 3, 2026, 4:54 PM CT',
+    items: [
+      'New bell icon in the top bar with a live unread count — click it for a feed of overdue jobs, jobs due in the next 2 days, approval requests, jobs that have gone quiet in their stage, and upcoming or overdue milestones.',
+      'Click any entry to jump straight to that job, dismiss the ones you\'ve handled, or clear the whole feed with "Mark all read".',
+      'Everything is computed live from your jobs, so it\'s always accurate — nothing new to configure or keep in sync.',
+    ],
+  },
+  {
+    v: 7,
+    title: 'Checklists — subtasks & milestones on every job',
+    kind: 'feature',
+    ts: '2026-07-03T21:21:42.285Z',
+    date: 'Jul 3, 2026, 4:21 PM CT',
+    items: [
+      'New Checklist tab on the job editor: checkable subtasks with a progress bar, auto-seeded from the job\'s type (reorder, add, remove, or reset to the type defaults).',
+      'Add dated milestones like "Draft review" or "Client sign-off" — a job\'s progress badge (e.g. "3/5") now shows right in the hero next to its status.',
+      'Milestones surface on the Calendar as their own dashed chip alongside due dates, so key checkpoints aren\'t buried in the editor.',
+      'Changing a job\'s type reseeds its checklist to that type\'s defaults, but only while nothing has been added or checked off yet — your progress is never silently overwritten.',
+    ],
+  },
+  {
+    v: 6,
+    title: 'View Library — fully manageable saved views',
+    kind: 'feature',
+    ts: '2026-07-03T19:58:24.421Z',
+    date: 'Jul 3, 2026, 2:58 PM CT',
+    items: [
+      'New Settings → Saved views "View Library": every saved view in one place with a plain-language summary of its filters, columns & sort.',
+      'Rename inline, change its icon, duplicate, reorder with ↑↓, star one as the default, or delete — with "Open in Jobs" to load it there and tweak filters/columns/sort.',
+      'Jobs now opens to your starred default view on first visit, and the inventory\'s views row links straight to the View Library with a tooltip explaining what a saved view is.',
+    ],
+  },
+  {
+    v: 5,
+    title: 'Reorganized job editor — collapsible sections',
+    kind: 'feature',
+    ts: '2026-07-03T19:20:05.470Z',
+    date: 'Jul 3, 2026, 2:20 PM CT',
+    items: [
+      'The Details tab is no longer one giant form: an Overview up top (name, type, client, status, priority, owner, due date, rush) leads with what you touch most.',
+      'People, Schedule, Deliverables and Finance & tracking are now clearly labeled, collapsible sections — Finance stays tucked away by default, the rest start open.',
+      'Every section remembers whether you left it open or closed, across every job you open.',
+      'Simple mode is untouched — this only reorganizes the full editor.',
+    ],
+  },
+  {
+    v: 4,
+    title: 'Media-type filter + a tidier filter bar',
+    kind: 'feature',
+    ts: '2026-07-03T18:48:47.865Z',
+    date: 'Jul 3, 2026, 1:48 PM CT',
+    items: [
+      'New dedicated "Type" filter chip for the jobs inventory — filter by media/job type (Video, Podcast, Print, Social, Email, Web, …) with a quick checklist dropdown showing each type\'s icon and job count.',
+      'Division, Priority and Client filters now live together in one "Filters" chip so the bar stays tidy — status, rush, overdue and my-jobs stay front-and-center as quick pills.',
+      'Both dropdowns stay open while you tick multiple boxes, with live counts and a one-click Clear.',
+    ],
+  },
+  {
+    v: 3,
+    title: 'Version switcher — flip between released builds',
+    kind: 'feature',
+    ts: '2026-07-03T18:30:00.000Z',
+    date: 'Jul 3, 2026, 1:30 PM CT',
+    items: [
+      'Every successful release is now frozen as an immutable snapshot under /v/<n>/, so you can roll back to any earlier build from Settings → Version.',
+      'Defaults to the latest version; pick a previous one and the app reloads that exact build — your local data is shared and preserved across versions.',
+      'Viewing an older build shows a banner to jump back to the latest. Fixed the version number so Settings and What’s new always agree.',
+    ],
+  },
+  {
+    v: 2,
+    title: 'Neutral branding + public-site SEO',
+    kind: 'polish',
+    ts: '2026-07-03T17:45:00.000Z',
+    date: 'Jul 3, 2026, 12:45 PM CT',
+    items: [
+      'Rebranded to "Agency Job Tracker" — dropped the ADA name and logo throughout the app and marketing site. The "ADA" theme is now "Agency", retuned to an ADA-inspired green + blue palette.',
+      'Added SEO to the public site: canonical URL, richer Open Graph & Twitter cards, keywords, JSON-LD structured data, a social share image, robots.txt and sitemap.xml.',
+      'No access tokens are shown on the public site — request one from the polecat admin.',
+    ],
+  },
+  {
+    v: 1,
+    title: 'JobTracker launches',
+    kind: 'feature',
+    ts: '2026-07-03T00:00:00.000Z',
+    date: 'Jul 2, 2026, 7:00 PM CT',
+    items: [
+      'Invite-only, admin-token gated console for the agency creative team, with a public marketing site.',
+      'Dashboard with live KPIs, a full Jobs inventory (list · board · calendar), and a rich job editor with comments, attachments, approvals, and history.',
+      'Managed pick lists, saved views, campaigns, undo/redo, global search, and one-click CSV / Excel / JSON export.',
+      'A guided import wizard for JSON / CSV / Excel / Microsoft Forms with column mapping, validation, duplicate detection, and an error report.',
+      'Six themes — Agency & Polecat, each Dark / Light / System (default Agency Dark) — with a restartable welcome tour and full in-app documentation.',
+    ],
+  },
+];
+
+// The current release is the newest changelog entry — this is the single
+// source of truth for "what version am I on", so Settings and "What's new"
+// always agree. `LATEST` is that entry's integer `v`; `RELEASE` is the entry.
+export const RELEASE = CHANGELOG[0];
+export const LATEST = RELEASE.v;
+// Fleet contract alias (docs/SHELL-API.md in polecat-platform, matching
+// manager/relay/autoselector's own changelog.js) — Manager's live parser and
+// sibling apps' "Sync changelog" look for this exact export name.
+export const LATEST_VERSION = LATEST;
+// Kept for the export-format label / backwards-compat; not the user-facing number.
+export const APP_VERSION = '1.0';
+// e.g. "v2 · Jul 3, 2026" — the label shown as the installed version.
+export function versionLabel(){ return `v${RELEASE.v}${RELEASE.date?` · ${String(RELEASE.date).replace(/,\s*\d?\d:\d\d\s*[AP]M/,'')}`:''}`; }
+
+const SEEN_KEY = 'jt.wn.seen';   // stores the highest `v` the user has seen
+function latestV(){ return CHANGELOG[0]?.v ?? 0; }
+export function hasUnread(){ return hasUnseen(SEEN_KEY, latestV()); }
+
+// The What's-New feed lives in the shell's slide-in right panel now
+// (searchable + kind-filterable, shared fleet pattern). Opening it marks
+// the latest version as seen, clearing the sparkle-button dot.
+export function openWhatsNew(){
+  rightPanel({ title:"What’s new",
+    body: initWhatsNew({ entries: CHANGELOG, latest: latestV(), storageKey: SEEN_KEY }) });
+}
