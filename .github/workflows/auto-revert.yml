@@ -39,16 +39,9 @@ jobs:
           node-version: '22'
       - name: Validate main; auto-revert HEAD if it fails
         run: |
-          validate() {
-            set -e
-            for f in $(git ls-files '*.js' | grep -v vendor/); do
-              node --input-type=module --check < "$f" || { echo "SYNTAX FAIL: $f"; return 1; }
-            done
-            for f in $(git ls-files '*.mjs'); do
-              node --check "$f" || { echo "SYNTAX FAIL: $f"; return 1; }
-            done
-          }
-          if validate; then
+          # The syntax gate lives in .github/validate.mjs so Guard main, the
+          # dev gate (ci.yml) and promote-to-qa.yml agree on what "parses" is.
+          if node .github/validate.mjs; then
             echo "main passes validation."
             exit 0
           fi
@@ -62,7 +55,14 @@ jobs:
           bad_sha="$(git rev-parse --short HEAD)"
           git config user.name  "polecat-ci"
           git config user.email "ci@polecat.live"
-          if ! git revert --no-edit HEAD; then
+          # HEAD may now be a promotion MERGE (qa→prod, docs/PIPELINE.md) —
+          # revert those against their first parent; plain commits as before.
+          if git rev-parse -q --verify HEAD^2 >/dev/null; then
+            revert_args="-m 1"
+          else
+            revert_args=""
+          fi
+          if ! git revert --no-edit $revert_args HEAD; then
             git revert --abort || true
             echo "::error::Auto-revert of $bad_sha failed to apply cleanly — needs a human."
             exit 1

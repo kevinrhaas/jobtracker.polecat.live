@@ -28,7 +28,16 @@ keeps the historical keys (`jt.theme.v1`, `jt.rail.open`, …) via `configure()`
   with versioned additive migrations — never wipe or break existing data.
 - Bump the `sw.js` CACHE name in the same commit as any shell adoption or
   precached-file change.
-- Deploys: merge/push to main IS ship (`deploy.yml` is the single deploy
-  authority; `auto-revert.yml` guards main). Scheduled self-improvement runs
-  centrally from polecat-platform's steward — this repo's `self-improve.yml`
-  is a dispatch-only fallback.
+- **Ship via the promotion pipeline** (read `docs/PIPELINE.md` — this repo is
+  the fleet pilot): feature PRs target the **`dev`** branch and must pass the
+  dev gate (`ci.yml`: validate + smoke). Merge-to-dev is *stage*, not ship —
+  `promote-to-qa.yml` (on command or the `.github/pipeline.json` schedule)
+  moves dev→qa and runs the full suite against the staged `/qa/` preview,
+  rolling qa back on red; `promote-to-prod.yml` (dispatch-only) moves qa→main
+  with a `release-vNNN` tag + frozen `/v/` snapshot. **Hotfix exception:** a
+  production emergency still PRs straight into main — deploy stays ungated,
+  `auto-revert.yml` guards it, and the next promotion back-merges the fix
+  into dev. `deploy.yml` remains the single deploy authority and publishes
+  main at `/` plus the qa/dev previews at `/qa/` + `/dev/`. Scheduled
+  self-improvement runs centrally from polecat-platform's steward — this
+  repo's `self-improve.yml` is a dispatch-only fallback.

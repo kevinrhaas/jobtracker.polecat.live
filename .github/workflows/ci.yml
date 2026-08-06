@@ -1,0 +1,39 @@
+name: Dev gate (area tests)
+
+# The pipeline's LIGHT gate (docs/PIPELINE.md): fast syntax validation plus
+# the app smoke test, run on work heading into the `dev` integration branch.
+# This gate IS allowed to be hard — it gates an integration branch, never a
+# production deploy, so the fleet's "never hard-gate deploy on CI" doctrine
+# (the analytics ~21h freeze lesson) is untouched: prod hotfixes go straight
+# to main and only Guard main (auto-revert.yml) watches them.
+# The FULL gate runs at qa-promotion time in promote-to-qa.yml.
+on:
+  pull_request:
+    branches: [dev]
+  push:
+    branches: [dev]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dev-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax validation (shared with Guard main)
+        run: node .github/validate.mjs
+      - name: Install Playwright (Chromium + WebKit)
+        run: |
+          npm install playwright --no-save --silent
+          npx playwright install --with-deps chromium webkit
+      - name: Smoke test (390×780 + desktop, zero pageerrors)
+        run: node .github/smoke-test.mjs

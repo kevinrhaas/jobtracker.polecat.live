@@ -1,0 +1,88 @@
+name: Promote qa to prod
+
+# Ship a tested qa candidate to production (docs/PIPELINE.md). Dispatch-only —
+# prod NEVER promotes on a schedule. Refuses while the latest qa promotion run
+# is red (pipeline.json requireGreenQaForProd), unless dispatched with force.
+# Promotion = a --no-ff merge of qa into main + a release-vNNN tag + a frozen
+# /v/<n>/ snapshot (archive-release.mjs), so every release is rollback-able
+# both by rollback-prod.yml (git revert) and by the in-app version switcher.
+#
+# The deploy itself stays ungated: this workflow gates the PROMOTION, and a
+# hotfix merged straight to main bypasses it entirely (the fleet's
+# "promotion is gated, deploy is not" doctrine).
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Promote even if the latest qa promotion run is red
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: promote-to-prod
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Require a green qa (unless forced or disabled in pipeline.json)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          REQUIRE="$(node -e "console.log(require('./.github/pipeline.json').requireGreenQaForProd !== false)")"
+          if [ "${{ inputs.force }}" = "true" ] || [ "$REQUIRE" != "true" ]; then
+            echo "qa-green check skipped (force=${{ inputs.force }}, require=$REQUIRE)."
+            exit 0
+          fi
+          LAST="$(gh run list --workflow=promote-to-qa.yml --status=completed --limit=1 --json conclusion --jq '.[0].conclusion // "none"')"
+          echo "latest completed qa promotion: $LAST"
+          if [ "$LAST" != "success" ] && [ "$LAST" != "none" ]; then
+            echo "::error::Latest qa promotion is '$LAST'. Fix qa (or dispatch with force) before promoting to prod."
+            exit 1
+          fi
+
+      - name: Merge qa into main, tag the release, freeze the /v/ snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          git config user.name  "polecat-ci"
+          git config user.email "ci@polecat.live"
+          if ! git fetch origin qa 2>/dev/null; then
+            echo "::error::qa branch missing — dispatch pipeline-setup.yml first."
+            exit 1
+          fi
+          COUNT="$(git rev-list --count main..origin/qa)"
+          if [ "$COUNT" = "0" ]; then
+            echo "Nothing to promote — main already contains qa."
+            exit 0
+          fi
+          V="$(grep -oE 'v:\s*[0-9]+' js/changelog.js | head -1 | grep -oE '[0-9]+')"
+          git merge --no-ff origin/qa -m "Promote qa→prod (release v${V}): $COUNT commit(s)"
+          # Read the (possibly merge-updated) version for the tag + snapshot.
+          V="$(grep -oE 'v:\s*[0-9]+' js/changelog.js | head -1 | grep -oE '[0-9]+')"
+          node .github/archive-release.mjs
+          git add -A
+          git commit -m "Archive release v${V} (/v/${V}/ snapshot + manifest)" || true
+          git tag -f "release-v${V}"
+          git push origin main "refs/tags/release-v${V}"
+          echo "Promoted qa→prod as release v${V}."
+
+      - name: Publish (GITHUB_TOKEN pushes don't trigger deploy — dispatch it)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main

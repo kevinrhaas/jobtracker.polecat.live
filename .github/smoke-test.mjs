@@ -18,6 +18,12 @@ import { chromium, webkit } from 'playwright';
 
 const ROOT = process.cwd();
 const PORT = 4178;
+// SMOKE_PREFIX lets promote-to-qa.yml run this exact suite against a staged
+// pipeline preview (SMOKE_PREFIX=/qa after stage-preview.mjs assembled ./qa/),
+// so path-rewrite bugs in the staging itself are caught by the qa gate too.
+// Empty (the default) tests the production form at the server root.
+const PREFIX = (process.env.SMOKE_PREFIX || '').replace(/\/+$/, '');
+const at = (p) => `http://localhost:${PORT}${PREFIX}${p}`;
 // A valid, non-expiring team access token (verifiable against js/access.js).
 const TEAM_TOKEN = 'eyJ2IjoxLCJsYWJlbCI6IkFEQSBBZ2VuY3kgVXNlciIsImlhdCI6MTc1MTUwMDAwMDAwMCwiZXhwIjowLCJqdGkiOiJhZGF1c2VyMSJ9.J89Wfrwr0uhaKWrWogf8uu1qCCqJwRN6Y9x0lceaukR4o2CgZNyaKK3cxZVIrzkMDjaHIC-JPo2sQKQyhpp_Aw';
 
@@ -58,13 +64,13 @@ async function checkPage(browser, url, mustFind, label){
   let code = 0;
   try{
     // 1) marketing page
-    await checkPage(browser, `http://localhost:${PORT}/`, '.hero h1', 'marketing');
+    await checkPage(browser, at('/'), '.hero h1', 'marketing');
     // 2) gated app — token in URL should unlock and render the rail
-    await checkPage(browser, `http://localhost:${PORT}/app/?token=${encodeURIComponent(TEAM_TOKEN)}`, '.ps-rail .ps-rail-item', 'app');
+    await checkPage(browser, at(`/app/?token=${encodeURIComponent(TEAM_TOKEN)}`), '.ps-rail .ps-rail-item', 'app');
     // 3) app deep sections shouldn't throw — click a few rail items
     const page = await browser.newPage();
     const errs=[]; page.on('pageerror',e=>errs.push(String(e)));
-    await page.goto(`http://localhost:${PORT}/app/?token=${encodeURIComponent(TEAM_TOKEN)}`, { waitUntil:'networkidle' });
+    await page.goto(at(`/app/?token=${encodeURIComponent(TEAM_TOKEN)}`), { waitUntil:'networkidle' });
     const garbage = [];
     for(const sec of ['inventory','board','calendar','timeline','metrics','reports','documents','import','docs','settings']){
       // A real page.click() waits for the element to be unobscured — the
@@ -100,12 +106,12 @@ async function checkPage(browser, url, mustFind, label){
     const mob = await browser.newContext({ viewport:{ width:390, height:844 }, isMobile:true });
     const mp = await mob.newPage();
     const mobErrs=[]; mp.on('pageerror',e=>mobErrs.push(String(e)));
-    await mp.goto(`http://localhost:${PORT}/`, { waitUntil:'domcontentloaded' });
+    await mp.goto(at('/'), { waitUntil:'domcontentloaded' });
     await mp.waitForSelector('.psx-header'); await mp.waitForTimeout(200);
     if(await mp.evaluate(()=>document.documentElement.scrollWidth > innerWidth+1))
       throw new Error('mobile: marketing page overflows horizontally at 390px');
 
-    await mp.goto(`http://localhost:${PORT}/app/?token=${encodeURIComponent(TEAM_TOKEN)}#inventory`, { waitUntil:'domcontentloaded' });
+    await mp.goto(at(`/app/?token=${encodeURIComponent(TEAM_TOKEN)}#inventory`), { waitUntil:'domcontentloaded' });
     await mp.waitForSelector('.ps-rail .ps-rail-item'); await mp.waitForTimeout(300);
     if(await mp.evaluate(()=>{ const b=[...document.querySelectorAll('.ps-topbar > *')].pop(); return b ? b.getBoundingClientRect().right > innerWidth+1 : false; }))
       throw new Error('mobile: app topbar buttons overflow the 390px viewport');
@@ -204,7 +210,7 @@ async function checkPage(browser, url, mustFind, label){
         const wErrs = [];
         wp.on('pageerror', e=>wErrs.push('pageerror: '+e));
         wp.on('console', m=>{ if(m.type()==='error') wErrs.push('console: '+m.text()); });
-        await wp.goto(`http://localhost:${PORT}/app/?token=${encodeURIComponent(TEAM_TOKEN)}`, { waitUntil:'networkidle', timeout:20000 });
+        await wp.goto(at(`/app/?token=${encodeURIComponent(TEAM_TOKEN)}`), { waitUntil:'networkidle', timeout:20000 });
         await wp.waitForSelector('.ps-rail .ps-rail-item', { timeout:12000 });
         const bad = [];
         for(const sec of SECTIONS){
