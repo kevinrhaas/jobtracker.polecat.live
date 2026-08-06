@@ -77,7 +77,11 @@ for (const file of await htmlFiles(stage)) {
   html = html
     .replace(/register\('\/sw\.js'/g, `register('/${stage}/sw.js'`)
     .replace(/scope:\s*'\/app\/'/g, `scope: '/${stage}/app/'`);
-  if (!html.includes('name="robots"')) {
+  if (html.includes('name="robots"')) {
+    // The page ships its own robots meta (the marketing page says
+    // "index, follow") — a preview must override it, not sit beside it.
+    html = html.replace(/<meta[^>]*name="robots"[^>]*\/?>/gi, '<meta name="robots" content="noindex"/>');
+  } else {
     html = html.replace(/<head([^>]*)>/i, `<head$1>\n  <meta name="robots" content="noindex">`);
   }
   if (!html.includes('id="__stage"')) {
