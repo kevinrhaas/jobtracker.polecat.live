@@ -12,6 +12,9 @@ on:
     branches: [dev]
   push:
     branches: [dev]
+  # Manual escape hatch: PRs opened via API tokens (bots, integrations) don't
+  # fire event-triggered workflows, so the gate can be run by hand on any ref.
+  workflow_dispatch:
 
 permissions:
   contents: read
