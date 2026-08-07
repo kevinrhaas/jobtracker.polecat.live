@@ -6,7 +6,7 @@ name: Dev gate (area tests)
 # production deploy, so the fleet's "never hard-gate deploy on CI" doctrine
 # (the analytics ~21h freeze lesson) is untouched: prod hotfixes go straight
 # to main and only Guard main (auto-revert.yml) watches them.
-# The FULL gate runs at qa-promotion time in promote-to-qa.yml.
+# The FULL gate runs at stage-promotion time in promote-to-stage.yml.
 on:
   pull_request:
     branches: [dev]

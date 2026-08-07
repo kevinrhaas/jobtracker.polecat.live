@@ -5,21 +5,21 @@ name: Deploy to GitHub Pages
 # artifact now carries THREE stages of the promotion pipeline
 # (docs/PIPELINE.md):
 #   /        production  = main            (untouched, real sw.js, indexed)
-#   /qa/     candidate   = the qa branch   (stage-preview: rewritten paths,
+#   /stage/     candidate   = the stage branch   (stage-preview: rewritten paths,
 #   /dev/    integration = the dev branch    stub SW, noindex, stage banner)
-# The stage steps no-op while the qa/dev refs don't exist, so this workflow is
+# The stage steps no-op while the stage/dev refs don't exist, so this workflow is
 # safe to merge before the pipeline is ever activated (pipeline-setup.yml
 # creates the refs). Any stage's push republishes the whole artifact — main is
 # always assembled at the root regardless of which branch triggered the run.
 # Runs on:
-#   • push to main / qa / dev (human or PAT pushes; the promotion workflows
+#   • push to main / stage / dev (human or PAT pushes; the promotion workflows
 #     push with GITHUB_TOKEN which can't trigger `push`, so they dispatch this
 #     workflow explicitly — same bridge auto-revert relies on)
 #   • completion of the self-improvement fallback workflow
 #   • manual dispatch
 on:
   push:
-    branches: [main, qa, dev]
+    branches: [main, stage, dev]
   workflow_run:
     workflows: ["Self-improvement (dispatch-only fallback)"]
     types: [completed]
@@ -52,9 +52,9 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Assemble /qa/ and /dev/ stage previews (no-op until the refs exist)
+      - name: Assemble /stage/ and /dev/ stage previews (no-op until the refs exist)
         run: |
-          for stage in qa dev; do
+          for stage in stage dev; do
             if git fetch origin "$stage" 2>/dev/null; then
               sha="$(git rev-parse --short FETCH_HEAD)"
               git worktree add "_${stage}-src" FETCH_HEAD
@@ -72,7 +72,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Publish the whole repo (index.html, app/, css/, js/, assets, CNAME)
-          # plus the assembled /qa/ and /dev/ preview directories.
+          # plus the assembled /stage/ and /dev/ preview directories.
           path: "."
 
       - name: Deploy to GitHub Pages

@@ -40,7 +40,7 @@ jobs:
       - name: Validate main; auto-revert HEAD if it fails
         run: |
           # The syntax gate lives in .github/validate.mjs so Guard main, the
-          # dev gate (ci.yml) and promote-to-qa.yml agree on what "parses" is.
+          # dev gate (ci.yml) and promote-to-stage.yml agree on what "parses" is.
           if node .github/validate.mjs; then
             echo "main passes validation."
             exit 0
@@ -55,7 +55,7 @@ jobs:
           bad_sha="$(git rev-parse --short HEAD)"
           git config user.name  "polecat-ci"
           git config user.email "ci@polecat.live"
-          # HEAD may now be a promotion MERGE (qa→prod, docs/PIPELINE.md) —
+          # HEAD may now be a promotion MERGE (stage→prod, docs/PIPELINE.md) —
           # revert those against their first parent; plain commits as before.
           if git rev-parse -q --verify HEAD^2 >/dev/null; then
             revert_args="-m 1"

@@ -31,13 +31,13 @@ keeps the historical keys (`jt.theme.v1`, `jt.rail.open`, …) via `configure()`
 - **Ship via the promotion pipeline** (read `docs/PIPELINE.md` — this repo is
   the fleet pilot): feature PRs target the **`dev`** branch and must pass the
   dev gate (`ci.yml`: validate + smoke). Merge-to-dev is *stage*, not ship —
-  `promote-to-qa.yml` (on command or the `.github/pipeline.json` schedule)
-  moves dev→qa and runs the full suite against the staged `/qa/` preview,
-  rolling qa back on red; `promote-to-prod.yml` (dispatch-only) moves qa→main
+  `promote-to-stage.yml` (on command or the `.github/pipeline.json` schedule)
+  moves dev→stage and runs the full suite against the staged `/stage/` preview,
+  rolling stage back on red; `promote-to-prod.yml` (dispatch-only) moves stage→main
   with a `release-vNNN` tag + frozen `/v/` snapshot. **Hotfix exception:** a
   production emergency still PRs straight into main — deploy stays ungated,
   `auto-revert.yml` guards it, and the next promotion back-merges the fix
   into dev. `deploy.yml` remains the single deploy authority and publishes
-  main at `/` plus the qa/dev previews at `/qa/` + `/dev/`. Scheduled
+  main at `/` plus the stage/dev previews at `/stage/` + `/dev/`. Scheduled
   self-improvement runs centrally from polecat-platform's steward — this
   repo's `self-improve.yml` is a dispatch-only fallback.

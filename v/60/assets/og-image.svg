@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="JobTracker">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0f1a"/><stop offset="1" stop-color="#111d31"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a8fd6"/><stop offset="1" stop-color="#12a24f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1000" cy="120" r="360" fill="#1a8fd6" opacity="0.18"/>
+  <circle cx="180" cy="560" r="320" fill="#12a24f" opacity="0.14"/>
+  <g transform="translate(90,150)">
+    <rect width="104" height="104" rx="26" fill="url(#brand)"/>
+    <g transform="translate(30,30)" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 30c-4 2-4 14-4 14s12 0 14-4"/>
+      <path d="M14 34c14-3 22-14 24-38-24 3-35 11-38 24"/>
+      <circle cx="30" cy="14" r="4.5" fill="#fff" stroke="none"/>
+    </g>
+  </g>
+  <text x="90" y="360" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="76" font-weight="800" fill="#ecebfb">JobTracker</text>
+  <text x="92" y="428" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="34" font-weight="500" fill="#a49ed0">Track every creative job, end to end.</text>
+  <g font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="24" font-weight="600" fill="#c9c3ee">
+    <rect x="90"  y="474" width="230" height="54" rx="27" fill="#18243a" stroke="#26344f"/>
+    <text x="120" y="509">Dashboard · Board</text>
+    <rect x="340" y="474" width="210" height="54" rx="27" fill="#18243a" stroke="#26344f"/>
+    <text x="368" y="509">Calendar · KPIs</text>
+    <rect x="570" y="474" width="250" height="54" rx="27" fill="#18243a" stroke="#26344f"/>
+    <text x="598" y="509">Import · Export</text>
+  </g>
+  <text x="90" y="588" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="24" fill="#5b567e">jobtracker.polecat.live</text>
+</svg>

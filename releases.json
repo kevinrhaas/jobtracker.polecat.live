@@ -1,5 +1,11 @@
 [
   {
+    "v": 60,
+    "title": "Staged releases: dev and qa previews before production",
+    "date": "Aug 6, 2026, 2:04 PM CT",
+    "path": "/v/60/app/"
+  },
+  {
     "v": 54,
     "title": "Dashboard KPI tiles are real links now",
     "date": "Jul 18, 2026, 5:35 PM CT",
@@ -136,11 +142,5 @@
     "title": "Recurring jobs",
     "date": "Jul 4, 2026, 9:54 AM CT",
     "path": "/v/30/app/"
-  },
-  {
-    "v": 29,
-    "title": "Saved views: share a filter/column/sort combo via link",
-    "date": "Jul 4, 2026, 9:01 AM CT",
-    "path": "/v/29/app/"
   }
 ]

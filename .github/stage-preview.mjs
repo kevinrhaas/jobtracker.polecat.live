@@ -1,9 +1,9 @@
-// stage-preview.mjs — assemble a hosted preview of a pipeline stage (dev|qa)
+// stage-preview.mjs — assemble a hosted preview of a pipeline stage (dev|stage)
 // as a subdirectory of the production Pages artifact.
 //
 //   node .github/stage-preview.mjs <srcDir> <stage> [sha]
 //
-// Copies the stage's checkout (a worktree of origin/dev or origin/qa) into
+// Copies the stage's checkout (a worktree of origin/dev or origin/stage) into
 // ./<stage>/ and makes it self-contained at that prefix, the same way
 // archive-release.mjs finalizes /v/<n>/ snapshots:
 //   • every root-absolute href/src/content URL in every .html is rewritten to
@@ -16,7 +16,7 @@
 //     touch production's; production keeps its real sw.js untouched.
 //   • <meta name="robots" content="noindex"> is injected into every page and
 //     the production robots.txt gains a Disallow for the stage path;
-//   • a fixed stage banner (amber = dev, violet = qa) marks every page and
+//   • a fixed stage banner (amber = dev, violet = stage) marks every page and
 //     links back to production. Previews share the production origin, so they
 //     also share localStorage (jt.workspace) — same deliberate behavior as
 //     the /v/<n>/ archived-build switcher; migrations are additive, so a
@@ -32,18 +32,18 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 const [srcDir, stage, sha = ''] = process.argv.slice(2);
-if (!srcDir || !['dev', 'qa'].includes(stage)) {
-  console.error('usage: node .github/stage-preview.mjs <srcDir> <dev|qa> [sha]');
+if (!srcDir || !['dev', 'stage'].includes(stage)) {
+  console.error('usage: node .github/stage-preview.mjs <srcDir> <dev|stage> [sha]');
   process.exit(2);
 }
 
-// 'dev' and 'qa' are excluded so running in-repo (promote-to-qa tests the
+// 'dev' and 'stage' are excluded so running in-repo (promote-to-stage tests the
 // staged form from the repo root) can never recursively copy a stage into
 // itself, and one stage never nests inside another.
-const EXCLUDE = new Set(['.git', '.github', 'v', 'dev', 'qa', 'releases.json', 'CNAME', 'node_modules']);
+const EXCLUDE = new Set(['.git', '.github', 'v', 'dev', 'stage', 'releases.json', 'CNAME', 'node_modules']);
 const COLORS = {
   dev: 'linear-gradient(135deg,#fbbf24,#d97706)', // amber — work in progress
-  qa: 'linear-gradient(135deg,#a78bfa,#7c3aed)', // violet — release candidate
+  stage: 'linear-gradient(135deg,#a78bfa,#7c3aed)', // violet — release candidate
 };
 
 await rm(stage, { recursive: true, force: true });

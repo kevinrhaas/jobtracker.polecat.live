@@ -16,6 +16,17 @@ import { initWhatsNew, hasUnseen } from '../vendor/polecat-shell/whatsnew.js';
 
 export const CHANGELOG = [
   {
+    v: 61,
+    title: 'The release pipeline speaks plainly: dev, stage, main',
+    kind: 'infra',
+    ts: '2026-08-07T00:15:52.727Z',
+    date: 'Aug 6, 2026, 7:15 PM CT',
+    items: [
+      'The middle pipeline step is now called what it is \u2014 stage. The hosted preview of the next release moved from /qa/ to /stage/, and every workflow, config and doc now reads dev \u2192 stage \u2192 main.',
+      'The scheduled promotion also moved overnight: dev promotes to stage daily at ~2am Central instead of ~8am.',
+    ],
+  },
+  {
     v: 60,
     title: 'Staged releases: dev and qa previews before production',
     kind: 'infra',
