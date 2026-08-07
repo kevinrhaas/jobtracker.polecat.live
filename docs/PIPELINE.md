@@ -49,20 +49,20 @@ search-hidden, not access-controlled.
 
 ## App changes vs. tooling changes (a subtlety proven on day one)
 
-The preview *content* comes from the `dev`/`qa` branches, but the preview
+The preview *content* comes from the `dev`/`stage` branches, but the preview
 *assembly tooling* (`stage-preview.mjs`, run inside `deploy.yml`) always
 executes **from main's checkout**. So:
 
-- an **app change** shows up on `/dev/` or `/qa/` as soon as it lands on that
+- an **app change** shows up on `/dev/` or `/stage/` as soon as it lands on that
   branch and a deploy runs;
 - a **tooling change** (how previews are assembled — path rewrites, banner,
   robots handling) takes effect only after it is promoted **to prod**, because
   main is where the deploy reads it from.
 
 This is deliberate — the deploy must trust main's tooling, not a candidate's —
-but it means a stage-preview fix rides the full dev→qa→prod loop before the
+but it means a stage-preview fix rides the full dev→stage→prod loop before the
 previews reflect it. (First observed with the robots-meta override fix: live
-in qa as content, effective on the previews only after release v60.)
+in stage (then `qa`) as content, effective on the previews only after release v60.)
 
 ## The hotfix bypass (unchanged, on purpose)
 
