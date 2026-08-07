@@ -18,9 +18,9 @@ import { chromium, webkit } from 'playwright';
 
 const ROOT = process.cwd();
 const PORT = 4178;
-// SMOKE_PREFIX lets promote-to-qa.yml run this exact suite against a staged
-// pipeline preview (SMOKE_PREFIX=/qa after stage-preview.mjs assembled ./qa/),
-// so path-rewrite bugs in the staging itself are caught by the qa gate too.
+// SMOKE_PREFIX lets promote-to-stage.yml run this exact suite against a staged
+// pipeline preview (SMOKE_PREFIX=/stage after stage-preview.mjs assembled ./stage/),
+// so path-rewrite bugs in the staging itself are caught by the stage gate too.
 // Empty (the default) tests the production form at the server root.
 const PREFIX = (process.env.SMOKE_PREFIX || '').replace(/\/+$/, '');
 const at = (p) => `http://localhost:${PORT}${PREFIX}${p}`;

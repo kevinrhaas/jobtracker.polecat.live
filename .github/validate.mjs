@@ -1,5 +1,5 @@
 // validate.mjs — the fast, browser-free syntax gate, shared by Guard main
-// (auto-revert.yml), the dev gate (ci.yml) and promote-to-qa.yml so all three
+// (auto-revert.yml), the dev gate (ci.yml) and promote-to-stage.yml so all three
 // agree on what "parses" means. Mirrors the historical inline shell loop:
 // every first-party .js must parse as an ES module (the app is ESM;
 // vendor/polecat-shell is read-only and drift-checked by fleet sweeps, not
